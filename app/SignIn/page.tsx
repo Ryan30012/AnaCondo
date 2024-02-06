@@ -32,7 +32,7 @@ const SignIn = () => {
       </button>
     </div>
     <div className="text-center text-gray-600">
-      Don't have an account?{' '}
+      Don&apos;t have an account?{' '}
       <span className="text-blue-500 cursor-pointer"><Link href='../SignUp'>Sign Up</Link></span>
     </div>
   </div>
