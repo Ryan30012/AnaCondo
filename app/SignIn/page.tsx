@@ -1,33 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { sql } from '@vercel/postgres'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 const SignIn = () => {
-
+  var notExists =" ";
   async function signin(formData: FormData) {
     'use server';
-    console.log(formData);
+    //console.log(formData);
+    
     const email = formData.get("Email")?.toString();
     const password = formData.get("Password")?.toString();
 
     const result = await sql`select Email, Password from users where  Email = ${email} AND Password = ${password}`;
-    console.log(result);
+    //console.log(result);
     const exists = (await sql`select Email, Password from users where Email = ${email} AND Password = ${password}`).rowCount  > 0;
 
     if(exists) {
+      cookies().set('Email',email == undefined ? "" : email);
       redirect('/');
     }
     else {
-      console.log("doesnt exist")
+      notExists = "Incorrect Email or Password"
     }
 
   }
 
 
-
-
+  console.log(`Not exists is ${notExists}`)
   return (
     <div className="bg-stone-50 flex flex-col items-center justify-center h-screen">
   <form className="w-full max-w-xs" action={signin}>
@@ -47,6 +49,7 @@ const SignIn = () => {
         className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
       />
     </div>
+    <div>{notExists}</div>
     <div className="flex items-center mb-4">
       <input type="checkbox" id="remember" className="mr-2" />
       <label htmlFor="remember" className="text-gray-600">
