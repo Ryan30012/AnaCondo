@@ -1,13 +1,39 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { sql } from '@vercel/postgres'
+import { redirect } from 'next/navigation'
 
 const SignIn = () => {
+
+  async function signin(formData: FormData) {
+    'use server';
+    console.log(formData);
+    const email = formData.get("Email")?.toString();
+    const password = formData.get("Password")?.toString();
+
+    const result = await sql`select Email, Password from users where  Email = ${email} AND Password = ${password}`;
+    console.log(result);
+    const exists = (await sql`select Email, Password from users where Email = ${email} AND Password = ${password}`).rowCount  > 0;
+
+    if(exists) {
+      redirect('/');
+    }
+    else {
+      console.log("doesnt exist")
+    }
+
+  }
+
+
+
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-  <div className="w-full max-w-xs">
+    <div className="bg-stone-50 flex flex-col items-center justify-center h-screen">
+  <form className="w-full max-w-xs" action={signin}>
     <div className="mb-4">
       <input
+        name="Email"
         type="text"
         placeholder="Username"
         className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
@@ -15,6 +41,7 @@ const SignIn = () => {
     </div>
     <div className="mb-4">
       <input
+        name="Password"
         type="password"
         placeholder="Password"
         className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
@@ -27,7 +54,7 @@ const SignIn = () => {
       </label>
     </div>
     <div className="mb-6">
-      <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+      <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
         Login
       </button>
     </div>
@@ -35,7 +62,7 @@ const SignIn = () => {
       Don&apos;t have an account?{' '}
       <span className="text-blue-500 cursor-pointer"><Link href='../SignUp'>Sign Up</Link></span>
     </div>
-  </div>
+  </form>
 </div>
 
   )
