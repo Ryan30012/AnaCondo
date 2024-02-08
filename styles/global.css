@@ -21,7 +21,43 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 0.15rem;
-  background-color: #EDEADE;
-  color: black;
+  border: 1px solid white;
+  background-color: #000000;
+  color: white;
   height: fit-content;
+  transition: all ease-in-out 0.15s;
+}
+
+.navButton:hover {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.loginSignupLogo {
+  gap: 2rem;
+}
+
+.logoTitle {
+  font-size: 1.75rem;
+}
+
+.welcomeBackLogin {
+  font-size: 1.25rem;
+}
+
+.loginSignupCtn {
+  gap: 1rem;
+}
+
+#profileContainer {
+  height: calc(100vh - 82px);
+  align-items: center;
+  justify-content: center;
+}
+
+#profilePicture {
+  height: 100%;
+  background-color: black;
+  color: white;
 }
