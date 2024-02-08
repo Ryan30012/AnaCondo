@@ -5,9 +5,8 @@ import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
+let notExists = " ";
 const Signin = () => {
-  var notExists = " ";
-
   async function signin(formData: FormData) {
     "use server";
 
@@ -38,10 +37,10 @@ const Signin = () => {
         <p className="text-center logoTitle">AnaCondo</p>
         <p className="welcomeBackLogin">Welcome back!</p>
       </div>
-
       <form className="w-full max-w-xs" action={signin}>
         <div className="mb-4">
           <input
+            required
             name="Email"
             type="text"
             placeholder="Username"
@@ -50,13 +49,14 @@ const Signin = () => {
         </div>
         <div className="mb-4">
           <input
+            required
             name="Password"
             type="password"
             placeholder="Password"
             className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div>{notExists}</div>
+        <div className="text-red-500 text-center" >{notExists}</div> 
         <div className="flex items-center mb-4">
           <input type="checkbox" id="remember" className="mr-2" />
           <label htmlFor="remember" className="text-gray-600">
