@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 First, install all node modules and packages in the terminal:
-
+```bash
 npm i
 # or
 pnpm i
