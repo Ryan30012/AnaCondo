@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="navBarAccount flex align-middle">
         <div>
           <Link href="/UserProfile">
-            <button id="loginBtn" className="navButton">
+            <button id="loginBtn" className="navButtonWhite">
               User Profile
             </button>
           </Link>

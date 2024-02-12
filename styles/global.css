@@ -12,8 +12,24 @@
   font-size: 1.75rem;
 }
 
+.navBarAccount {
+  gap: 1rem;
+}
+
 #navbarAccountNoLogin {
   gap: 1rem;
+}
+
+.navButtonWhite {
+  all: unset;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.15rem;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  height: fit-content;
+  transition: all ease-in-out 0.15s;
 }
 
 .navButton {
@@ -32,6 +48,10 @@
   color: black;
   background-color: white;
   border: 1px solid black;
+}
+
+.navButtonWhite:hover {
+  transform: scale(1.05);
 }
 
 .loginSignupLogo {
