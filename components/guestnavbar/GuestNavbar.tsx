@@ -12,19 +12,17 @@ const Navbar = () => {
           <Link href="/">AnaCondo</Link>
         </p>
       </div>
-      <div className="navBarAccount flex align-middle">
-        <div>
-          <Link href="/UserProfile">
-            <button id="loginBtn" className="navButton">
-              User Profile
-            </button>
-          </Link>
-        </div>
-        <div>
-          <button id="logoutBtn" className="navButton">
-            Logout
+      <div id="navbarAccountNoLogin" className="flex">
+        <Link href="/SignIn">
+          <button id="loginBtn" className="navButton">
+            Login
           </button>
-        </div>
+        </Link>
+        <Link href="/SignUp">
+          <button id="signupBtn" className="navButton">
+            Signup
+          </button>
+        </Link>
       </div>
     </div>
   );

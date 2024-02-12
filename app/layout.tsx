@@ -1,16 +1,14 @@
-"use client";
-
-import Navbar from "@/components/navbar/Navbar";
+import GuestNavbar from "@/components/guestnavbar/GuestNavbar";
 import "/styles/global.css";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import Navbar from "@/components/navbar/Navbar";
+import { getServerSession } from "next-auth/next";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
+  const session = await getServerSession();
   return (
     <html lang="en">
       <head>
@@ -20,9 +18,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {pathname !== "/signin" && pathname !== "/signup" && (
-          <Navbar authenticatedUser={false} />
-        )}
+        {!session && <GuestNavbar />}
+        {session && <Navbar />}
         {children}
       </body>
     </html>
