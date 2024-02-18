@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --light-blue: #E1F2FB;
+  --blue: #3559E0;
+  --green: #50623A;
+}
+
+@media (min-width: 1200px) {
+  #userFullNameCtn {
+    width: 66.67%;
+  }
+  
+  .profilePictureCtn, #profilePictureBtn {
+    width: 33.33%;
+  }
+  #profileContainer {
+    width: 60%;
+  }
+  #userHeaderCtn {
+    gap: 6rem;
+  }
+  .addPictureText {
+    text-align: left;
+    padding-left: 1.5rem;
+  }
+}
+@media (max-width: 1199px) {
+  #profileContainer {
+    width: 80%;
+  }
+  #userHeaderCtn {
+    gap: 4rem;
+  }
+  .addPictureText {
+    text-align: left;
+    padding-left: 1.5rem;
+  }
+}
+@media (max-width: 768px) {
+  #profileContainer {
+    width: 90%;
+  }
+  #userHeaderCtn {
+    gap: 4rem;
+  }
+
+}
+@media (max-width: 575px) {
+  #userHeaderCtn {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #userFullNameCtn, #profilePictureBtn, .profilePictureCtn {
+    width: 100%;
+  }
+  .profilePictureBtnCtn {
+    justify-content: center;
+  }
+  .addPictureText {
+    text-align: center;
+    padding-left: 0;
+  }
+}
+ 
+#navbarMain {
+  background-color: #000;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbarLogoTitle {
+  font-size: 1.75rem;
+}
+
+.navBarAccount {
+  gap: 1rem;
+}
+
+#navbarAccountNoLogin {
+  gap: 1rem;
+}
+
+.navButtonWhite {
+  all: unset;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.15rem;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  height: fit-content;
+  transition: all ease-in-out 0.15s;
+}
+
+.navButton {
+  all: unset;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.15rem;
+  border: 1px solid white;
+  background-color: #000000;
+  color: white;
+  height: fit-content;
+  transition: all ease-in-out 0.15s;
+}
+
+.navButton:hover {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.navButtonWhite:hover {
+  transform: scale(1.05);
+}
+
+.loginSignupLogo {
+  gap: 2rem;
+}
+
+.logoTitle {
+  font-size: 1.75rem;
+}
+
+.welcomeBackLogin {
+  font-size: 1.25rem;
+}
+
+.loginSignupCtn {
+  gap: 1rem;
+}
+
+#profileContainerMasterCtn {
+  width: 100vw;
+  height: calc(100vh - 82px);
+  display: flex;
+  justify-content: center;
+}
+
+#profileContainer {
+  height: fit-content;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+#profilePicture {
+  background-color: black;
+  color: white;
+  min-width: 100px;
+  min-height: 150px;
+}
+
+.pageHeader {
+  font-size: 2.5rem;
+  border-bottom: 1.5px solid black;
+}
+
+#imageIconCtn {
+  border: 2.5px solid var(--green);
+  border-radius: 100%;
+  padding: 4rem;
+  width: fit-content;
+  cursor: pointer;
+  transition: 0.15s all ease-in-out;
+}
+
+#imageIconCtn:hover {
+  border-color: #A4A4A4;
+}
+#imageIconCtn:hover .imageIcon {
+  transform: rotate(-10deg);
+}
+
+.imageIcon {
+  width: 4rem;
+  color: var(--green);
+  transition: 0.15s all ease-in-out;
+}
+
+.fullNameText {
+  font-size: 2rem;
+  color: var(--green);
+}
+
+#userDataCtn {
+  font-size: 1.15rem;
+}
+
+#profilePictureCtn {
+  all: unset;
+}
