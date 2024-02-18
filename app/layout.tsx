@@ -4,6 +4,7 @@ import GuestNavbar from "@/components/guestnavbar/GuestNavbar";
 import "/styles/global.css";
 import Navbar from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
+import SessionProvider from "@/components/SessionProvider";
 
 export default async function RootLayout({
   children,
@@ -11,6 +12,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession();
+  console.log(session?.user);
   return (
     <html lang="en">
       <head>
@@ -20,9 +22,11 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        {session && <Navbar />}
-        {!session && <GuestNavbar />}
-        {children}
+        <SessionProvider>
+          {session && <Navbar />}
+          {!session && <GuestNavbar />}
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

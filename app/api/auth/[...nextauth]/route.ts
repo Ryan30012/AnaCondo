@@ -15,7 +15,7 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         console.log("Authorizing...");
         const response =
-          await sql`SELECT * FROM users2 WHERE Email = ${credentials?.email}`;
+          await sql`SELECT * FROM users WHERE Email = ${credentials?.email}`;
 
         const user = response.rows[0];
         console.log(user.password);
@@ -27,6 +27,7 @@ const handler = NextAuth({
           return {
             id: user.id,
             email: user.email,
+            username: user.username,
           };
         }
         return null;
