@@ -3,6 +3,8 @@ import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import AddPictureButton from "./AddPictureButton";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   // -> Retrieving User Data from Postgres

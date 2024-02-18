@@ -7,7 +7,7 @@ export default function Logout() {
       id="loginBtn"
       className="navButton"
       onClick={async () => {
-        await signOut();
+        await signOut({ callbackUrl: "http://localhost:3000/" });
       }}
     >
       Logout
