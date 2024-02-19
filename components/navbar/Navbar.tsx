@@ -7,7 +7,7 @@ import Logout from "@/components/logout/Logout";
 
 const Navbar = () => {
   return (
-    <div id="navbarMain" className="flex justify-between px-7 py-5">
+    <div id="navbarMain" className="flex justify-between px-6 py-6">
       <div className="navbarLogo">
         <p className="navbarLogoTitle">
           <Link href="/">AnaCondo</Link>
