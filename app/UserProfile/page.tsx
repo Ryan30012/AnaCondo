@@ -3,8 +3,6 @@ import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import AddPictureButton from "./AddPictureButton";
-import { useEffect } from "react";
-import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   // -> Retrieving User Data from Postgres
@@ -16,10 +14,6 @@ export default async function ProfilePage() {
   const user = res.rows[0];
   console.log(user.username);
   console.log(user.ProfilePictureHandle);
-
-  const uploadProfilePicture = () => {
-    document.getElementById("profilePicFileInput")?.click();
-  };
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">

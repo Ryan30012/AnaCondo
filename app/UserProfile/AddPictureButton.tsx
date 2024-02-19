@@ -1,22 +1,22 @@
 "use client";
 
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent } from "react";
 
 export default function AddPictureButton() {
   const uploadProfilePicture = () => {
     const fileInput = document.getElementById("profilePicFileInput");
-    if (fileInput) fileInput.click();
-    else console.log("File input corrupt.");
+    if (fileInput) {
+      console.log("File selections showing...");
+      fileInput.click();
+    } else console.log("File input corrupt.");
   };
 
   const attachProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
     console.log("IN!");
     const fileInput = event.target.files;
     var fileName = "";
-    var fileHandle = null;
     if (fileInput) {
-      fileName = fileInput[0].name;
-      console.log(fileName);
+      console.log(fileInput);
     }
   };
 
