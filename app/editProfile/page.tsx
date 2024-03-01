@@ -4,10 +4,10 @@ import React from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
-import AddPictureButton from "./AddPictureButton";
-import {EditButton} from "@/components/EditButton/EditButton.js";
+import AddPictureButton from "../UserProfile/AddPictureButton";
+import {SaveButton} from "@/components/SaveButton/SaveButton.js";
 
-export default async function ProfilePage() {
+export default async function editProfilePage() {
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
   var email = "";
@@ -67,22 +67,50 @@ export default async function ProfilePage() {
                 </div>
                 <div>
                   <p>
-                    <b>Username</b>: <span>{user.username}</span>
+                    <b>Username</b>: 
+                    <input
+                        name="Uname"
+                        type="text"
+                        placeholder={user.username}
+                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+                    />
                   </p>
                 </div>
                 <div>
                   <p>
-                    <b>Contact e-mail</b>: <span>{user.email}</span>
+                    <b>Contact e-mail</b>:
+                    <input
+                        name="userEmail"
+                        type="text"
+                        placeholder={user.email}
+                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+                    />
                   </p>
                 </div>
                 <div>
                   <p>
-                    <b>Phone Number</b>: <span>{user.phone}</span>
+                    <b>Phone Number</b>:
+                    <input
+                        name="Uname"
+                        type="text"
+                        placeholder={user.phone}
+                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+                    />
                   </p>
                 </div>
                 <div>
-                <EditButton/>
+                  <p>
+                    <b>Registration Key</b>:
+                    <input
+                        name="regKey"
+                        type="text"
+                        placeholder="Enter your registration key"
+                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+                    />
+                  </p>
                 </div>
+                <button type="submit"></button>
+                <SaveButton />
               </div>
             </div>
           </div>
