@@ -114,6 +114,7 @@ export default function Form() {
             className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
           />
         </div>
+
         <div className="mb-6">
           <button
             type="submit"

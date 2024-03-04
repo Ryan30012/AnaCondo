@@ -1,3 +1,5 @@
+"use server";
+
 import React from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
@@ -7,35 +9,33 @@ import AddPictureButton from "./AddPictureButton";
 export default async function ProfilePage() {
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
-  const email = session?.user?.email;
+  var email = "";
+  if (session?.user?.email) email = session.user.email;
   console.log("Session Email: " + email);
   console.log("Fetching user data...");
   const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
   const user = res.rows[0];
+  const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
-  console.log(user.ProfilePictureHandle);
-
-  const uploadProfilePicture = () => {
-    document.getElementById("profilePicFileInput")?.click();
-  };
+  console.log(user.pictureblob);
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
-      <div id="profileContainer" className="flex flex-col">
-        <div className="pageHeaderCtn text-left w-full mb-6">
+      <div id="profileContainer" className="flex flex-col p-6">
+        <div className="pageHeaderCtn text-left w-full">
           {/* Page Header */}
-          <h1 className="pageHeader">
+          <h1 className="pageHeader p-2">
             <b>My Profile</b>
           </h1>
         </div>
         {/* User Profile Header */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full userMainContent p-6">
           <div id="userHeaderCtn" className="flex">
-            {!(user.ProfilePictureHandle == undefined) ? (
+            {!(userProfilePictureUrl == null) ? (
               <div className="flex justify-start align-middle profilePictureCtn">
                 <img
                   id="profilePicture"
-                  src=""
+                  src={userProfilePictureUrl}
                   alt="Profile Picture will be here"
                 />
               </div>
