@@ -5,9 +5,40 @@ import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import AddPictureButton from "../UserProfile/AddPictureButton";
-import {SaveButton} from "@/components/SaveButton/SaveButton.js";
+import {SaveButton} from "@/components/SaveButton/saveButton";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import Form from './form';
 
-export default async function editProfilePage() {
+//  async function returnCredentials() {
+//   const session = await getServerSession();
+//   var email = "";
+//   if (session?.user?.email) email = session.user.email;
+//   console.log("Session Email: " + email);
+//   console.log("Fetching user data...");
+//   const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
+//   const user = res.rows[0];
+//   const userProfilePictureUrl = user.pictureblob;
+//   console.log(user.username);
+//   console.log(user.pictureblob);
+//   return user;
+// }
+
+export default async function EditProfilePage() {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+ 
+    const formData = new FormData(event.currentTarget)
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      body: formData,
+    })
+ 
+    // Handle response if necessary
+    const data = await response.json()
+    // ...
+  }
+
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
   var email = "";
@@ -19,6 +50,11 @@ export default async function editProfilePage() {
   const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
   console.log(user.pictureblob);
+
+  //const router = useRouter();
+
+
+  
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
@@ -65,52 +101,7 @@ export default async function editProfilePage() {
                     <b>Account Type</b>: <span>{user.accounttype}</span>
                   </p>
                 </div>
-                <div>
-                  <p>
-                    <b>Username</b>: 
-                    <input
-                        name="Uname"
-                        type="text"
-                        placeholder={user.username}
-                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-                    />
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Contact e-mail</b>:
-                    <input
-                        name="userEmail"
-                        type="text"
-                        placeholder={user.email}
-                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-                    />
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Phone Number</b>:
-                    <input
-                        name="Uname"
-                        type="text"
-                        placeholder={user.phone}
-                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-                    />
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Registration Key</b>:
-                    <input
-                        name="regKey"
-                        type="text"
-                        placeholder="Enter your registration key"
-                        className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-                    />
-                  </p>
-                </div>
-                <button type="submit"></button>
-                <SaveButton />
+              <Form  user={user}/>
               </div>
             </div>
           </div>
