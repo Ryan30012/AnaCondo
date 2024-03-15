@@ -1,6 +1,7 @@
 "use client";
-
+import { POST } from '../api/auth/register/route';
 import React, { useState } from 'react';
+import { getServerSession } from "next-auth";
 
 interface Message {
   content: string;
@@ -11,19 +12,46 @@ const Forum: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  function handleInputChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setInput(event.target.value);
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const session = await getServerSession()
+    if (input.trim() !== '') {
+      try {
+        console.log("connecting to the table");
+        const response = await fetch('/api/messageBoard/route', {
+          method: "POST",
+          body: JSON.stringify({
+            email: session?.user?.email,
+            date: new Date(),
+            message: input.trim()
+          })
+        })
+        console.log(`Insertion Complete ${response.status}`);
+      } catch (error) {
+        console.error('Error creating message:', error);
+      }
+    }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (input.trim() !== '') {
-      const newMessage: Message = {
-        content: input.trim(),
-        username: 'Public User', // Assuming a default username for public users
-      };
-      setMessages([...messages, newMessage]);
-      setInput('');
+  const fetchMessages= async () => {
+    try {
+      const response = await fetch('/api/messageBoard/route', {
+        method: "GET"
+      });
+      if (response.status === 200) {
+        console.log("connecting to the table to fetch");
+        const data = await response.json();
+        console.log(`Fetching Complete ${data.rows}`);
+        setMessages(data);
+      } else {
+        console.error('Error fetching messages:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching messages:', error);
     }
   };
 
