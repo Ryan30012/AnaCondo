@@ -20,7 +20,7 @@ const Forum: React.FC = () => {
     if (input.trim() !== '') {
       const newMessage: Message = {
         content: input.trim(),
-        username: 'Public User', // Assuming a default username for public users
+        username: 'Public User', // Change this corresponding to user profile
       };
       setMessages([...messages, newMessage]);
       setInput('');
@@ -28,28 +28,35 @@ const Forum: React.FC = () => {
   };
 
   return (
-    <div className="mt-4"> {/* Added mt-4 for top margin */}
-      <div className="w-4/5 max-w-2xl mx-auto"> {/* Adjusted width and centered */}
-        <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
-        <form onSubmit={handleSubmit} className="mb-4">
-          <textarea
-            value={input}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-            rows={4}
-            placeholder="Type your message here..."
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600"
-          >
-            Post Message
-          </button>
-        </form>
-        <MessageList messages={messages} />
-      </div>
+    <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">  
+    <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ left: '-40px'}}>
+      <img src="/imgbin_architectural-drawing-architecture-sketch-building-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
     </div>
-  );
+    <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ right: '-40px'}}>
+      <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
+    </div>
+    <div className="w-4/5 max-w-2xl mx-auto z-10">
+
+      <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
+      <form onSubmit={handleSubmit} className="mb-4">
+        <textarea
+          value={input}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          rows={4}
+          placeholder="Type your message here..."
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600"
+        >
+          Post Message
+        </button>
+      </form>
+      <MessageList messages={messages} />
+    </div>
+  </div>
+);
 };
 
 interface MessageListProps {
@@ -60,7 +67,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
     <div>
       {messages.map((message, index) => (
-        <div className="border rounded p-2 mb-2" key={index}>
+        <div className="border rounded p-2 mb-2 bg-white break-words" style={{ wordWrap: 'break-word' }} key={index}>
           <p className="text-gray-800">{`${message.username}: ${message.content}`}</p>
         </div>
       ))}
