@@ -1,5 +1,6 @@
 "use client";
 
+import NotificationsBtn from '@/components/NotificationsBtn/NotificationsBtn';
 import React, { useState } from 'react';
 
 interface Message {
@@ -55,6 +56,9 @@ const Forum: React.FC = () => {
       </form>
       <MessageList messages={messages} />
     </div>
+    <div className="absolute top-0 right-0 p-4">
+        <NotificationsBtn />
+      </div>
   </div>
 );
 };
