@@ -1,5 +1,6 @@
 "use client";
 
+import NotificationsBtn from '@/components/NotificationsBtn/NotificationsBtn';
 import React, { useState } from 'react';
 
 interface Message {
@@ -35,8 +36,8 @@ const Forum: React.FC = () => {
     <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ right: '-40px'}}>
       <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
     </div>
-    <div className="w-4/5 max-w-2xl mx-auto z-10">
 
+    <div className="w-4/5 max-w-2xl mx-auto z-10">
       <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
       <form onSubmit={handleSubmit} className="mb-4">
         <textarea
@@ -55,9 +56,18 @@ const Forum: React.FC = () => {
       </form>
       <MessageList messages={messages} />
     </div>
+    <div className="absolute top-0 right-0 p-4">
+        <NotificationsBtn/>
+      </div>
   </div>
+
+
+
 );
+
 };
+
+
 
 interface MessageListProps {
   messages: Message[];
