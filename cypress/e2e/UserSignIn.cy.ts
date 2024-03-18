@@ -1,10 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 describe('template spec', () => {
   it('passes', () => {
     cy.visit('https://example.cypress.io')
 =======
 describe('creating & login account Testing', () => {
   it('navigate to Sign Up page', () => {
+=======
+describe('creating & login account Testing', () => {
+ it('navigate to Sign Up page', () => {
+>>>>>>> 4e046ac (Cypress testing)
     cy.visit('http://localhost:3000')
     cy.wait(1000)
     cy.get('#signupBtn').should('exist').click()
@@ -31,6 +36,9 @@ describe('creating & login account Testing', () => {
     cy.get('.max-w-xs > :nth-child(2) > .w-full').should('exist').type('testy123')
     cy.get('.mb-6 > .w-full').click()
     cy.get('a > #loginBtn').contains('User Profile')
+<<<<<<< HEAD
 >>>>>>> 2d37c7a (Add cypress testing to Ryan30012/Anacondo)
+=======
+>>>>>>> 4e046ac (Cypress testing)
   })
 })
