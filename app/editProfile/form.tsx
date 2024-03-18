@@ -1,7 +1,8 @@
 "use client";
 import { SaveButton } from '@/components/SaveButton/saveButton';
 import { FormEvent } from 'react'
- 
+import { redirect } from "next/navigation";
+
 export default function Form(props: any) {
     console.log(props);
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -12,6 +13,8 @@ export default function Form(props: any) {
       method: 'POST',
       body: formData,
     })
+    // redirect upon successful registration key submission
+    if(response.status == 200) redirect('/userProfile');
  
     // Handle response if necessary
     //const data = await response.json()

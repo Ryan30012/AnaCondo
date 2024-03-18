@@ -1,6 +1,5 @@
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
