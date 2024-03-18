@@ -1,3 +1,4 @@
+import { Result } from 'postcss';
 import React, { useState, useEffect } from 'react';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 
@@ -10,33 +11,39 @@ type AppNotification = {
 const NotificationsBtn: React.FC = () => {
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [newNotif, setNewNotif] = useState(false);
+  const user = ''; // add session user need code in Branch of Message Board to get the user email in the current session
 
   useEffect(() => {
-    // Simulated data fetching (replace with actual API call)
-    const fetchNotifications = () => {
-      // Simulated data
-      const mockNotifications: AppNotification[] = [
-        {
-          message: 'User booked a common facility',
-          time: '2024-03-16T10:30:00',
-        },
-        {
-          message: 'New file uploaded by company administrator',
-          time: '2024-03-15T15:45:00',
-        },
-        // Add more simulated notifications as needed
-      ];
-      setNotifications(mockNotifications);
-    };
-
-    fetchNotifications();
+    fetchNotifications(user);
   }, []);
+
+  const fetchNotifications = async (user: string) => {
+    try {
+      const result = await fetch('api/notification', {
+        method: 'GET',
+        body: JSON.stringify({
+          user: user,
+        })
+      })
+      setNewNotif(false);
+    } catch (error) {
+      console.log('Error: ', error);
+    }  
+  };
+
+  const NewNotif = () => {
+    setNewNotif(true);
+  }
 
   return (
     <div className="relative">
     <button
       className="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600 flex items-center"
-      onClick={() => setShowNotifications(!showNotifications)}
+      onClick={() => {
+        setShowNotifications(!showNotifications)
+        setNewNotif(false);
+      }}
     >
       <IoMdNotificationsOutline /> {/* Icon for notifications */}
     </button>
@@ -56,7 +63,5 @@ const NotificationsBtn: React.FC = () => {
   </div>
 );
 };
-
-
-
 export default NotificationsBtn;
+
