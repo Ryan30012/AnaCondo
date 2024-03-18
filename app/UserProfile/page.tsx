@@ -6,10 +6,17 @@ import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import AddPictureButton from "./AddPictureButton";
 import {EditButton} from "@/components/EditButton/EditButton.js";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
+
+    // If not logged in, redirect to signin
+    if(!session?.user?.email){
+      redirect('/SignIn');
+    }
+    
   var email = "";
   if (session?.user?.email) email = session.user.email;
   console.log("Session Email: " + email);
