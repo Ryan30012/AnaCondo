@@ -1,5 +1,5 @@
 describe('creating & login account Testing', () => {
-  it('navigate to Sign Up page', () => {
+ it('navigate to Sign Up page', () => {
     cy.visit('http://localhost:3000')
     cy.wait(1000)
     cy.get('#signupBtn').should('exist').click()
