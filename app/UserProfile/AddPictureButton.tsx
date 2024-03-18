@@ -1,22 +1,50 @@
 "use client";
 
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent } from "react";
+import type { PutBlobResult } from "@vercel/blob";
+import { useRouter } from "next/navigation";
 
-export default function AddPictureButton() {
-  const uploadProfilePicture = () => {
+// eslint-disable-next-line @next/next/no-async-client-component
+export default async function AddPictureButton() {
+  const router = useRouter();
+  var blobUrl = "";
+
+  // Open user File Browser
+  const selectProfilePicture = () => {
     const fileInput = document.getElementById("profilePicFileInput");
-    if (fileInput) fileInput.click();
-    else console.log("File input corrupt.");
+    if (fileInput) {
+      console.log("File selections showing...");
+      fileInput.click();
+    } else console.log("File input corrupt.");
   };
 
-  const attachProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("IN!");
+  // --- Event where User Selected Image
+  const attachProfilePicture = async (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target.files;
-    var fileName = "";
-    var fileHandle = null;
     if (fileInput) {
-      fileName = fileInput[0].name;
-      console.log(fileName);
+      // --- Storing the file in Vercel Blob Storage
+      const response = await fetch(`/api/file?filename=${fileInput[0]?.name}`, {
+        method: "POST",
+        body: fileInput[0],
+      });
+      const newBlob = (await response.json()) as PutBlobResult;
+      blobUrl = newBlob.url;
+      console.log("blobUrl: " + blobUrl);
+
+      const storageResponse = await fetch(
+        `/api/filestorage?bloburl=${blobUrl}`,
+        {
+          method: "POST",
+        }
+      );
+      if (storageResponse.ok) {
+        const data = await storageResponse.json();
+        console.log("retrievedUrl: " + data.blobUrl);
+        router.push("/UserProfile");
+        router.refresh();
+      } else {
+        console.log("Failed to insert URL into DB.");
+      }
     }
   };
 
@@ -25,7 +53,7 @@ export default function AddPictureButton() {
       <button
         className="flex flex-col justify-start align-middle profilePictureBtn"
         type="button"
-        onClick={uploadProfilePicture}
+        onClick={selectProfilePicture}
       >
         <div id="imageIconCtn">
           <div className="imageIcon">

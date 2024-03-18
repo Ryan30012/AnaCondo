@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 
 :root {
   --light-blue: #E1F2FB;
@@ -14,13 +15,14 @@
   }
   
   .profilePictureCtn, #profilePictureBtn {
-    width: 33.33%;
+    width: fit-content;
+    max-width: 33.33%;
   }
   #profileContainer {
-    width: 60%;
+    width: 65%;
   }
   #userHeaderCtn {
-    gap: 6rem;
+    gap: 4rem;
   }
   .addPictureText {
     text-align: left;
@@ -28,6 +30,10 @@
   }
 }
 @media (max-width: 1199px) {
+  .profilePictureCtn {
+    width: fit-content;
+    max-width: 33.33%;
+  }
   #profileContainer {
     width: 80%;
   }
@@ -41,10 +47,14 @@
 }
 @media (max-width: 768px) {
   #profileContainer {
-    width: 90%;
+    width: 100%;
   }
   #userHeaderCtn {
     gap: 4rem;
+  }
+  .profilePictureCtn {
+    width: fit-content;
+    max-width: 33.33%;
   }
 
 }
@@ -55,6 +65,7 @@
   }
   #userFullNameCtn, #profilePictureBtn, .profilePictureCtn {
     width: 100%;
+    max-width: 100%;
   }
   .profilePictureBtnCtn {
     justify-content: center;
@@ -143,20 +154,24 @@
 #profileContainer {
   height: fit-content;
   align-items: center;
-  padding: 1rem;
   border-radius: 0.5rem;
 }
 
 #profilePicture {
   background-color: black;
   color: white;
-  min-width: 100px;
-  min-height: 150px;
+  max-height: 200px;
+  max-width: 200px;
+  height: auto !important;
+  display: block;
+  border-radius: 100%;
 }
 
-.pageHeader {
-  font-size: 2.5rem;
-  border-bottom: 1.5px solid black;
+.pageHeaderCtn {
+  font-size: 2.35rem;
+  background-color: var(--green);
+  color: white;
+  border-radius: 0.25rem 0.25rem 0 0;
 }
 
 #imageIconCtn {
@@ -190,6 +205,11 @@
   font-size: 1.15rem;
 }
 
-#profilePictureCtn {
-  all: unset;
+.profilePictureCtn { 
+  overflow: hidden;
+}
+
+.userMainContent {
+  background-color: #FAFAFA;
+  border-radius: 0 0 0.25rem 0.25rem;
 }

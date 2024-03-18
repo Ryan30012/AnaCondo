@@ -4,19 +4,43 @@ import React from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
-import AddPictureButton from "./AddPictureButton";
-import {EditButton} from "@/components/EditButton/EditButton.js";
-import { redirect } from "next/navigation";
+import AddPictureButton from "../UserProfile/AddPictureButton";
+import {SaveButton} from "@/components/SaveButton/saveButton";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import Form from './form';
 
-export default async function ProfilePage() {
+//  async function returnCredentials() {
+//   const session = await getServerSession();
+//   var email = "";
+//   if (session?.user?.email) email = session.user.email;
+//   console.log("Session Email: " + email);
+//   console.log("Fetching user data...");
+//   const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
+//   const user = res.rows[0];
+//   const userProfilePictureUrl = user.pictureblob;
+//   console.log(user.username);
+//   console.log(user.pictureblob);
+//   return user;
+// }
+
+export default async function EditProfilePage() {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+ 
+    const formData = new FormData(event.currentTarget)
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      body: formData,
+    })
+ 
+    // Handle response if necessary
+    const data = await response.json()
+    // ...
+  }
+
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
-
-    // If not logged in, redirect to signin
-    if(!session?.user?.email){
-      redirect('/SignIn');
-    }
-    
   var email = "";
   if (session?.user?.email) email = session.user.email;
   console.log("Session Email: " + email);
@@ -26,6 +50,11 @@ export default async function ProfilePage() {
   const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
   console.log(user.pictureblob);
+
+  //const router = useRouter();
+
+
+  
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
@@ -72,24 +101,7 @@ export default async function ProfilePage() {
                     <b>Account Type</b>: <span>{user.accounttype}</span>
                   </p>
                 </div>
-                <div>
-                  <p>
-                    <b>Username</b>: <span>{user.username}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Contact e-mail</b>: <span>{user.email}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Phone Number</b>: <span>{user.phone}</span>
-                  </p>
-                </div>
-                <div>
-                <EditButton/>
-                </div>
+              <Form  user={user}/>
               </div>
             </div>
           </div>

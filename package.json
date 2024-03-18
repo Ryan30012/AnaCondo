@@ -10,8 +10,12 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@edgestore/react": "^0.1.6",
+    "@edgestore/server": "^0.1.6",
     "@types/filestack-react": "^4.0.4",
+    "@vercel/blob": "^0.22.0",
     "@vercel/postgres": "^0.7.2",
+    "edgestore": "^1.0.3",
     "filestack-js": "^3.30.1",
     "filestack-react": "^5.0.0",
     "next": "^14.1.0",
@@ -20,7 +24,8 @@
     "psql": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vercel": "^32.7.2"
+    "vercel": "^32.7.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
