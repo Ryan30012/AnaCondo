@@ -80,6 +80,16 @@ const NavbarMainContent = () => {
             </li>
           </>
         )}
+        {userAccountType === "PUBLIC_USER" && (
+          <>
+            <li className="mainNavItem">
+              <a href="">View Properties</a>
+            </li>
+            <li className="mainNavItem">
+              <a href="">Notifications</a>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );
