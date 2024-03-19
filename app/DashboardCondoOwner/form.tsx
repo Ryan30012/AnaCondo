@@ -86,7 +86,7 @@ export const DashboardCondoOwner: React.FC = () => {
   return (
     <div className='bg-yellow-300 bg-opacity-40 min-h-screen relative'>
       <div className="flex flex-col h-full text-white p-4">
-        <h1 className="ml-8 mr-auto max-w-8xl mb-4 text-3xl font-semibold text-white p-2 z-10 rounded" style={{ backgroundColor: '#BBF200'}}>Property Dashboard</h1>
+        <h1 className="ml-8 mr-auto max-w-8xl mb-4 text-3xl font-semibold text-white p-2 z-10 rounded bg-gray-400">Property Dashboard</h1>
 
         <div className="relative">
           {/* Fixed images */}
@@ -105,7 +105,7 @@ export const DashboardCondoOwner: React.FC = () => {
     <div className="rounded-lg overflow-hidden">
       <table className="w-full table-auto border-collapse">
         <thead>
-          <tr style={{ backgroundColor: '#BBF200' }}>
+          <tr className="bg-gray-400">
             <th className="p-3 border">Property Names</th>
             <th className="p-3 border">Address</th>
             <th className="p-3 border">Balance</th>
