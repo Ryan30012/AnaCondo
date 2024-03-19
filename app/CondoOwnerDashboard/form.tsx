@@ -59,10 +59,10 @@ export default function CondoOwnerDashboard() {
           <h2 className="text-center">(514) 999-9999</h2>
         </div>
         <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
-        <div> {submitRequests()} </div>
         <div>
           <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
           <div className="dashboard-shortcuts grid md:grid-cols-4 gap-4 my-6">
+            <div> {submitRequests()} </div>
             <Link
               href="/"
               className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
