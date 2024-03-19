@@ -1,5 +1,6 @@
 "use client";
 
+import NotificationsBtn from '@/components/NotificationsBtn/NotificationsBtn';
 import React, { useState } from 'react';
 
 interface Message {
@@ -26,7 +27,6 @@ const Forum: React.FC = () => {
       setInput('');
     }
   };
-
   return (
     <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">  
     <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ left: '-40px'}}>
@@ -55,6 +55,9 @@ const Forum: React.FC = () => {
       </form>
       <MessageList messages={messages} />
     </div>
+    <div className="absolute top-0 right-0 p-4">
+        <NotificationsBtn />
+      </div>
   </div>
 );
 };
@@ -62,7 +65,6 @@ const Forum: React.FC = () => {
 interface MessageListProps {
   messages: Message[];
 }
-
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
     <div>
