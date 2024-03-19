@@ -15,7 +15,7 @@ function submitRequests() {
   return (
     <Link
       href="/SubmitRequest"
-      className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100"
+    
     >
       <button id="submitForms" className="font-semibold">
         Submit Request
@@ -62,7 +62,7 @@ export default function CondoOwnerDashboard() {
         <div>
           <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
           <div className="dashboard-shortcuts grid md:grid-cols-4 gap-4 my-6">
-            <div> {submitRequests()} </div>
+            <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100"> {submitRequests()} </div>
             <Link
               href="/"
               className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
