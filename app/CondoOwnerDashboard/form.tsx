@@ -11,17 +11,17 @@ import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancial
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
 
+let type = "Condo Owner";
+
 function submitRequests() {
-  return (
-    <Link
-      href="/SubmitRequest"
-    
-    >
-      <button id="submitForms" className="font-semibold">
-        Submit Request
-      </button>
-    </Link>
-  );
+  if (type == "Condo Owner")
+    return (
+      <Link href="/SubmitRequest" className="">
+        <button id="submitForms" className="font-semibold">
+          Submit Request
+        </button>
+      </Link>
+    );
 }
 
 export default function CondoOwnerDashboard() {
@@ -30,7 +30,7 @@ export default function CondoOwnerDashboard() {
    * 'TYPE' SHOULD BE CHANGED TO PULL DATA FROM THE USER SESSION AND DETERMINE IF THE USER IS A OWNER
    * OR RENTER, THEN DISPLAY THE CORRECT USER INFORMATION AND CHANGE THE DISPLAY TO "CONDO OWNER PAGE", ETC.
    */
-  let type = "Condo Owner";
+
   if (status === "loading") return <p>DASHBOARD: Loading...</p>;
   if (!session)
     return (
@@ -62,7 +62,9 @@ export default function CondoOwnerDashboard() {
         <div>
           <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
           <div className="dashboard-shortcuts grid md:grid-cols-4 gap-4 my-6">
-            <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100"> {submitRequests()} </div>
+            <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
+              {submitRequests()}
+            </div>
             <Link
               href="/"
               className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
@@ -84,7 +86,7 @@ export default function CondoOwnerDashboard() {
               className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
             >
               <button id="submitForms" className="font-semibold">
-                Message Board
+                Message Baord
               </button>
             </Link>
           </div>
@@ -92,7 +94,7 @@ export default function CondoOwnerDashboard() {
 
         <div className="grid md:grid-cols-2 gap-3 my-12">
           <div>
-            <h1 className="font-bold text-xl pb-6">Your Condo Properties</h1>
+            <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
             <RentalPropertyCard />
           </div>
           <div className="ml-6 ">
