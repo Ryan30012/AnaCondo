@@ -3,15 +3,23 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import "./NavbarMainContent.css";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const NavbarMainContent = () => {
   const session = useSession();
   const userAccountType = session.data?.accounttype;
   console.log(userAccountType);
 
-  const path = window.location.pathname.split("/");
-  const lastPath = path[path.length - 1].toLowerCase();
-  console.log("path: " + lastPath);
+  const [lastPath, setlastPath] = useState("");
+
+  useEffect(() => {
+    // Ensure this code only runs on the client-side
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.split("/");
+      setlastPath(path[path.length - 1].toLowerCase());
+      console.log("path: " + lastPath);
+    }
+  }, []);
 
   const [activeItem, setactiveItem] = useState(lastPath);
   const handleNavItemClick = (item: string) => {

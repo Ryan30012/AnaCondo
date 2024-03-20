@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
 import type { PutBlobResult } from "@vercel/blob";
 
 const Form = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
-
+  const router = useRouter();
   var name = "";
 
   const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +60,8 @@ const Form = () => {
     if (storageResponse.ok) {
       const data = await storageResponse.json();
       console.log(data);
+      router.push("/CondoCompany/Properties");
+      router.refresh();
     }
   };
 
