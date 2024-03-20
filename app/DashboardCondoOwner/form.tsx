@@ -115,47 +115,35 @@ export const DashboardCondoOwner: React.FC = () => {
 
           {/* Property table */}
           <div className="ml-auto mr-auto max-w-8xl p-4 relative z-10 rounded overflow-hidden">
-            {loading ? (
-              <p>Loading...</p> // Display loading indicator while data is being fetched
-            ) : (
-              <div className="rounded-lg overflow-hidden">
-                <table className="w-full table-auto border-collapse">
-                  <thead>
-                    <tr className="bg-gray-400">
-                      <th className="p-3 border">Property Names</th>
-                      <th className="p-3 border">Address</th>
-                      <th className="p-3 border">Balance</th>
-                      <th className="p-3 border">Requests</th>
-                      <th className="p-3 border">Image</th>
+          {loading ? (
+            <p>Loading...</p> // Display loading indicator while data is being fetched
+          ) : (
+            <div className="rounded-lg overflow-hidden">
+              <table className="w-full table-auto border-collapse">
+                <thead>
+                  <tr className="bg-gray-400">
+                    <th className="p-3 border">Property Names</th>
+                    <th className="p-3 border">Address</th>
+                    <th className="p-3 border">Balance</th>
+                    <th className="p-3 border">Requests</th>
+                    <th className="p-3 border">Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((row, index) => (
+                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+                      <td className="p-3 border">{row.column1}</td>
+                      <td className="p-3 border">{row.column2}</td>
+                      <td className="p-3 border">{row.column3}</td>
+                      <td className="p-3 border"><a href="/" className="text-blue-400 underline cursor-pointer">{row.column4}</a></td>
+                      <td className="p-3 border">{row.column5}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((row, index) => (
-                      <tr
-                        key={index}
-                        className={
-                          index % 2 === 0 ? "bg-gray-200" : "bg-gray-300"
-                        }
-                      >
-                        <td className="p-3 border">{row.column1}</td>
-                        <td className="p-3 border">{row.column2}</td>
-                        <td className="p-3 border">{row.column3}</td>
-                        <td className="p-3 border">
-                          <a
-                            href="/"
-                            className="text-blue-400 underline cursor-pointer"
-                          >
-                            {row.column4}
-                          </a>
-                        </td>
-                        <td className="p-3 border">{row.column5}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
         </div>
       </div>
     </div>
