@@ -1,6 +1,6 @@
 ## Condo Owner Page
 ![image](https://github.com/Ryan30012/AnaCondo/assets/91510546/f9917cf2-5406-471c-803f-0962ffde6545)
-
+(Note: I fixed the small button)
 ## Submit Request Page
 ![image](https://github.com/Ryan30012/AnaCondo/assets/91510546/00613245-3689-4aed-8578-0889235cae72)
 ![image](https://github.com/Ryan30012/AnaCondo/assets/91510546/92b2bcd0-1775-44da-af81-e29164418441)
