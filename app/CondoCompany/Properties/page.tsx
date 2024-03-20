@@ -1,35 +1,54 @@
+"use client";
+import { useEffect, useState } from "react";
 import React from "react";
 import Link from "next/link";
 
-const PropertyList: React.FC = async () => {
-  // const propertyResponse = await fetch("/api/properties", {
-  //   method: "GET",
-  // });
-  //const properties = await propertyResponse.json();
+interface Property {
+  bid: number;
+  name: string;
+  unitcount: number;
+  parkingcount: number;
+  lockercount: number;
+  address: string;
+  propertyimage: string;
+}
+
+const PropertyList: React.FC = () => {
+  const [properties, setProperties] = useState<Property[]>([]);
+  useEffect(() => {
+    fetch("/api/getproperties", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProperties(data.properties);
+        console.log(data);
+      });
+  }, []);
 
   return (
     <div className="p-4">
       <div className="my-5 text-center">
         <h2 className="text-xl font-semibold mb-4">Property List</h2>
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {properties.map((property) => (
             <div
-              key={property.id}
+              key={property.bid}
               className="border border-gray-300 rounded-lg shadow p-4"
             >
               <img
                 className="w-full rounded-lg mb-2"
-                src={property.image}
-                alt={`Property ${property.id}`}
+                src={property.propertyimage}
+                alt={`Property ${property.bid}`}
               />
               <div className="text-left">
                 <p className="font-semibold">{property.name}</p>
                 <p>
-                  <span className="font-normal">Location:</span>{" "}
-                  {property.location}
+                  <span className="font-normal">Address:</span>{" "}
+                  {property.address}
                 </p>
                 <span className="bg-green-500 text-white p-1 rounded text-sm mt-2 inline-block">
-                  Property {property.id}
+                  Property {property.bid}
                 </span>
                 <Link href="Properties/Edit" as={`Properties/Edit`}>
                   <button
@@ -42,7 +61,7 @@ const PropertyList: React.FC = async () => {
               </div>
             </div>
           ))}
-        </div> */}
+        </div>
         <div className="text-center mt-8">
           <Link href="Properties/Add" as={`Properties/Add`}>
             <button
