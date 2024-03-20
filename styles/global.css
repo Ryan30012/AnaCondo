@@ -148,7 +148,7 @@
 
 #profileContainerMasterCtn {
   width: 100vw;
-  height: calc(100vh - 82px);
+  height: calc(100vh - 90px);
   display: flex;
   justify-content: center;
 }
@@ -267,6 +267,7 @@
 .globalBtn {
   padding: 0.25rem;
   border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
 }
 .biggerBtn {
   padding: 0.5rem;
@@ -275,6 +276,13 @@
 }
 .biggerBtn:hover {
   transform: scale(1.025);
+}
+.viewBtn {
+  background-color: var(--green);
+  color: #fff;
+}
+.viewBtn:hover {
+  background-color: var(--green-hover);
 }
 
 .propertyImage {

@@ -10,6 +10,7 @@ interface Property {
   parkingcount: number;
   lockercount: number;
   address: string;
+  propertyfile: string;
   propertyimage: string;
 }
 
@@ -52,28 +53,32 @@ const PropertyList: React.FC = () => {
                     <span className="font-normal">Address:</span>{" "}
                     {property.address}
                   </p>
-                  <div className="flex w-full gap-2">
-                    <div
-                      className="globalBtn w-1/4 p-1 text-white text-center"
-                      style={{ backgroundColor: "#000" }}
-                    >
-                      <span>Property {property.bid}</span>
+                  <div className="flex w-full">
+                    <div className="flex w-full gap-2">
+                      <div
+                        className="globalBtn w-1/4 p-1 text-white text-center"
+                        style={{ backgroundColor: "#000" }}
+                      >
+                        <span>Property {property.bid}</span>
+                      </div>
+                      <div className="w-1/6">
+                        <Link href="Properties/Edit" as={`Properties/Edit`}>
+                          <button
+                            className="editBtn globalBtn w-full"
+                            type="button"
+                          >
+                            Edit
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="w-1/6">
-                      <Link href="Properties/Edit" as={`Properties/Edit`}>
-                        <button
-                          className="editBtn globalBtn w-full"
-                          type="button"
-                        >
-                          Edit
+                    <div className="flex flex-col w-1/5">
+                      <Link href={`Properties/viewproperty/${property.bid}`}>
+                        <button className="globalBtn w-full viewBtn">
+                          View
                         </button>
                       </Link>
                     </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <Link
-                      href={`Properties/viewproperty/${property.bid}`}
-                    ></Link>
                   </div>
                 </div>
               </div>

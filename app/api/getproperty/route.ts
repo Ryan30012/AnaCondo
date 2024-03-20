@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
     console.log("Successfully retrieved property.");
     return NextResponse.json(
       {
-        message: "Successfully retrieved properties.",
+        message: "Successfully retrieved property " + bid,
         property: property,
       },
       { status: 200 }
