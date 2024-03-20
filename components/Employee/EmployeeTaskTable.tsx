@@ -48,10 +48,10 @@ const EmployeeTaskList: React.FC = () => {
   
     return (
       <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">  
-        <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ left: '-40px'}}>
+        <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ left: '-40px'}}>
           <img src="/imgbin_architectural-drawing-architecture-sketch-building-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
         </div>
-        <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ right: '-40px'}}>
+        <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ right: '-40px'}}>
           <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
         </div>
         <div className="w-full max-w-4xl mx-auto z-10 bg-white shadow-lg rounded-lg p-6">
