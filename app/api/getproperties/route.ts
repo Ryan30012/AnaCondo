@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     const { rows } =
       await sql`SELECT json_build_object('bid', bid, 'name', name, 
                         'unitcount', unitCount, 'parkingcount', parkingCount, 'lockercount', lockerCount,
-                         'address', address, 'propertyfile', propertyfile, 'propertyimage', propertyimage) as properties FROM Buildings;`;
+                         'address', address, 'propertyfile', propertyfile, 'propertyimage', propertyimage) as properties FROM Buildings ORDER BY bid;`;
     console.log("rows:");
     console.log(rows);
     console.log("better JSON: ");
