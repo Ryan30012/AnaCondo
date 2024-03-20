@@ -138,7 +138,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
     <div>
       {reversedMessages.map((message, index) => (
-        <div className="border rounded p-2 mb-2" key={index}>
+        <div className="border rounded p-2 mb-2 bg-white" key={index}>
           <p className="text-gray-800">
             ID: {message.id}<br />
             Email: {message.email}<br />
