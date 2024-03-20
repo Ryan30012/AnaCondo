@@ -68,8 +68,9 @@ const Forum: React.FC = () => {
       if (response.status === 200) {
         console.log('Connecting to the table to fetch...');
         const data = await response.json();
-        console.log(`Fetching complete. Data: ${JSON.stringify(data)}`);
-        setMessages(data.rows);
+        const messageData = data.data.rows;
+        console.log('Fetching complete. Data:', messageData);
+        setMessages(messageData);
       } else {
         console.error(`Error fetching messages: ${response.statusText}`);
       }
@@ -104,16 +105,32 @@ const Forum: React.FC = () => {
   );
 };
 
+
+interface Message {
+  id: number;
+  email: string;
+  date: string;
+  message: string;
+}
+
 interface MessageListProps {
   messages: Message[];
 }
 
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
+
+  const reversedMessages = messages.slice().reverse();
+
   return (
     <div>
-      {messages && messages.map((message, index) => (
+      {reversedMessages.map((message, index) => (
         <div className="border rounded p-2 mb-2" key={index}>
-          <p className="text-gray-800">{`${message.username}: ${message.content}`}</p>
+          <p className="text-gray-800">
+            ID: {message.id}<br />
+            Email: {message.email}<br />
+            Date: {message.date}<br />
+            Message: {message.message}
+          </p>
         </div>
       ))}
     </div>
