@@ -81,7 +81,7 @@ const PropertyList: React.FC = () => {
         </div>
         <div className="text-center mt-8">
           <Link href="Properties/Add" as={`Properties/Add`}>
-            <button className="bg-red-500 text-white biggerBtn" type="button">
+            <button className="text-white biggerBtn addBtn" type="button">
               Add New Property
             </button>
           </Link>
