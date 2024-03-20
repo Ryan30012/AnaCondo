@@ -53,7 +53,7 @@ class DashboardCondoOwner extends React.Component {
 export default DashboardCondoOwner;
 
 */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 interface Property {
   column1: string;
@@ -84,50 +84,66 @@ export const DashboardCondoOwner: React.FC = () => {
   }, []);
 
   return (
-    <div className='bg-yellow-300 bg-opacity-40 min-h-screen relative'>
+    <div className="bg-yellow-300 bg-opacity-40 min-h-screen relative">
       <div className="flex flex-col h-full text-white p-4">
-        <h1 className="ml-8 mr-auto max-w-8xl mb-4 text-3xl font-semibold text-white p-2 z-10 rounded bg-gray-400">Property Dashboard</h1>
+        <h1 className="ml-8 mr-auto max-w-8xl mb-4 text-3xl font-semibold text-white p-2 z-10 rounded bg-gray-400">
+          Property Dashboard
+        </h1>
 
         <div className="relative">
           {/* Fixed images */}
-          <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ left: '-40px' }}>
-            <img src="/imgbin_architectural-drawing-architecture-sketch-building-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
+          <div
+            className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0"
+            style={{ left: "-40px", top: "82px" }}
+          >
+            <img
+              src="/imgbin_architectural-drawing-architecture-sketch-building-png.png"
+              alt="Condo"
+              className="h-auto w-full max-h-80vh"
+            />
           </div>
-          <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0" style={{ right: '-40px' }}>
-            <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
+          <div
+            className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0"
+            style={{ right: "-40px", top: "82px" }}
+          >
+            <img
+              src="/imgbin_drawing-building-architecture-png.png"
+              alt="Condo"
+              className="h-auto w-full max-h-80vh"
+            />
           </div>
 
           {/* Property table */}
-  <div className="ml-auto mr-auto max-w-8xl p-4 relative z-10 rounded overflow-hidden">
-  {loading ? (
-    <p>Loading...</p> // Display loading indicator while data is being fetched
-  ) : (
-    <div className="rounded-lg overflow-hidden">
-      <table className="w-full table-auto border-collapse">
-        <thead>
-          <tr className="bg-gray-400">
-            <th className="p-3 border">Property Names</th>
-            <th className="p-3 border">Address</th>
-            <th className="p-3 border">Balance</th>
-            <th className="p-3 border">Requests</th>
-            <th className="p-3 border">Image</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
-              <td className="p-3 border">{row.column1}</td>
-              <td className="p-3 border">{row.column2}</td>
-              <td className="p-3 border">{row.column3}</td>
-              <td className="p-3 border"><a href="/" className="text-blue-400 underline cursor-pointer">{row.column4}</a></td>
-              <td className="p-3 border">{row.column5}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )}
-</div>
+          <div className="ml-auto mr-auto max-w-8xl p-4 relative z-10 rounded overflow-hidden">
+          {loading ? (
+            <p>Loading...</p> // Display loading indicator while data is being fetched
+          ) : (
+            <div className="rounded-lg overflow-hidden">
+              <table className="w-full table-auto border-collapse">
+                <thead>
+                  <tr className="bg-gray-400">
+                    <th className="p-3 border">Property Names</th>
+                    <th className="p-3 border">Address</th>
+                    <th className="p-3 border">Balance</th>
+                    <th className="p-3 border">Requests</th>
+                    <th className="p-3 border">Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((row, index) => (
+                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+                      <td className="p-3 border">{row.column1}</td>
+                      <td className="p-3 border">{row.column2}</td>
+                      <td className="p-3 border">{row.column3}</td>
+                      <td className="p-3 border"><a href="/" className="text-blue-400 underline cursor-pointer">{row.column4}</a></td>
+                      <td className="p-3 border">{row.column5}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
         </div>
       </div>
     </div>

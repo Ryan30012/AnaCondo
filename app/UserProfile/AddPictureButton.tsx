@@ -5,7 +5,7 @@ import type { PutBlobResult } from "@vercel/blob";
 import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line @next/next/no-async-client-component
-export default async function AddPictureButton() {
+export default function AddPictureButton() {
   const router = useRouter();
   var blobUrl = "";
 
@@ -32,7 +32,7 @@ export default async function AddPictureButton() {
       console.log("blobUrl: " + blobUrl);
 
       const storageResponse = await fetch(
-        `/api/filestorage?bloburl=${blobUrl}`,
+        `/api/imagefilestorage?bloburl=${blobUrl}`,
         {
           method: "POST",
         }

@@ -3,24 +3,29 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-    const session = await getServerSession();
-    var uid = "";
-    console.log(session?.user);
-    const userID = (await sql`SELECT uid FROM users WHERE email=${session?.user?.email}`).rows[0].uid;
-    const data = await request.formData();
-    // console.log(data);
-    const regKey = parseInt(data.get("regKey")?.toString());
-    console.log(regKey)
-    // await sql`CREATE TABLE IF NOT EXISTS RegKeys(CompanyID integer primary key, regKey integer)`;
-    const isValidRegKey = (await sql`SELECT regKey FROM RegKeys WHERE regKey=${regKey}`).rowCount > 0;
-    // const allTable = await sql`SELECT * FROM users`;
-    // // console.log(allTable);
-    if(isValidRegKey) {
-       const makeCondoOwner = await sql`UPDATE users SET accounttype=${'Condo Owner'} WHERE uid=${userID}`;
-       const afterOperation = await sql`SELECT * FROM users WHERE uid=${userID}`;
-     }
-    //redirect('https://www.google.com');
-     
+  const session = await getServerSession();
+  var uid = "";
+  console.log(session?.user);
+  const userID = (
+    await sql`SELECT uid FROM users WHERE email=${session?.user?.email}`
+  ).rows[0].uid;
+  const data = await request.formData();
+  // console.log(data);
+  const regKeyString = data.get("regKey")?.toString();
+  const regKey = regKeyString ? parseInt(regKeyString) : 0;
+  console.log(regKey);
+  // await sql`CREATE TABLE IF NOT EXISTS RegKeys(CompanyID integer primary key, regKey integer)`;
+  const isValidRegKey =
+    (await sql`SELECT regKey FROM RegKeys WHERE regKey=${regKey}`).rowCount > 0;
+  // const allTable = await sql`SELECT * FROM users`;
+  // // console.log(allTable);
+  if (isValidRegKey) {
+    const makeCondoOwner =
+      await sql`UPDATE users SET accounttype=${"Condo Owner"} WHERE uid=${userID}`;
+    const afterOperation = await sql`SELECT * FROM users WHERE uid=${userID}`;
+  }
+  //redirect('https://www.google.com');
+
   // try {
   //   const { Fname, Lname, username, DOB, Address, Phone, Email, Password } =
   //     await request.json();

@@ -4,19 +4,19 @@ import React from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
-import AddPictureButton from "./AddPictureButton";
-import {EditButton} from "@/components/EditButton/EditButton.js";
+import { EditButton } from "@/components/EditButton/EditButton.js";
 import { redirect } from "next/navigation";
+import AddPictureButton from "./AddPictureButton";
 
 export default async function ProfilePage() {
   // -> Retrieving User Data from Postgres
   const session = await getServerSession();
 
-    // If not logged in, redirect to signin
-    if(!session?.user?.email){
-      redirect('/SignIn');
-    }
-    
+  // If not logged in, redirect to signin
+  if (!session?.user?.email) {
+    redirect("/SignIn");
+  }
+
   var email = "";
   if (session?.user?.email) email = session.user.email;
   console.log("Session Email: " + email);
@@ -26,15 +26,15 @@ export default async function ProfilePage() {
   const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
   console.log(user.pictureblob);
+  console.log("User accountType: " + user.accounttype);
+  session.accounttype = user.accounttype;
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
       <div id="profileContainer" className="flex flex-col p-6">
         <div className="pageHeaderCtn text-left w-full">
           {/* Page Header */}
-          <h1 className="pageHeader p-2">
-            <b>My Profile</b>
-          </h1>
+          <h1 className="pageHeader px-6 py-2">My Profile</h1>
         </div>
         {/* User Profile Header */}
         <div className="flex flex-col w-full userMainContent p-6">
@@ -87,8 +87,8 @@ export default async function ProfilePage() {
                     <b>Phone Number</b>: <span>{user.phone}</span>
                   </p>
                 </div>
-                <div>
-                <EditButton/>
+                <div className="mt-4">
+                  <EditButton />
                 </div>
               </div>
             </div>
