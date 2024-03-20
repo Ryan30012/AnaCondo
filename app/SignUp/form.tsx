@@ -168,7 +168,7 @@ export default function Form() {
                 Condo Management Company
               </option>
               <option value="PUBLIC_USER">Public User</option>
-              <option value="PUBLIC_USER">Employee</option>
+              <option value="EMPLOYEE">Employee</option>
             </select>
             <div className="dropdownIcon">
               <FontAwesomeIcon icon={faAngleDown} />
