@@ -4,14 +4,17 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Form() {
   const router = useRouter();
+  const { data: session, update } = useSession();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Triggered handleSubmit...");
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("Email"));
+    const email = formData.get("Email");
 
     const response = await signIn("credentials", {
       email: formData.get("Email"),
@@ -19,6 +22,13 @@ export default function Form() {
       redirect: false,
     });
     if (!response?.error) {
+      update({
+        ...session,
+        user: {
+          ...session?.user,
+          email,
+        },
+      });
       router.push("/");
       router.refresh();
     }

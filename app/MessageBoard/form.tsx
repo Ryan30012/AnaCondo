@@ -1,7 +1,11 @@
 "use client";
 
+import { POST, GET, PUT, DELETE } from '../api/messageBoard/route';
+import React, { useState, useEffect } from 'react';
+import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+
 import NotificationsBtn from "@/components/NotificationsBtn/NotificationsBtn";
-import React, { useState } from "react";
 
 interface Message {
   content: string;
@@ -9,22 +13,73 @@ interface Message {
 }
 
 const Forum: React.FC = () => {
+  const { data: session } = useSession();
+  const email = session?.user?.email;
+  
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  function handleInputChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setInput(event.target.value);
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    
+    const formData = new FormData(event.currentTarget);
+    if (input.trim() !== '') {
+      try {
+        const date = new Date();
+        date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0  
+        const dateString = date.toISOString().split('T')[0]; // Convert date to string in format YYYY-MM-DD
+        console.log(email, ' ', input, ' ', dateString);
+        
+        console.log("Connecting to the table...");
+        const response = await fetch('/api/messageBoard', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: email,
+            date: dateString,
+            message: formData.get("message")
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          console.log("Message created successfully.");
+          setInput('');
+          fetchMessages();
+        } else {
+          console.error("Error creating message:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error creating message:", error);
+      }
+    }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (input.trim() !== "") {
-      const newMessage: Message = {
-        content: input.trim(),
-        username: "Public User", // Change this corresponding to user profile
-      };
-      setMessages([...messages, newMessage]);
-      setInput("");
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch('/api/messageBoard', {
+        method: 'GET',
+      });
+      if (response.status === 200) {
+        console.log('Connecting to the table to fetch...');
+        const data = await response.json();
+        const messageData = data.data.rows;
+        console.log('Fetching complete. Data:', messageData);
+        setMessages(messageData);
+      } else {
+        console.error(`Error fetching messages: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(`Error fetching messages: ${error}`);
     }
   };
 
@@ -54,6 +109,7 @@ const Forum: React.FC = () => {
         <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
         <form onSubmit={handleSubmit} className="mb-4">
           <textarea
+          name='message'
             value={input}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded"
@@ -76,20 +132,32 @@ const Forum: React.FC = () => {
   );
 };
 
+
+interface Message {
+  id: number;
+  email: string;
+  date: string;
+  message: string;
+}
+
 interface MessageListProps {
   messages: Message[];
 }
 
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
+
+  const reversedMessages = messages.slice().reverse();
+
   return (
     <div>
-      {messages.map((message, index) => (
-        <div
-          className="border rounded p-2 mb-2 bg-white break-words"
-          style={{ wordWrap: "break-word" }}
-          key={index}
-        >
-          <p className="text-gray-800">{`${message.username}: ${message.content}`}</p>
+      {reversedMessages.map((message, index) => (
+        <div className="border rounded p-2 mb-2" key={index}>
+          <p className="text-gray-800">
+            ID: {message.id}<br />
+            Email: {message.email}<br />
+            Date: {message.date}<br />
+            Message: {message.message}
+          </p>
         </div>
       ))}
     </div>
