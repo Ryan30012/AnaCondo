@@ -1,13 +1,10 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-import { FormEvent } from "react";
-import { ChangeEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import type { PutBlobResult } from "@vercel/blob";
-import { blob } from "stream/consumers";
 
-const form = () => {
+const Form = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
+
   var name = "";
 
   const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -168,4 +165,4 @@ const form = () => {
   );
 };
 
-export default form;
+export default Form;
