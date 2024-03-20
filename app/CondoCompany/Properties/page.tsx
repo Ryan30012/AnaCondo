@@ -37,9 +37,12 @@ const PropertyList: React.FC = () => {
               className="border border-gray-300 rounded-lg shadow p-4"
             >
               <img
-                className="w-full rounded-lg mb-2"
+                className="propertyImage"
                 src={property.propertyimage}
                 alt={`Property ${property.bid}`}
+                onLoad={() => {
+                  console.log(property.propertyimage);
+                }}
               />
               <div className="text-left">
                 <p className="font-semibold">{property.name}</p>

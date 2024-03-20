@@ -255,3 +255,8 @@
 .addBtn:hover {
   transform: scale(1.025);
 }
+
+.propertyImage {
+  max-height: 300px;
+  aspect-ratio: 4/5;
+}
