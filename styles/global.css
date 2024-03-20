@@ -6,6 +6,7 @@
 :root {
   --light-blue: #E1F2FB;
   --blue: #3559E0;
+  --blue-hover: #00008B;
   --green: #355E3B;
   --green-hover: #023020;
 }
@@ -242,5 +243,15 @@
   background-color: var(--green-hover);
 }
 .formGroup:focus {
+  transform: scale(1.025);
+}
+
+.addBtn {
+  background-color: #000;
+  color: #FFF !important;
+  border: 1px solid #000;
+  transition: 0.2s all ease-in-out;
+}
+.addBtn:hover {
   transform: scale(1.025);
 }
