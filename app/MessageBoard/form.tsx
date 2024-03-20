@@ -84,40 +84,19 @@ const Forum: React.FC = () => {
   };
 
   return (
-    <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">  
-    <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ left: '-40px'}}>
-      <img src="/imgbin_architectural-drawing-architecture-sketch-building-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
-    </div>
-    <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ right: '-40px'}}>
-      <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
-    </div>
-
-    <div className="w-4/5 max-w-2xl mx-auto z-10">
-      <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
-      <form onSubmit={handleSubmit} className="mb-4">
-        <textarea
-          value={input}
-          onChange={handleInputChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          rows={4}
-          placeholder="Type your message here..."
-        />
+    <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">
+      <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ left: '-40px'}}>
+        <img src="/imgbin_architectural-drawing-architecture-sketch-building-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
       </div>
-      <div
-        className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center z-0"
-        style={{ right: "-40px", top: "82px" }}
-      >
-        <img
-          src="/imgbin_drawing-building-architecture-png.png"
-          alt="Condo"
-          className="h-auto w-full max-h-80vh"
-        />
+      <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ right: '-40px'}}>
+        <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
       </div>
+  
       <div className="w-4/5 max-w-2xl mx-auto z-10">
         <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
         <form onSubmit={handleSubmit} className="mb-4">
           <textarea
-          name='message'
+            name='message'
             value={input}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded"
@@ -137,10 +116,6 @@ const Forum: React.FC = () => {
         <NotificationsBtn />
       </div>
     </div>
-    <div className="absolute top-0 right-0 p-4">
-        <NotificationsBtn/>
-      </div>
-  </div>
   );
 };
 
