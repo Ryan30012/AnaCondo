@@ -34,7 +34,7 @@ const PropertyList: React.FC = () => {
           {properties.map((property) => (
             <div
               key={property.bid}
-              className="border border-gray-300 rounded-lg shadow p-4 flex flex-col item-center"
+              className="border border-gray-300 rounded-lg shadow p-4 flex flex-col item-center gap-2"
             >
               <img
                 className="propertyImage"
@@ -44,33 +44,34 @@ const PropertyList: React.FC = () => {
                   console.log(property.propertyimage);
                 }}
               />
-              <div className="text-left">
+              <div className="text-left flex flex-col gap-2">
                 <p className="font-semibold">{property.name}</p>
                 <p>
                   <span className="font-normal">Address:</span>{" "}
                   {property.address}
                 </p>
-                <span className="bg-green-500 text-white p-1 rounded text-sm mt-2 inline-block">
-                  Property {property.bid}
-                </span>
-                <Link href="Properties/Edit" as={`Properties/Edit`}>
-                  <button
-                    className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mt-3 ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    Edit
-                  </button>
-                </Link>
+                <div className="flex w-full gap-2">
+                  <div className="bg-green-500 globalBtn w-1/4 p-1 text-white text-center">
+                    <span>Property {property.bid}</span>
+                  </div>
+                  <div className="w-1/6">
+                    <Link href="Properties/Edit" as={`Properties/Edit`}>
+                      <button
+                        className="editBtn globalBtn w-full"
+                        type="button"
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
         <div className="text-center mt-8">
           <Link href="Properties/Add" as={`Properties/Add`}>
-            <button
-              className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-            >
+            <button className="bg-red-500 text-white biggerBtn" type="button">
               Add New Property
             </button>
           </Link>

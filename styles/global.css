@@ -256,6 +256,27 @@
   transform: scale(1.025);
 }
 
+.editBtn {
+  background-color: var(--blue);
+  color: #fff;
+  transition: 0.2s all ease-in-out;
+}
+.editBtn:hover {
+  background-color: var(--blue-hover);
+}
+.globalBtn {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+.biggerBtn {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
+}
+.biggerBtn:hover {
+  transform: scale(1.025);
+}
+
 .propertyImage {
   max-height: 300px;
   object-fit: cover;
