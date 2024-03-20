@@ -10,3 +10,8 @@
     background-color: var(--green-hover);
     border: 1px solid white;
 }
+
+.activeNavItem a {
+    background-color: var(--green-hover);
+    border: 1px solid white;
+}
