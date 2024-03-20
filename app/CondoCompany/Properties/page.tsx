@@ -34,7 +34,7 @@ const PropertyList: React.FC = () => {
           {properties.map((property) => (
             <div
               key={property.bid}
-              className="border border-gray-300 rounded-lg shadow p-4"
+              className="border border-gray-300 rounded-lg shadow p-4 flex flex-col item-center"
             >
               <img
                 className="propertyImage"

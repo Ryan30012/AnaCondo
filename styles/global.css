@@ -258,5 +258,5 @@
 
 .propertyImage {
   max-height: 300px;
-  aspect-ratio: 4/5;
+  object-fit: cover;
 }
