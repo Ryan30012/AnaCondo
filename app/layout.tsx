@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 import GuestNavbar from "@/components/guestnavbar/GuestNavbar";
 import "/styles/global.css";
@@ -13,6 +13,15 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession();
   console.log(session?.user);
+
+  // Set the user.email variable in the SessionProvider component
+  const sessionWithEmail = {
+    ...session,
+    user: {
+      ...session?.user,
+      email: session?.user?.email,
+    },
+  };
   return (
     <html lang="en">
       <head>
@@ -22,7 +31,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <SessionProvider>
+        <SessionProvider session={session}>
           {session && <Navbar />}
           {!session && <GuestNavbar />}
           {children}

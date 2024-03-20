@@ -4,14 +4,17 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Form() {
   const router = useRouter();
+  const { data: session, update } = useSession();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Triggered handleSubmit...");
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("Email"));
+    const email = formData.get("Email");
 
     const response = await signIn("credentials", {
       email: formData.get("Email"),
@@ -19,6 +22,13 @@ export default function Form() {
       redirect: false,
     });
     if (!response?.error) {
+      update({
+        ...session,
+        user: {
+          ...session?.user,
+          email,
+        },
+      });
       router.push("/");
       router.refresh();
     }
@@ -27,28 +37,33 @@ export default function Form() {
   let notExists = " ";
 
   return (
-    <div className="bg-stone-50 flex flex-col items-center justify-center h-screen loginSignupCtn">
+    <div
+      className="bg-stone-50 loginSignupCtn flex flex-col items-center justify-center"
+      style={{ height: "calc(100vh - 82px)" }}
+    >
       <div className="loginSignupLogo flex flex-col justify-center align-middle">
         <p className="text-center logoTitle">AnaCondo</p>
         <p className="welcomeBackLogin">Welcome back!</p>
       </div>
       <form className="w-full max-w-xs" onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div className="mb-4 flex w-full">
           <input
             required
             name="Email"
             type="text"
             placeholder="Email"
-            className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+            className="formGroup"
+            style={{ width: "100%" }}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 flex">
           <input
             required
             name="Password"
             type="password"
             placeholder="Password"
-            className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+            className="formGroup"
+            style={{ width: "100%" }}
           />
         </div>
         <div className="text-red-500 text-center">{notExists}</div>
@@ -61,7 +76,11 @@ export default function Form() {
         <div className="mb-6">
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+            className="w-full p-3 signInBtn"
+            style={{
+              color: "white",
+              borderRadius: "0.25rem",
+            }}
           >
             Login
           </button>

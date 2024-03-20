@@ -4,19 +4,43 @@ import React from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
-import { EditButton } from "@/components/EditButton/EditButton.js";
-import { redirect } from "next/navigation";
-import AddPictureButton from "./AddPictureButton";
+import AddPictureButton from "../UserProfile/AddPictureButton";
+import {SaveButton} from "@/components/SaveButton/saveButton";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import Form from './form';
 
-export default async function ProfilePage() {
-  // -> Retrieving User Data from Postgres
-  const session = await getServerSession();
+//  async function returnCredentials() {
+//   const session = await getServerSession();
+//   var email = "";
+//   if (session?.user?.email) email = session.user.email;
+//   console.log("Session Email: " + email);
+//   console.log("Fetching user data...");
+//   const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
+//   const user = res.rows[0];
+//   const userProfilePictureUrl = user.pictureblob;
+//   console.log(user.username);
+//   console.log(user.pictureblob);
+//   return user;
+// }
 
-  // If not logged in, redirect to signin
-  if (!session?.user?.email) {
-    redirect("/SignIn");
+export default async function EditProfilePage() {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+ 
+    const formData = new FormData(event.currentTarget)
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      body: formData,
+    })
+ 
+    // Handle response if necessary
+    const data = await response.json()
+    // ...
   }
 
+  // -> Retrieving User Data from Postgres
+  const session = await getServerSession();
   var email = "";
   if (session?.user?.email) email = session.user.email;
   console.log("Session Email: " + email);
@@ -26,15 +50,20 @@ export default async function ProfilePage() {
   const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
   console.log(user.pictureblob);
-  console.log("User accountType: " + user.accounttype);
-  session.accounttype = user.accounttype;
+
+  //const router = useRouter();
+
+
+  
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
       <div id="profileContainer" className="flex flex-col p-6">
         <div className="pageHeaderCtn text-left w-full">
           {/* Page Header */}
-          <h1 className="pageHeader px-6 py-2">My Profile</h1>
+          <h1 className="pageHeader p-2">
+            <b>My Profile</b>
+          </h1>
         </div>
         {/* User Profile Header */}
         <div className="flex flex-col w-full userMainContent p-6">
@@ -72,24 +101,7 @@ export default async function ProfilePage() {
                     <b>Account Type</b>: <span>{user.accounttype}</span>
                   </p>
                 </div>
-                <div>
-                  <p>
-                    <b>Username</b>: <span>{user.username}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Contact e-mail</b>: <span>{user.email}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <b>Phone Number</b>: <span>{user.phone}</span>
-                  </p>
-                </div>
-                <div className="mt-4">
-                  <EditButton />
-                </div>
+              <Form  user={user}/>
               </div>
             </div>
           </div>

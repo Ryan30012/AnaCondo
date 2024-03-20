@@ -1,0 +1,12 @@
+.mainNavItem a {
+    background-color: var(--green);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    transition: 0.2s all ease-in-out;
+}
+
+.mainNavItem a:hover {
+    background-color: var(--green-hover);
+    border: 1px solid white;
+}
