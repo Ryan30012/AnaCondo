@@ -3,8 +3,8 @@ export default function RequestAccess() {
     <form>
       <div className="mb-5">
         <label
-          for="email"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="email"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Your email
         </label>
@@ -25,8 +25,8 @@ export default function RequestAccess() {
           className="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
         />
         <label
-          for="fob"
-          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          htmlFor="fob"
+          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Fob
         </label>
@@ -40,8 +40,8 @@ export default function RequestAccess() {
           className="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
         />
         <label
-          for="key"
-          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          htmlFor="key"
+          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Key
         </label>

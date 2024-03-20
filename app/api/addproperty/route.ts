@@ -6,6 +6,14 @@ export async function POST(request: Request) {
     const { name, unitCount, parkingCount, lockerCount, address } =
       await request.json();
 
+    console.log({
+      name,
+      unitCount,
+      parkingCount,
+      lockerCount,
+      address,
+    });
+
     const buildings = await sql`SELECT COUNT(*) AS table_count FROM buildings;`;
 
     const buildingCount = buildings.rows[0].table_count;
@@ -13,7 +21,9 @@ export async function POST(request: Request) {
     const newBID = parseInt(buildingCount) + 1;
     const result =
       await sql`insert into buildings (bid, name, unitcount, parkingcount, lockercount, address) values 
-          (${newBID}, ${name}, ${unitCount}, ${parkingCount}, ${lockerCount}, ${address})`;
+          (${newBID}, ${name}, ${parseInt(unitCount)}, ${parseInt(
+        parkingCount
+      )}, ${parseInt(lockerCount)}, ${address})`;
 
     console.log("Successfully Inserted Property.");
     return NextResponse.json(name);

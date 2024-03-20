@@ -3,8 +3,8 @@ export default function ElevatorDate() {
     <form>
       <div className="mb-5">
         <label
-          for="email"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="email"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Your email
         </label>
@@ -19,8 +19,8 @@ export default function ElevatorDate() {
       <div className="grid md:grid-cols-3">
         <div className="max-w-sm mb-4 mr-3">
           <label
-            for="day"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="day"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Day
           </label>
@@ -62,8 +62,8 @@ export default function ElevatorDate() {
         </div>
         <div className="max-w-sm mb-4 mx-3">
           <label
-            for="month"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="month"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Month
           </label>
@@ -87,8 +87,8 @@ export default function ElevatorDate() {
         </div>
         <div className="max-w-sm mb-4 ml-3">
           <label
-            for="year"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="year"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Year
           </label>

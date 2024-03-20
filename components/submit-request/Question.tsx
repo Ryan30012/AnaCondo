@@ -2,14 +2,14 @@ export default function Question() {
   return (
     <div className="ask-question mb-6">
       <form>
-        <label for="question" class="sr-only">
+        <label htmlFor="question" className="sr-only">
           Your question
         </label>
         <div className="px-3 py-4 rounded-lg bg-gray-50 dark:bg-gray-700">
           <div className="flex mb-5">
             <label
-              for="email"
-              class="w-[103px] flex items-center justify-center mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="email"
+              className="w-[103px] flex items-center justify-center mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your email
             </label>
@@ -77,8 +77,8 @@ export default function Question() {
             </button>
             <textarea
               id="question"
-              rows="1"
-              class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              rows={1}
+              className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Your question..."
             ></textarea>
             <button

@@ -11,7 +11,7 @@ export default function RentalFinancialStatus() {
   return (
     <>
       {finances.map((finances, index) => (
-        <div className="grid grid-rows-6 gap-4 my-3">
+        <div key={index} className="grid grid-rows-6 gap-4 my-3">
           <div className="border-2 row-span-2 rounded-lg flex p-3">
             <div className="pr-4 pt-2.5">
               <Image src={img1} className="w-7 rounded-lg" alt="img" />

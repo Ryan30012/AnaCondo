@@ -55,7 +55,7 @@ export default function CondoOwnerDashboard() {
           </div>
           <h1 className="font-semibold text-center">Name</h1>
           <h2 className="text-center">@user</h2>
-          <h2 className="text-center">{session.user.email}</h2>
+          <h2 className="text-center">{session?.user?.email}</h2>
           <h2 className="text-center">(514) 999-9999</h2>
         </div>
         <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
