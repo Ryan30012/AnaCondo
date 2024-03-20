@@ -51,7 +51,10 @@ const PropertyList: React.FC = () => {
                   {property.address}
                 </p>
                 <div className="flex w-full gap-2">
-                  <div className="bg-green-500 globalBtn w-1/4 p-1 text-white text-center">
+                  <div
+                    className="globalBtn w-1/4 p-1 text-white text-center"
+                    style={{ backgroundColor: "#000" }}
+                  >
                     <span>Property {property.bid}</span>
                   </div>
                   <div className="w-1/6">
@@ -64,6 +67,9 @@ const PropertyList: React.FC = () => {
                       </button>
                     </Link>
                   </div>
+                </div>
+                <div className="flex flex-col">
+                  <Link href={`Properties/viewproperty/${property.bid}`}></Link>
                 </div>
               </div>
             </div>
