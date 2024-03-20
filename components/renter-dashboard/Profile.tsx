@@ -3,6 +3,7 @@ import img from "@/assets/profile-pic.png";
 import { useSession } from "next-auth/react";
 
 export default function Profile() {
+  const session = useSession();
   return (
     <div className="dashboard-profile-info">
       <div className="flex justify-center items-center">
@@ -10,7 +11,7 @@ export default function Profile() {
       </div>
       <h1 className="font-semibold text-center">Name</h1>
       <h2 className="text-center">@user</h2>
-      <h2 className="text-center">{session.user.email}</h2>
+      <h2 className="text-center">{session.data?.user?.email}</h2>
       <h2 className="text-center">(514) 999-9999</h2>
     </div>
   );

@@ -4,8 +4,8 @@ export default function Violation() {
       <div className="max-w-sm mb-4">
         <div className="mb-5">
           <label
-            for="email"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Your email
           </label>
@@ -18,8 +18,8 @@ export default function Violation() {
           />
         </div>
         <label
-          for="common-room"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="common-room"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Select a common room
         </label>
@@ -39,8 +39,8 @@ export default function Violation() {
         </select>
         <div className="my-5">
           <label
-            for="new-violation"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="new-violation"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Your violation not listed?
           </label>

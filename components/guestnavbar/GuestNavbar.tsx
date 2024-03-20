@@ -13,7 +13,6 @@ const Navbar = () => {
         </p>
       </div>
       <div id="navbarAccountNoLogin" className="flex">
-
         <Link href="/RentalUserDashboard">
           <button id="renterDashboardBtn" className="navButtonWhite">
             Renter Dashboard
@@ -24,7 +23,6 @@ const Navbar = () => {
             Dashboard
           </button>
         </Link>
-
         <Link href="/SignIn">
           <button id="loginBtn" className="navButton">
             Login

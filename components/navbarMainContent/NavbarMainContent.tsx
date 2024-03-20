@@ -17,7 +17,6 @@ const NavbarMainContent = () => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname.split("/");
       setlastPath(path[path.length - 1].toLowerCase());
-      console.log("path: " + lastPath);
     }
   }, []);
 
