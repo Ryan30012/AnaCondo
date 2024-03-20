@@ -49,6 +49,9 @@ const pool = new Pool({
   host: postgresHost,
   database: postgresDatabase,
   connectionString: `${postgresUrl}?sslmode=require`, // Add sslmode=require to the connection string
+  ssl: {
+    rejectUnauthorized: false, // Ignore self-signed certificates (remove this in production)
+  }
 });
 
 // Function to create "properties" table if it does not exist
@@ -66,6 +69,7 @@ async function createTable() {
       `);
 
       // Insert dummy data into the properties table
+      /** 
     await pool.query(`
     INSERT INTO properties (property_name, address, balance, requests, image_url)
     VALUES 
@@ -73,7 +77,7 @@ async function createTable() {
       ('Property 2', 'Address 2', '2000', '10', 'https://example.com/image2.jpg'),
       ('Property 3', 'Address 3', '1500', '8', 'https://example.com/image3.jpg');
   `);
-
+*/
 
       console.log('Table created successfully');
     } catch (error) {
@@ -81,16 +85,19 @@ async function createTable() {
     }
   }
   
-  // Function to fetch property data from the database
-  async function fetchData() {
-    try {
-      const result = await pool.query('SELECT * FROM properties');
-      return NextResponse.json({ data: result.rows });
-    } catch (error) {
-      console.error('Error fetching properties:', error);
-      return NextResponse.json({ error: 'Error fetching properties' }, { status: 500 });
-    }
+
+// Function to fetch property data from the database
+async function fetchData() {
+  try {
+    const result = await pool.query('SELECT * FROM properties');
+    console.log(result);
+    return NextResponse.json({ data: result.rows });
+
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    return NextResponse.json({ error: 'Error fetching properties' }, { status: 500 });
   }
+}
   
   // Main function to handle GET request
   export async function GET(request: Request) {

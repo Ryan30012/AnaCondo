@@ -22,7 +22,6 @@ export default async function RootLayout({
       email: session?.user?.email,
     },
   };
-
   return (
     <html lang="en">
       <head>
@@ -32,7 +31,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <SessionProvider>
+        <SessionProvider session={session}>
           {session && <Navbar />}
           {!session && <GuestNavbar />}
           {children}
