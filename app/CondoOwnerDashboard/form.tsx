@@ -32,7 +32,7 @@ export default function CondoOwnerDashboard() {
    * OR RENTER, THEN DISPLAY THE CORRECT USER INFORMATION AND CHANGE THE DISPLAY TO "CONDO OWNER PAGE", ETC.
    */
 
-  if (status === "loading") return <p>DASHBOARD: Loading...</p>;
+  //if (status === "loading") return <p>DASHBOARD: Loading...</p>;
   if (!session)
     return (
       <div className="grid place-items-center h-screen">
