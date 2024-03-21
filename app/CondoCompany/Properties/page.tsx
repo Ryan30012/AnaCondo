@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import React from "react";
-import Link from "next/link";
+import Link from "@/node_modules/next/link";
 
 interface Property {
   bid: number;
