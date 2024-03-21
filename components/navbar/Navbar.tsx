@@ -11,25 +11,6 @@ import VerticalNavContent from "../verticalnavcontent/VerticalNavContent";
 
 const Navbar = () => {
   const [burgerOpen, setBurgerOpen] = useState(false);
-  const [burgerDisplay, setBurgerDisplay] = useState("none");
-  const [windowWidth, setWindowWidth] = useState(0); // Catch window screen size for navbar type
-  const [breakpointReached, setBreakpointReached] = useState(false); // Switch between horizontal and vertical navbar
-  const breakpoint = 1400;
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      console.log("Window Width: " + windowWidth);
-      setBreakpointReached(windowWidth < breakpoint);
-      console.log("Breakpoint Reached: " + breakpointReached);
-    };
-
-    if (window !== undefined) window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [windowWidth, breakpointReached]);
 
   const handleBurgerClick = () => {
     if (burgerOpen) {
@@ -41,10 +22,10 @@ const Navbar = () => {
 
   return (
     <>
-      {breakpointReached ? (
+      <div id="horizontalNav">
         <div
           id="navbarMain"
-          className="flex justify-between px-6 py-6"
+          className="flex justify-between px-6 py-6 w-full"
           style={{ zIndex: "999" }}
         >
           <div className="navbarLogo">
@@ -74,29 +55,28 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <>
-          <div
-            id="navbarMain"
-            className="flex justify-between px-6 py-6"
-            style={{ zIndex: "999" }}
-          >
-            <div className="navbarLogo">
-              <p className="navbarLogoTitle">
-                <Link href="/">AnaCondo</Link>
-              </p>
-            </div>
-            {burgerOpen && <VerticalNavContent />}
-            <div
-              id="menuIcon"
-              className={`menu-icon-btn ${burgerOpen ? "open" : ""}`}
-              onClick={handleBurgerClick}
-            >
-              <div className="menu-btn-burger"></div>
-            </div>
+      </div>
+      <div id="verticalNav">
+        <div
+          id="navbarMain"
+          className="flex justify-between px-6 py-6 w-full"
+          style={{ zIndex: "999" }}
+        >
+          <div className="navbarLogo">
+            <p className="navbarLogoTitle">
+              <Link href="/">AnaCondo</Link>
+            </p>
           </div>
-        </>
-      )}
+          {burgerOpen && <VerticalNavContent />}
+          <div
+            id="menuIcon"
+            className={`menu-icon-btn ${burgerOpen ? "open" : ""}`}
+            onClick={handleBurgerClick}
+          >
+            <div className="menu-btn-burger"></div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

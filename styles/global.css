@@ -11,15 +11,29 @@
   --green-hover: #023020;
 }
 
-@media (min-width: 1400px) {
+@media screen and (min-width: 1400px) {
   #menuIcon {
     display: none !important;
   }
+  #horizontalNav {
+    display: flex;
+    width: 100vw;
+  }
+  #verticalNav {
+    display: none;
+  }
 }
 
-@media (max-width: 1400px) {
+@media screen and (max-width: 1400px) {
   .menu-icon-btn {
     display: flex !important;
+  }
+  #horizontalNav {
+    display: none;
+  }
+  #verticalNav {
+    display: flex;
+    width: 100vw;
   }
 }
 
