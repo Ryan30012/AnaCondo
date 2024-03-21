@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function Form() {
   const router = useRouter();
@@ -22,6 +24,7 @@ export default function Form() {
         Phone: formData.get("Phone"),
         Email: formData.get("Email"),
         Password: formData.get("Password"),
+        AccountType: formData.get("accountType"),
       }),
     });
     if (response.ok) {
@@ -31,69 +34,99 @@ export default function Form() {
   };
 
   return (
-    <div className="bg-stone-50 flex flex-col items-center justify-center h-screen">
-      <form className="bg-stone 50 w-full max-w-md" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <input
-            name="Fname"
-            type="text"
-            placeholder="First Name"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+    <div
+      className="bg-stone-50 flex flex-col items-center justify-center gap-8"
+      style={{ height: "calc(100vh - 90px)" }}
+    >
+      <div id="welcomeSignUp">
+        <p style={{ fontSize: "1.75rem" }}>Welcome to Anacondo</p>
+      </div>
+      <form
+        className="bg-stone 50 w-full max-w-md flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex w-full gap-2">
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="fName">First Name</label> */}
+            <input
+              id="fName"
+              name="Fname"
+              type="text"
+              className="formGroup"
+              placeholder="First Name"
+            />
+          </div>
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="lName">Last Name</label> */}
+            <input
+              id="lName"
+              name="Lname"
+              type="text"
+              className="formGroup"
+              placeholder="Last Name"
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <input
-            name="Lname"
-            type="text"
-            placeholder="Last Name"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+        <div className="flex w-full gap-2">
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="username">Username</label> */}
+            <input
+              id="username"
+              required
+              pattern="[a-z]{1,15}"
+              title="Please enter a valid username (no symbols)"
+              name="username"
+              type="text"
+              placeholder="Username"
+              className="formGroup"
+            />
+          </div>
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="address">Address</label> */}
+            <input
+              id="address"
+              name="Address"
+              type="text"
+              className="formGroup"
+              placeholder="Address"
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <input
-            required
-            pattern="[a-z]{1,15}"
-            title="Please enter a valid username (no symbols)"
-            name="username"
-            type="text"
-            placeholder="Username"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
+        <div className="flex w-full gap-2">
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="dob">Date of Birth</label> */}
+            <input
+              id="dob"
+              name="DOB"
+              type="text"
+              className="formGroup"
+              placeholder="DD/MM/YYYY"
+            />
+          </div>
+          <div className="flex flex-col w-1/2">
+            {/* <label htmlFor="phone">Phone No.</label> */}
+            <input
+              id="phone"
+              name="Phone"
+              type="text"
+              className="formGroup"
+              placeholder="###-###-####"
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <input
-            name="DOB"
-            type="text"
-            placeholder="Date of Birth"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            name="Address"
-            type="text"
-            placeholder="Address"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            name="Phone"
-            type="text"
-            placeholder="Phone"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
+        <div className="flex flex-col">
+          {/* <label htmlFor="Email">Email</label> */}
           <input
             required
             name="Email"
             type="email"
+            id="Email"
+            className="formGroup"
             placeholder="Email"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div className="mb-4">
+        <div className="flex flex-col">
+          {/* <label htmlFor="Password">Password</label> */}
           <input
             required
             maxLength={255}
@@ -101,23 +134,55 @@ export default function Form() {
             type="password"
             id="Password"
             placeholder="Password"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+            className="formGroup"
           />
         </div>
-        <div className="mb-6">
+        <div className="flex flex-col">
+          {/* <label htmlFor="Confirmpass">Confirm Password</label> */}
           <input
             required
             name="Confirmpass"
             type="password"
             id="Confirmpass"
             placeholder="Confirm Password"
-            className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+            className="formGroup"
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-4">
+          {/* <label htmlFor="accountType">Account Type</label> */}
+          <div
+            className="flex"
+            style={{ alignItems: "center", position: "relative" }}
+          >
+            <select
+              required
+              id="accountType"
+              name="accountType"
+              className="formGroup"
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled selected>
+                Select an Account Type
+              </option>
+              <option value="CONDO_MANAGEMENT_COMPANY">
+                Condo Management Company
+              </option>
+              <option value="PUBLIC_USER">Public User</option>
+              <option value="EMPLOYEE">Employee</option>
+            </select>
+            <div className="dropdownIcon">
+              <FontAwesomeIcon icon={faAngleDown} />
+            </div>
+          </div>
+        </div>
+        <div className="">
           <button
             type="submit"
-            className="w-full text-black bg-blue-500 py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+            className="w-full p-3 signInBtn"
+            style={{
+              color: "white",
+              borderRadius: "0.25rem",
+            }}
           >
             Sign Up
           </button>

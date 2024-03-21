@@ -6,7 +6,9 @@
 :root {
   --light-blue: #E1F2FB;
   --blue: #3559E0;
-  --green: #50623A;
+  --blue-hover: #00008B;
+  --green: #355E3B;
+  --green-hover: #023020;
 }
 
 @media (min-width: 1200px) {
@@ -146,7 +148,7 @@
 
 #profileContainerMasterCtn {
   width: 100vw;
-  height: calc(100vh - 82px);
+  height: calc(100vh - 90px);
   display: flex;
   justify-content: center;
 }
@@ -169,7 +171,8 @@
 
 .pageHeaderCtn {
   font-size: 2.35rem;
-  background-color: var(--green);
+  /* background-color: var(--green); */
+  background-color: #000;
   color: white;
   border-radius: 0.25rem 0.25rem 0 0;
 }
@@ -212,4 +215,77 @@
 .userMainContent {
   background-color: #FAFAFA;
   border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.formGroup {
+  all: unset;
+  position: relative;
+  z-index: 3;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 1px 1px 4px;
+  border: 1px solid var(--green);
+}
+
+.dropdownIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #000;
+}
+.signInBtn {
+  background-color: var(--green);
+  transition: 0.25s all ease-in-out;
+}
+.signInBtn:hover {
+  background-color: var(--green-hover);
+}
+.formGroup:focus {
+  transform: scale(1.025);
+}
+
+.addBtn {
+  background-color: #000;
+  color: #FFF !important;
+  border: 1px solid #000;
+  transition: 0.2s all ease-in-out;
+}
+.addBtn:hover {
+  transform: scale(1.025);
+}
+
+.editBtn {
+  background-color: var(--blue);
+  color: #fff;
+  transition: 0.2s all ease-in-out;
+}
+.editBtn:hover {
+  background-color: var(--blue-hover);
+}
+.globalBtn {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
+}
+.biggerBtn {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
+}
+.biggerBtn:hover {
+  transform: scale(1.025);
+}
+.viewBtn {
+  background-color: var(--green);
+  color: #fff;
+}
+.viewBtn:hover {
+  background-color: var(--green-hover);
+}
+
+.propertyImage {
+  max-height: 300px;
+  object-fit: cover;
 }
