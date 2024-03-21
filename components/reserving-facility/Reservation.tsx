@@ -30,14 +30,17 @@ export default function Reservation() {
             name="day"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
           >
-            <option selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
+            <option value="01" selected>
+              1
+            </option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
@@ -74,18 +77,20 @@ export default function Reservation() {
             name="month"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
           >
-            <option selected>January</option>
-            <option value="february">February</option>
-            <option value="march">March</option>
-            <option value="april">April</option>
-            <option value="may">May</option>
-            <option value="june">June</option>
-            <option value="july">July</option>
-            <option value="august">August</option>
-            <option value="september">September</option>
-            <option value="october">October</option>
-            <option value="november">November</option>
-            <option value="december">December</option>
+            <option value="01" selected>
+              January
+            </option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
           </select>
         </div>
         <div className="max-w-sm mb-4 ml-3">
@@ -101,10 +106,8 @@ export default function Reservation() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
           >
             <option selected>2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
           </select>
         </div>
       </div>
@@ -121,21 +124,23 @@ export default function Reservation() {
             name="StartTime"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
           >
-            <option selected>8:00</option>
-            <option value="2023">9:00</option>
-            <option value="2022">10:00</option>
-            <option value="2021">11:00</option>
-            <option value="2020">12:00</option>
-            <option value="2020">13:00</option>
-            <option value="2020">14:00</option>
-            <option value="2020">15:00</option>
-            <option value="2020">16:00</option>
-            <option value="2020">17:00</option>
-            <option value="2020">18:00</option>
-            <option value="2020">19:00</option>
-            <option value="2020">20:00</option>
-            <option value="2020">21:00</option>
-            <option value="2020">22:00</option>
+            <option value="8:00:00" selected>
+              8:00
+            </option>
+            <option value="9:00:00">9:00</option>
+            <option value="10:00:00">10:00</option>
+            <option value="11:00:00">11:00</option>
+            <option value="12:00:00">12:00</option>
+            <option value="13:00:00">13:00</option>
+            <option value="14:00:00">14:00</option>
+            <option value="15:00:00">15:00</option>
+            <option value="16:00:00">16:00</option>
+            <option value="17:00:00">17:00</option>
+            <option value="18:00:00">18:00</option>
+            <option value="19:00:00">19:00</option>
+            <option value="20:00:00">20:00</option>
+            <option value="21:00:00">21:00</option>
+            <option value="22:00:00">22:00</option>
           </select>
         </div>
         <div className="max-w-sm mb-4 ml-3">
@@ -150,21 +155,24 @@ export default function Reservation() {
             name="EndTime"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
           >
-            <option selected>8:00</option>
-            <option value="2023">9:00</option>
-            <option value="2022">10:00</option>
-            <option value="2021">11:00</option>
-            <option value="2020">12:00</option>
-            <option value="2020">13:00</option>
-            <option value="2020">14:00</option>
-            <option value="2020">15:00</option>
-            <option value="2020">16:00</option>
-            <option value="2020">17:00</option>
-            <option value="2020">18:00</option>
-            <option value="2020">19:00</option>
-            <option value="2020">20:00</option>
-            <option value="2020">21:00</option>
-            <option value="2020">22:00</option>
+            <option value="8:00:00" selected>
+              8:00
+            </option>
+            <option value="9:00:00">9:00</option>
+            <option value="10:00:00">10:00</option>
+            <option value="11:00:00">11:00</option>
+            <option value="12:00:00">12:00</option>
+            <option value="13:00:00">13:00</option>
+            <option value="14:00:00">14:00</option>
+            <option value="15:00:00">15:00</option>
+            <option value="16:00:00">16:00</option>
+            <option value="17:00:00">17:00</option>
+            <option value="18:00:00">18:00</option>
+            <option value="19:00:00">19:00</option>
+            <option value="20:00:00">20:00</option>
+            <option value="21:00:00">21:00</option>
+            <option value="22:00:00">22:00</option>
+            <option value="23:00:00">23:00</option>
           </select>
         </div>
       </div>

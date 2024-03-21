@@ -15,7 +15,9 @@ const VerticalNavContent = ({ handleLinkClick }: Props) => {
   const session = useSession();
   const router = useRouter();
   const userAccountType = session.data?.accounttype;
+  const userUid = session.data?.uid;
   console.log("Account Type: " + userAccountType);
+  console.log("User UID: " + userUid);
 
   const [lastPath, setlastPath] = useState("");
 
@@ -113,49 +115,49 @@ const VerticalNavContent = ({ handleLinkClick }: Props) => {
             <li className="mainNavItem">
               <a href="">My Properties</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Common Facilities</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Submit a Request</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Notifications</a>
             </li>
           </>
         )}
         {userAccountType === "RENTAL_USER" && (
           <>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">My Rental Units</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Common Facilities</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Submit a Request</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Notifications</a>
             </li>
           </>
         )}
         {userAccountType === "EMPLOYEE" && (
           <>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Assignments</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Notifications</a>
             </li>
           </>
         )}
         {userAccountType === "PUBLIC_USER" && (
           <>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">View Properties</a>
             </li>
-            <li className="mainNavItemVerticalVertical">
+            <li className="mainNavItemVertical">
               <a href="">Notifications</a>
             </li>
           </>
