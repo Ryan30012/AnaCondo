@@ -4,7 +4,6 @@ import { ChangeEvent } from "react";
 import type { PutBlobResult } from "@vercel/blob";
 import { useRouter } from "next/navigation";
 
-// eslint-disable-next-line @next/next/no-async-client-component
 export default async function AddPictureButton() {
   const router = useRouter();
   var blobUrl = "";

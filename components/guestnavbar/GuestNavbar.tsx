@@ -13,6 +13,19 @@ const Navbar = () => {
         </p>
       </div>
       <div id="navbarAccountNoLogin" className="flex">
+<<<<<<< Updated upstream
+=======
+        <Link href="/RentalUserDashboard">
+          <button id="renterDashboardBtn" className="navButtonWhite">
+            Renter Dashboard
+          </button>
+        </Link>
+        <Link href="/CondoOwnerDashboard">
+          <button id="ownerDashboardBtn" className="navButtonWhite">
+            Dashboard
+          </button>
+        </Link>
+>>>>>>> Stashed changes
         <Link href="/SignIn">
           <button id="loginBtn" className="navButton">
             Login

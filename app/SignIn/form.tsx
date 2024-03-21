@@ -51,6 +51,14 @@ export default function Form() {
             className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
           />
         </div>
+        <div className="mb-4">
+          <input
+            name="registrationkey"
+            type="registrationkey"
+            placeholder="Registration Key"
+            className="w-full border-b-2 text-black border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
+          />
+        </div>
         <div className="text-red-500 text-center">{notExists}</div>
         <div className="flex items-center mb-4">
           <input type="checkbox" id="remember" className="mr-2" />
@@ -69,7 +77,7 @@ export default function Form() {
         <div className="text-center text-gray-600">
           Don&apos;t have an account?
           <span className="text-blue-500 cursor-pointer">
-            <Link href="../SignUp">Sign Up</Link>
+            <Link href="../SignUp"> Sign Up</Link>
           </span>
         </div>
       </form>

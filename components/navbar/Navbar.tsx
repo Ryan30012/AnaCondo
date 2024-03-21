@@ -14,6 +14,11 @@ const Navbar = () => {
         </p>
       </div>
       <div className="navBarAccount flex align-middle">
+        <Link href="@/RentalUserDashboard/page.tsx">
+          <button id="renterDashboardBtn" className="navButtonWhite">
+            Renter Dashboard
+          </button>
+        </Link>
         <Link href="/UserProfile">
           <button id="loginBtn" className="navButtonWhite">
             User Profile
