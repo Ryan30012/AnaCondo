@@ -6,7 +6,35 @@
 :root {
   --light-blue: #E1F2FB;
   --blue: #3559E0;
-  --green: #50623A;
+  --blue-hover: #00008B;
+  --green: #355E3B;
+  --green-hover: #023020;
+}
+
+@media screen and (min-width: 1400px) {
+  #menuIcon {
+    display: none !important;
+  }
+  #horizontalNav {
+    display: flex;
+    width: 100vw;
+  }
+  #verticalNav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .menu-icon-btn {
+    display: flex !important;
+  }
+  #horizontalNav {
+    display: none;
+  }
+  #verticalNav {
+    display: flex;
+    width: 100vw;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -82,6 +110,15 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+#verticalNavbarCtn {
+  display: flex;
+  font-size: 14px;
+  background-color: #000;
+  color: #FFF;
+  position: absolute;
+  height: calc(100vh - 90px);
+}
+
 .navbarLogoTitle {
   font-size: 1.75rem;
 }
@@ -94,6 +131,20 @@
   gap: 1rem;
 }
 
+.dashboardBtnNavVertical {
+  cursor: pointer;
+  padding: 1rem;
+  background-color: white;
+  color: black;
+  transition: all ease-in-out 0.15s;
+}
+.dashboardBtnNavVertical p {
+  transition: 0.25s all ease-in-out;
+}
+.dashboardBtnNavVertical:hover p {
+  transform: translateX(35%);
+}
+
 .navButtonWhite {
   all: unset;
   cursor: pointer;
@@ -102,8 +153,18 @@
   border: 1px solid black;
   background-color: white;
   color: black;
-  height: fit-content;
   transition: all ease-in-out 0.15s;
+}
+
+.navButtonLogoutVertical {
+  cursor: pointer;
+  padding: 1rem;
+  background-color: #000000;
+  color: white;
+  height: fit-content;
+  border-bottom: 2px solid transparent;
+  transition: all ease-in-out 0.5s;
+  position: relative;
 }
 
 .navButton {
@@ -117,10 +178,19 @@
   height: fit-content;
   transition: all ease-in-out 0.15s;
 }
+.navButtonLogoutVertical:hover {
+  border-bottom: 2px solid #FFF;
+}
+.navButtonLogoutVertical p {
+  transition: all ease-in-out 0.25s;
+}
+.navButtonLogoutVertical:hover p {
+  transform: translateX(40%);
+}
 
 .navButton:hover {
   color: black;
-  background-color: white;
+  background-color: white;  
   border: 1px solid black;
 }
 
@@ -146,7 +216,7 @@
 
 #profileContainerMasterCtn {
   width: 100vw;
-  height: calc(100vh - 82px);
+  height: calc(100vh - 90px);
   display: flex;
   justify-content: center;
 }
@@ -169,7 +239,8 @@
 
 .pageHeaderCtn {
   font-size: 2.35rem;
-  background-color: var(--green);
+  /* background-color: var(--green); */
+  background-color: #000;
   color: white;
   border-radius: 0.25rem 0.25rem 0 0;
 }
@@ -212,4 +283,182 @@
 .userMainContent {
   background-color: #FAFAFA;
   border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.formGroup {
+  all: unset;
+  position: relative;
+  z-index: 3;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 1px 1px 4px;
+  border: 1px solid var(--green);
+}
+
+.dropdownIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #000;
+}
+.signInBtn {
+  background-color: var(--green);
+  transition: 0.25s all ease-in-out;
+}
+.signInBtn:hover {
+  background-color: var(--green-hover);
+}
+.formGroup:focus {
+  transform: scale(1.025);
+}
+
+.addBtn {
+  background-color: #000;
+  color: #FFF !important;
+  border: 1px solid #000;
+  transition: 0.2s all ease-in-out;
+}
+.addBtn:hover {
+  transform: scale(1.025);
+}
+
+.editBtn {
+  background-color: var(--blue);
+  color: #fff;
+  transition: 0.2s all ease-in-out;
+}
+.editBtn:hover {
+  background-color: var(--blue-hover);
+}
+.globalBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
+}
+.biggerBtn {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: 0.2s all ease-in-out;
+}
+.biggerBtn:hover {
+  transform: scale(1.025);
+}
+.viewBtn {
+  background-color: var(--green);
+  color: #fff;
+}
+.viewBtn:hover {
+  background-color: var(--green-hover);
+}
+
+.propertyImage {
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* ------ Menu Button Style ------- */
+
+.menu-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 37px;
+  cursor: pointer;
+}
+
+.menu-btn-burger {
+  width: 2rem;
+  height: 2px;
+  background: white;
+  border-radius: 0.25rem;
+  transition: 0.25s all ease-in-out;
+}
+
+.menu-btn-burger::before, .menu-btn-burger::after {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 2px;
+  background: white;
+  border-radius: 0.25rem;
+  transition: 0.25s all ease-in-out;
+}
+
+.menu-btn-burger::before {
+  transform: translateY(-10px);
+}
+
+.menu-btn-burger::after {
+  transform: translateY(10px);
+}
+
+/* Hover Animation */
+
+.menu-icon-btn:hover > .menu-btn-burger, 
+.menu-icon-btn:hover > .menu-btn-burger::after, 
+.menu-icon-btn:hover > .menu-btn-burger::before {
+  background: var(--green);
+}
+
+/* Animation to X */
+.menu-icon-btn.open .menu-btn-burger {
+  transform: translateX(-2rem);
+  background: transparent;
+}
+
+.menu-icon-btn.open .menu-btn-burger::before {
+  transform: rotate(45deg) translate(1.4rem, -1.4rem);
+}
+
+.menu-icon-btn.open .menu-btn-burger::after {
+  transform: rotate(-45deg) translate(1.4rem, 1.4rem);
+}
+
+/* End of Animation to X */
+
+#verticalNavbarCtn {
+  position: absolute;
+  top: 90px;
+  right: 0;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainNavItemVertical {
+  width: 100%;
+  background-color: var(--green);
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  font-size: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: 0.2s all ease-in-out;
+}
+.mainNavItemVertical:hover {
+  background-color: var(--green-hover);
+  border-bottom: 1px solid white;
+}
+.mainNavItemVertical a {
+  transition: 0.25s all ease-in-out;
+}
+.mainNavItemVertical:hover a {
+  transform: translateX(1rem);
+}
+
+.activeNavItem a {
+  background-color: var(--green-hover);
+  border: 1px solid white;
+}
+.activeNavItemVertical a {
+  transform: translateX(1rem);
+}
+.activeNavItemVertical {
+  background-color: var(--green-hover);
+  border-bottom: 1px solid white;
 }
