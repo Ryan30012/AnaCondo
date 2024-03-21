@@ -32,12 +32,16 @@ const PropertyList: React.FC = () => {
     <div className="p-4">
       <div className="my-5 text-center">
         <h2 className="text-xl font-semibold mb-4">Property List</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-4">
           {properties.length !== 0 &&
             properties.map((property) => (
               <div
                 key={property.bid}
-                className="border border-gray-300 rounded-lg shadow p-4 flex flex-col item-center gap-2"
+                className="p-4 flex flex-col item-center gap-2"
+                style={{
+                  boxShadow: "1px 1px 4px 2px #A2A2A2",
+                  borderRadius: "0.25rem",
+                }}
               >
                 <img
                   className="propertyImage"
@@ -56,12 +60,12 @@ const PropertyList: React.FC = () => {
                   <div className="flex w-full">
                     <div className="flex w-full gap-2">
                       <div
-                        className="globalBtn w-1/4 p-1 text-white text-center"
+                        className="globalBtn p-1 text-white text-center"
                         style={{ backgroundColor: "#000" }}
                       >
                         <span>Property {property.bid}</span>
                       </div>
-                      <div className="w-1/6">
+                      <div className="">
                         <Link href="Properties/Edit" as={`Properties/Edit`}>
                           <button
                             className="editBtn globalBtn w-full"
@@ -72,7 +76,7 @@ const PropertyList: React.FC = () => {
                         </Link>
                       </div>
                     </div>
-                    <div className="flex flex-col w-1/5">
+                    <div className="flex flex-col">
                       <Link href={`Properties/viewproperty/${property.bid}`}>
                         <button className="globalBtn w-full viewBtn">
                           View

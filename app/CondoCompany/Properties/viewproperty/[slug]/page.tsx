@@ -93,8 +93,12 @@ export default function Page({ params }: { params: { slug: string } }) {
         {property !== null && (
           <div
             key={property.bid}
-            className="border border-gray-300 rounded-lg shadow p-4 flex flex-col w-1/3 item-center gap-2"
-            style={{ minWidth: "475px" }}
+            className="p-4 flex flex-col w-1/3 item-center gap-2"
+            style={{
+              minWidth: "475px",
+              boxShadow: "1px 1px 4px 2px #A2A2A2",
+              borderRadius: "0.25rem",
+            }}
           >
             <img
               className="propertyImage"

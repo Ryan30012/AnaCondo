@@ -2,12 +2,21 @@
 import "/styles/global.css";
 import "/styles/home.css";
 import React from "react";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Homepage: React.FC = () => {
   const session = useSession();
   const accountType = session.data?.accounttype;
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("homepage acc type: " + accountType);
+    if (accountType === "CONDO_MANAGEMENT_COMPANY") {
+      router.push("/UserProfile");
+    }
+  }, []);
 
   return (
     <>

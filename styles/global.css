@@ -333,7 +333,7 @@
   background-color: var(--blue-hover);
 }
 .globalBtn {
-  padding: 0.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   transition: 0.2s all ease-in-out;
 }
