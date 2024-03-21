@@ -19,7 +19,9 @@ const Navbar = () => {
       setBurgerOpen(true);
     }
   };
-
+  const handleLinkClick = () => {
+    setBurgerOpen(false);
+  };
   return (
     <>
       <div id="horizontalNav">
@@ -41,11 +43,19 @@ const Navbar = () => {
             <NavbarMainContent />
           </div>
           <div className="navBarAccount flex align-middle">
-            <Link href="/UserProfile">
+            <Link
+              href="/UserProfile"
+              onClick={() => {
+                setBurgerOpen(false);
+              }}
+            >
               <button
                 id="loginBtn"
                 className="navButtonWhite"
                 style={{ fontSize: "14px" }}
+                onClick={() => {
+                  setBurgerOpen(false);
+                }}
               >
                 Dashboard
               </button>
@@ -67,7 +77,9 @@ const Navbar = () => {
               <Link href="/">AnaCondo</Link>
             </p>
           </div>
-          {burgerOpen && <VerticalNavContent />}
+          {burgerOpen && (
+            <VerticalNavContent handleLinkClick={handleLinkClick} />
+          )}
           <div
             id="menuIcon"
             className={`menu-icon-btn ${burgerOpen ? "open" : ""}`}

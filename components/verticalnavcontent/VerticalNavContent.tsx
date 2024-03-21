@@ -7,7 +7,11 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const VerticalNavContent = () => {
+interface Props {
+  handleLinkClick: () => void;
+}
+
+const VerticalNavContent = ({ handleLinkClick }: Props) => {
   const session = useSession();
   const router = useRouter();
   const userAccountType = session.data?.accounttype;
@@ -27,6 +31,7 @@ const VerticalNavContent = () => {
   const handleNavItemClick = (item: string) => {
     setactiveItem(item);
     router.push("/CondoCompany/" + item);
+    handleLinkClick();
   };
   return (
     <div id="verticalNavbarCtn">
@@ -35,9 +40,9 @@ const VerticalNavContent = () => {
           <>
             <li
               className={`mainNavItemVertical ${
-                activeItem === "properties" ? "activeNavItemVertical" : ""
+                activeItem === "Properties" ? "activeNavItemVertical" : ""
               }`}
-              onClick={() => handleNavItemClick("properties")}
+              onClick={() => handleNavItemClick("Properties")}
             >
               <Link href="/CondoCompany/Properties" style={{ width: "100%" }}>
                 Properties
