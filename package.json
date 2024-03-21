@@ -8,8 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open"
-    "lint": "next lint",
-    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@edgestore/react": "^0.1.6",
@@ -40,11 +38,7 @@
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.17",
-<<<<<<< HEAD
     "cypress": "13.6",
-=======
-    "cypress": "^13.6.6",
->>>>>>> 2d37c7a (Add cypress testing to Ryan30012/Anacondo)
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.38",
