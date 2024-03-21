@@ -10,6 +10,8 @@ export default async function employeeDashboard () {
     //await sql`create table if not exists users(uid serial primary key, Fname varchar(255), Lname varchar(255),username varchar(255), DOB DATE, Address varchar(255), Phone varchar(10), Email varchar(319), Password varchar(255), regKey varchar(255));`;
     //await sql`INSERT INTO users (Fname, Lname, username, DOB, Address, Phone, Email, Password, regKey) VALUES ('Marinette', 'Dupain-Chang', 'ladybug', '2002-01-24', 'hell', '5145145144', 'mdupain@zag.com', 'miraculous', NULL);`;
     //await sql `UPDATE users SET accounttype = 'Employee' WHERE email = 'mdupain@zag.com';`;
+    //await sql `CREATE TABLE if not exists EmployeeRole (uid, role VARCHAR(255));`;
+    //await sql `INSERT INTO EmployeeRole (uid, role) VALUES (11, 'Repair Crew');`;
     const result = (await sql`SELECT * FROM users WHERE email = 'mdupain@zag.com';`).rows;
     console.log(result);
     // If not logged in, redirect to signin
@@ -23,6 +25,10 @@ export default async function employeeDashboard () {
     console.log("Fetching user data...");
     const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
     const user = res.rows[0];
+    const userType = user.accounttype;
+    if (userType != 'Employee'){
+        return redirect("/");
+    }
     const userProfilePictureUrl = user.pictureblob;
     const userFirstName = user.fname;
     const userLastName = user.lname;
@@ -147,7 +153,7 @@ export default async function employeeDashboard () {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            {user.lname} {user.fname}
+                            {user.fname} {user.lname}
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                             {email}
