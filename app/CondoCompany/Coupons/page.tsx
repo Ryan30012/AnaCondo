@@ -2,6 +2,8 @@ import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import React from "react";
 import { Pool } from 'pg';
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function CompanyCoupons() {
     // Retrieve user email to use for fetching company id and coupons
@@ -11,14 +13,32 @@ export default async function CompanyCoupons() {
 
     const companyIDQuery = await sql`SELECT companyid FROM users WHERE email = ${email};`;
     const companyID = companyIDQuery.rows[0].companyid;
+    const coupons = await sql`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`;
+    console.log(coupons.rows[0].nid)
+    console.log(JSON.stringify(coupons.rows[1].expirydate))
+    console.log(coupons)
 
-    const pool = new Pool();
-    const client = await pool.connect();
-    const result = await client.query({
-      rowMode: 'array',
-      text:`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`
-    })
-    console.log(result.rows);
+    
+    // let result = [];
+    // for (var i in coupons.rows) {
+    //   result.push([coupons.rows[i]])
+    // }
+    // console.log(result)
+    // console.log(result[0][0].nid);
+
+    // let coupondictionary = {};
+    // coupons.rows
+
+    // const pool = new Pool();
+    // console.log("pool:")
+    // console.log(pool);
+    // const client = await pool.connect();
+    // const result = await client.query({
+    //   rowMode: 'array',
+    //   text:`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`
+    // })
+    // console.log(result.rows);
+    // client.release();
 
     // const allTable = await sql`SELECT * FROM users WHERE username = ${'estoylocomanager'}`;
     // console.log(allTable.rows);
@@ -35,7 +55,14 @@ export default async function CompanyCoupons() {
     // const coupons = await sql`SELECT * FROM companyCoupons;`;
     // console.log(coupons.rows);
 
-
+      // await sql`DROP table companyCoupons`
+      // await sql`CREATE TABLE IF NOT EXISTS companyCoupons(id serial, companyID integer, propertyID integer, discountValue decimal, expiryDate DATE, PRIMARY KEY (id))`
+      // await sql`INSERT INTO companyCoupons(companyid, propertyID, discountValue, expiryDate) VALUES (1, 2, 0.25, '2024-07-20')`
+      // await sql`INSERT INTO companyCoupons(companyid, propertyID, discountValue, expiryDate) VALUES (2, 3, 0.25, '2024-07-20')`
+      // await sql`INSERT INTO companyCoupons(companyid, propertyID, discountValue, expiryDate) VALUES (2, 1, 0.25, '2024-07-20')`
+      // await sql`INSERT INTO companyCoupons(companyid, propertyID, discountValue, expiryDate) VALUES (1, 4, 0.25, '2024-07-20')`
+      // const result = await sql`SELECT * FROM companyCoupons`;
+      // console.log(result.rows)
 
     // const coupons = (await sql`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`).rows;
     // console.log(coupons);
@@ -51,15 +78,60 @@ export default async function CompanyCoupons() {
           Coupons
         </h1>
         <div className="rounded-lg bg-blue-500 px-3 py-0.5 font-bold text-white">
-          3
+          {coupons.rowCount}
         </div>
-        <div className="rounded-lg ml-auto text-sm text-gray-500 hover:text-blue-500 px-3 py-0.5">
-          Add Coupon
-        </div>
+        <Link href="./Coupons/Add" className="rounded-lg ml-auto text-gray-500 hover:text-blue-500 px-3 py-0.5 hover:cursor-pointer">Add Coupon</Link>
       </div>
       {/* Coupons */}
-      <div className="flex flex-col gap-3">
+      
+
+      <div className="relative overflow-x-auto">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                      <th scope="col" className="px-6 py-3">
+                          Coupon ID
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Property ID
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Discount
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Expiry Date
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {coupons.rows.map(coupon => {
+                    
+                    return <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {coupon.id}
+                    </th>
+                    <td className="px-6 py-4">
+                        {coupon.propertyid}
+                    </td>
+                    <td className="px-6 py-4">
+                        {`${coupon.discountvalue*100}%`}
+                    </td>
+                    <td className="px-6 py-4">
+                        {`${JSON.stringify(coupon.expirydate)}`}
+                    </td>
+                </tr>
+                  })}
+                
+              </tbody>
+          </table>
       </div>
+
+      {/* <div className="flex flex-col gap-3">
+        {coupons.rows.map(item => {
+          return <div>{item.nid} and {item.description}</div>
+
+        })}
+      </div> */}
     </div>
   </main>
   );
