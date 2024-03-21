@@ -1,11 +1,13 @@
 "use client";
 
+
 import { POST, GET, PUT, DELETE } from '../api/messageBoard/route';
 import React, { useState, useEffect } from 'react';
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 
 import NotificationsBtn from "@/components/NotificationsBtn/NotificationsBtn";
+
 
 interface Message {
   content: string;
@@ -82,7 +84,6 @@ const Forum: React.FC = () => {
       console.error(`Error fetching messages: ${error}`);
     }
   };
-
   return (
     <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">
       <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ left: '-40px'}}>
@@ -116,7 +117,32 @@ const Forum: React.FC = () => {
         <NotificationsBtn />
       </div>
     </div>
-  );
+
+    <div className="w-4/5 max-w-2xl mx-auto z-10">
+
+      <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
+      <form onSubmit={handleSubmit} className="mb-4">
+        <textarea
+          value={input}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          rows={4}
+          placeholder="Type your message here..."
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600"
+        >
+          Post Message
+        </button>
+      </form>
+      <MessageList messages={messages} />
+    </div>
+    <div className="absolute top-0 right-0 p-4">
+        <NotificationsBtn />
+      </div>
+  </div>
+);
 };
 
 
@@ -130,7 +156,6 @@ interface Message {
 interface MessageListProps {
   messages: Message[];
 }
-
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
 
   const reversedMessages = messages.slice().reverse();
