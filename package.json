@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open"
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@edgestore/react": "^0.1.6",

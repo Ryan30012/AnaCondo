@@ -14,6 +14,10 @@ export default async function RootLayout({
   const session = await getServerSession();
   console.log(session?.user);
 
+  // Check if the code is running in a testing environment
+  const isTesting = process.env.NODE_ENV === 'development';
+
+
 <<<<<<< HEAD
   // Set the user.email variable in the SessionProvider component
   const sessionWithEmail = {
