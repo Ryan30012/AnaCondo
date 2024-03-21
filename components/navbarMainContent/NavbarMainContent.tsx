@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const NavbarMainContent = () => {
   const session = useSession();
-  const userAccountType = session.data?.accounttype;
+  var userAccountType = session.data?.accounttype;
   console.log(userAccountType);
 
   const [lastPath, setlastPath] = useState("");
@@ -18,6 +18,7 @@ const NavbarMainContent = () => {
       const path = window.location.pathname.split("/");
       setlastPath(path[path.length - 1].toLowerCase());
     }
+    userAccountType = session.data?.accounttype;
   }, []);
 
   const [activeItem, setactiveItem] = useState(lastPath);
