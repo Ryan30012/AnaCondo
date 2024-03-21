@@ -2,9 +2,12 @@
 import { SaveButton } from '@/components/SaveButton/saveButton';
 import { FormEvent } from 'react'
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+let errorMessage = "";
 
 export default function Form(props: any) {
-    console.log(props);
+    const router = useRouter();
+    // console.log(props);
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
  
@@ -13,9 +16,17 @@ export default function Form(props: any) {
       method: 'POST',
       body: formData,
     })
+
     // redirect upon successful registration key submission
-    if(response.status == 200) redirect('/userProfile');
- 
+    if(response.status == 200) {
+      errorMessage = "";
+      router.push('/UserProfile');
+    }
+    // Show error message for invalid registration key (empty or not existent)
+    else if (response.status == 500 || response.status == 501) {
+      errorMessage = "Please enter a valid registration key";
+      router.refresh();
+    }
     // Handle response if necessary
     //const data = await response.json()
     // ...
@@ -69,6 +80,7 @@ export default function Form(props: any) {
             className="w-full text-black border-b-2 border-gray-300 py-2 px-3 focus:outline-none focus:border-blue-500"
         />
       </p>
+      <div className='text-red-600'>{errorMessage}</div>
     </div>
     <SaveButton />
     </form>
