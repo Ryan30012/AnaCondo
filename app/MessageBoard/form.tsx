@@ -1,11 +1,13 @@
 "use client";
 
+
 import { POST, GET, PUT, DELETE } from '../api/messageBoard/route';
 import React, { useState, useEffect } from 'react';
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 
 import NotificationsBtn from "@/components/NotificationsBtn/NotificationsBtn";
+
 
 interface Message {
   content: string;
@@ -82,7 +84,6 @@ const Forum: React.FC = () => {
       console.error(`Error fetching messages: ${error}`);
     }
   };
-
   return (
     <div className="bg-yellow-300 bg-opacity-40 min-h-screen pt-16 relative">
       <div className="fixed left-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ left: '-40px'}}>
@@ -116,7 +117,8 @@ const Forum: React.FC = () => {
         <NotificationsBtn />
       </div>
     </div>
-  );
+ 
+);
 };
 
 
@@ -130,7 +132,6 @@ interface Message {
 interface MessageListProps {
   messages: Message[];
 }
-
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
 
   const reversedMessages = messages.slice().reverse();
@@ -138,7 +139,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
     <div>
       {reversedMessages.map((message, index) => (
-        <div className="border rounded p-2 mb-2" key={index}>
+        <div className="border rounded p-2 mb-2 bg-white" key={index}>
           <p className="text-gray-800">
             ID: {message.id}<br />
             Email: {message.email}<br />

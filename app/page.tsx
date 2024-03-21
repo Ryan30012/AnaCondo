@@ -2,38 +2,56 @@
 import "/styles/global.css";
 import "/styles/home.css";
 import React from "react";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Homepage: React.FC = () => {
+  const session = useSession();
+  const accountType = session.data?.accounttype;
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("homepage acc type: " + accountType);
+    if (accountType === "CONDO_MANAGEMENT_COMPANY") {
+      router.push("/UserProfile");
+    }
+  }, []);
+
   return (
     <>
-      <div
-        id="homeMainContent"
-        className="text-center flex align-middle flex-col p-12"
-      >
-        <h1 className="text-4xl font-bold text-gray-800 mb-8">
-          Welcome to AnaCondo
-        </h1>
-        <div className="text-center">
-          <p className="text-lg mb-4">Everything Condo with AnaCondo T-T</p>
-          <div className="flex justify-center flex-wrap">
-            <img
-              src="https://bestkeptmontreal.com/wp-content/uploads/2022/07/solstice-persp-ext-vue-ouest-1-1024x429.jpg"
-              alt="Condo Image 1"
-              className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
-            />
-            <img
-              src="https://maplr.co/wp-content/uploads/2022/08/13-griffintown-se-loger-montreal-francais-expatries.jpg"
-              alt="Condo Image 2"
-              className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
-            />
-            <img
-              src="https://immo.vrtx.co/picFull/10260972.jpg"
-              alt="Condo Image 3"
-              className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
-            />
+      {accountType === undefined ||
+        accountType === "" ||
+        (accountType === null && (
+          <div
+            id="homeMainContent"
+            className="text-center flex align-middle flex-col p-12"
+          >
+            <h1 className="text-4xl font-bold text-gray-800 mb-8">
+              Welcome to AnaCondo
+            </h1>
+            <div className="text-center">
+              <p className="text-lg mb-4">Everything Condo with AnaCondo T-T</p>
+              <div className="flex justify-center flex-wrap">
+                <img
+                  src="https://bestkeptmontreal.com/wp-content/uploads/2022/07/solstice-persp-ext-vue-ouest-1-1024x429.jpg"
+                  alt="Condo Image 1"
+                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
+                />
+                <img
+                  src="https://maplr.co/wp-content/uploads/2022/08/13-griffintown-se-loger-montreal-francais-expatries.jpg"
+                  alt="Condo Image 2"
+                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
+                />
+                <img
+                  src="https://immo.vrtx.co/picFull/10260972.jpg"
+                  alt="Condo Image 3"
+                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        ))}
     </>
   );
 };

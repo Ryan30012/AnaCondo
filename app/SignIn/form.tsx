@@ -39,7 +39,7 @@ export default function Form() {
   return (
     <div
       className="bg-stone-50 loginSignupCtn flex flex-col items-center justify-center"
-      style={{ height: "calc(100vh - 82px)" }}
+      style={{ height: "calc(100vh - 90px)" }}
     >
       <div className="loginSignupLogo flex flex-col justify-center align-middle">
         <p className="text-center logoTitle">AnaCondo</p>
