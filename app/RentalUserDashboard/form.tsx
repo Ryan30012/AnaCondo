@@ -14,7 +14,7 @@ import { cookies } from "next/headers";
 export default function RentalUserDashboard() {
   let session = true;
   //const { data: session, status } = useSession();
-  if (status === "loading") return <p>RENTALUSERDASHBOARD: Loading...</p>;
+  //if (status === "loading") return <p>RENTALUSERDASHBOARD: Loading...</p>;
   if (!session)
     return (
       <div className="grid place-items-center h-screen">
