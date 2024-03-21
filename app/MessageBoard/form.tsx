@@ -117,31 +117,7 @@ const Forum: React.FC = () => {
         <NotificationsBtn />
       </div>
     </div>
-
-    <div className="w-4/5 max-w-2xl mx-auto z-10">
-
-      <h1 className="text-2xl font-bold mb-4">Condo Forum</h1>
-      <form onSubmit={handleSubmit} className="mb-4">
-        <textarea
-          value={input}
-          onChange={handleInputChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          rows={4}
-          placeholder="Type your message here..."
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600"
-        >
-          Post Message
-        </button>
-      </form>
-      <MessageList messages={messages} />
-    </div>
-    <div className="absolute top-0 right-0 p-4">
-        <NotificationsBtn />
-      </div>
-  </div>
+ 
 );
 };
 
