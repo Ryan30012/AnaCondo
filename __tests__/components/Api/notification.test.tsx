@@ -1,8 +1,8 @@
-/** When NotificationAPI will be merged
+//When NotificationAPI will be merged
 import { NextApiRequest, NextApiResponse } from "next";
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
-import { GET} from "../../../app/api/notification/route";
+//import { GET} from "../../../app/api/notification/route";
 import fetchMock from 'fetch-mock-jest';
 
 jest.mock('@vercel/postgres', () => ({
@@ -40,4 +40,3 @@ describe('GET function', () => {
     expect(response.status).toBe(200);
   });
 });
-*/

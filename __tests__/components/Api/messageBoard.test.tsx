@@ -38,28 +38,17 @@ describe('GET function', () => {
     const response = await fetch('../../app/api/messageBoard/');
     expect(response.status).toBe(200);
   });
-});
-/*
-describe('Post function', () => {
-  let fetchConfigResponse: (new () => Response) | undefined;
-  beforeEach(() => {
-    fetchConfigResponse = fetchMock.config.Response;
-    jest.useFakeTimers({ advanceTimers: true });
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 
   it('it should return data on successful status -> 200', async () => {
     // Mock SQL query result
     fetchMock.mock('../../app/api/messageBoard/', { 
       method: 'POST',
-      body:
+      body: JSON.stringify({
         email: 'test@gmail.com',
         date: new Date(),
-        message: 'This is a Test', 
+        message: 'This is a Test', })
     });
     const response = await fetch('../../app/api/messageBoard/');
     expect(response.status).toBe(200);
   });
-});*/
+});
