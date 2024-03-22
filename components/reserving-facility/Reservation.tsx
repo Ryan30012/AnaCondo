@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   facilities: {
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function Reservation({ facilities }: Props) {
+  const router = useRouter();
   const handleReservation = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -33,6 +35,7 @@ export default function Reservation({ facilities }: Props) {
     if (reservationResponse.ok) {
       console.log("Facility reservation successful.");
     }
+    router.push("/");
   };
 
   return (

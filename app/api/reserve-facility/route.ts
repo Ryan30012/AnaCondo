@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     // Create rid
     const rows = await sql`SELECT COUNT(*) AS table_count FROM reservations;`;
     const reservationCount = rows.rows[0].table_count;
-    const rid = reservationCount + 1;
+    const rid = parseInt(reservationCount) + 1;
     const fid = parseInt(facility);
     const startDateTime = year + "-" + month + "-" + day + " " + startTime;
     const endDateTime = year + "-" + month + "-" + day + " " + endTime;

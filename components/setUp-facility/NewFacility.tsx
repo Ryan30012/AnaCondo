@@ -27,9 +27,8 @@ export default function NewFacility({ bid }: Props) {
     console.log(setupResponse);
     if (setupResponse.ok) {
       console.log("Facility setup successful.");
-      router.push("/");
-      router.refresh();
     }
+    router.push("/");
   };
 
   return (

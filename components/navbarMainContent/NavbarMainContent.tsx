@@ -103,7 +103,7 @@ const NavbarMainContent = () => {
               <a href="">My Properties</a>
             </li>
             <li className="mainNavItem">
-              <a href="">Common Facilities</a>
+              <Link href="/ReservingFacility">Common Facilities</Link>
             </li>
             <li className="mainNavItem">
               <a href="">Submit a Request</a>
