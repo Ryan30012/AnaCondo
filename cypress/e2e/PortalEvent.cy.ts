@@ -24,18 +24,19 @@ describe('PortalEvent Page', () => {
   it('fills up the Create Event form', () => {
     cy.get('input[placeholder="Event Title"]').type('Board Meeting');
 
-    // Open the Select Attendees list
     cy.get('.relative > .py-2').click();
 
-    // Select attendees by clicking on their name or associated checkbox
-    // Replace '.attendee-name' with the actual selector for your checkboxes
-    // Optionally, close the Select Attendees list
     cy.contains('Alex Johnson').click();
     cy.contains('Jordan Leigh').click();
     cy.get('.relative > .py-2').click(); 
 
     cy.get('input[placeholder="Location"]').type('Conference Room A');
     cy.get('textarea[placeholder="Type details for this new meeting"]').type('Discussing the upcoming project milestones.');
+
+    cy.get('.bg-blue-600').should('exist').click();
   });
 
+  it('Close button exist', () => {
+  cy.get('.bg-gray-300').should('exist');
+  });
 })
