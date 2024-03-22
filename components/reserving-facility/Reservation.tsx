@@ -30,6 +30,9 @@ export default function Reservation({ facilities }: Props) {
         message: formData.get("message"),
       }),
     });
+    if (reservationResponse.ok) {
+      console.log("Facility reservation successful.");
+    }
   };
 
   return (

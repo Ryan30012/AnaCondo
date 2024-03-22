@@ -6,21 +6,24 @@ export async function POST(request: Request) {
   const session = await getServerSession();
 
   try {
-    const { email, day, month, year, startTime, endTime, facility, message } =
-      await request.json();
+    const { bid, name, location, description } = await request.json();
 
-    console.log("Data Object received: ", {
-      email,
-      day,
-      month,
-      year,
-      startTime,
-      endTime,
-      facility,
-      message,
+    console.log("Data Object received for SETUP: ", {
+      bid,
+      name,
+      location,
+      description,
     });
 
     const userId = session?.uid;
+    // Create fid
+    const rows = await sql`SELECT COUNT(*) AS table_count FROM facilities;`;
+    const facilityCount = rows.rows[0].table_count;
+    const fid = parseInt(facilityCount) + 1;
+
+    const storageResponse =
+      await sql`INSERT INTO facilities (fid, bid, name, location, description)
+        VALUES (${fid}, ${bid}, ${name}, ${location}, ${description})`;
 
     return NextResponse.json(
       {

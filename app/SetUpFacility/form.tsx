@@ -1,7 +1,11 @@
 import NewFacility from "@/components/setUp-facility/NewFacility";
 import NewFacilityPics from "@/components/setUp-facility/NewFacilityPics";
 
-export default function SetUpFacilityPage() {
+interface Props {
+  bid: number;
+}
+
+export default function SetUpFacilityPage({ bid }: Props) {
   return (
     <>
       <div className="flex flex-col my-20 mx-20">
@@ -12,7 +16,7 @@ export default function SetUpFacilityPage() {
           <h1 className="font-bold text-xl py-6 text-lime-700">
             Set Up a new facility of your choice
           </h1>
-          <NewFacility />
+          <NewFacility bid={bid} />
           <hr></hr>
         </div>
 

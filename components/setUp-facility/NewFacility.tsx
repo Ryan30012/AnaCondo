@@ -1,6 +1,39 @@
-export default function NewFacility() {
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+
+interface Props {
+  bid: number;
+}
+
+export default function NewFacility({ bid }: Props) {
+  const router = useRouter();
+
+  const handleSetup = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    console.log("Attempting to setup...");
+    const reservationResponse = await fetch("/api/setupfacility", {
+      method: "POST",
+      body: JSON.stringify({
+        bid: bid,
+        name: formData.get("facility"),
+        location: formData.get("facilityLocation"),
+        description: formData.get("facilitiesDetails"),
+      }),
+    });
+
+    const setupResponse = await reservationResponse.json();
+    console.log(setupResponse);
+    if (setupResponse.ok) {
+      console.log("Facility setup successful.");
+      router.push("/");
+      router.refresh();
+    }
+  };
+
   return (
-    <form className="">
+    <form onSubmit={handleSetup}>
       <div className="max-w-sm mb-4">
         <label
           htmlFor="facility"
@@ -36,7 +69,7 @@ export default function NewFacility() {
       <div>
         <label
           htmlFor="facilitiesDetails"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
         >
           New Facility Details
         </label>
