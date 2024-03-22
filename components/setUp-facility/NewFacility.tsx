@@ -4,9 +4,9 @@ export default function NewFacility() {
       <div className="max-w-sm mb-4">
         <label
           htmlFor="facility"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
         >
-          Enter new Facility of Choice
+          Enter new Facility of Choice:
         </label>
         <textarea
           id="facility"
@@ -20,7 +20,7 @@ export default function NewFacility() {
       <div className="max-w-sm mb-4">
         <label
           htmlFor="facilityLocation"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
         >
           Enter the location
         </label>
@@ -51,7 +51,7 @@ export default function NewFacility() {
 
       <div className="mb-5"></div>
       <div className="max-w-sm mb-4">
-        <label
+        {/* <label
           htmlFor="uploadFile"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
@@ -66,7 +66,7 @@ export default function NewFacility() {
           <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
             Upload
           </span>
-        </button>
+        </button> */}
 
         <div className="facility-submit-button mt-4">
           <button

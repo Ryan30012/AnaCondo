@@ -1,6 +1,39 @@
-export default function Reservation() {
+import { FormEvent } from "react";
+
+interface Props {
+  facilities: {
+    fid: number;
+    bid: number;
+    count: number;
+    name: string;
+    location: string | null;
+    accesscard: boolean | null;
+    description: string | null;
+  }[];
+}
+
+export default function Reservation({ facilities }: Props) {
+  const handleReservation = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    console.log("Attempting to reserve...");
+    const reservationResponse = await fetch("/api/reserve-facility", {
+      method: "POST",
+      body: JSON.stringify({
+        email: formData.get("email"),
+        day: formData.get("day"),
+        month: formData.get("month"),
+        year: formData.get("year"),
+        startTime: formData.get("StartTime"),
+        endTime: formData.get("EndTime"),
+        facility: formData.get("facility"),
+        message: formData.get("message"),
+      }),
+    });
+  };
+
   return (
-    <form className="">
+    <form onSubmit={handleReservation}>
       <div className="mb-5">
         <label
           htmlFor="email"
@@ -189,12 +222,11 @@ export default function Reservation() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
         >
           <option selected>Choose a facility to reserve</option>
-          <option value="spa">Fitness Center</option>
-          <option value="gym">Swimming Pool</option>
-          <option value="mailroom">Conference Room</option>
-          <option value="pool">Rooftop Terrace</option>
-          <option value="pool">BBQ Station</option>
-          <option value="pool">Tennis Court</option>
+          {facilities.map((facility) => (
+            <option key={facility.fid} value={facility.fid}>
+              {facility.name}
+            </option>
+          ))}
         </select>
       </div>
       <div>
@@ -206,6 +238,7 @@ export default function Reservation() {
         </label>
         <textarea
           id="message"
+          name="message"
           rows={4}
           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Add any extra information about your resevervation (if needed)"

@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 
 export async function POST(request: Request) {
   const session = await getServerSession();
-  const userId = session?.uid;
 
   try {
     const { email, day, month, year, startTime, endTime, facility, message } =
@@ -21,24 +20,23 @@ export async function POST(request: Request) {
       message,
     });
 
+    const userId = session?.uid;
+
     // Create rid
     const rows = await sql`SELECT COUNT(*) AS table_count FROM reservations;`;
     const reservationCount = rows.rows[0].table_count;
     const rid = reservationCount + 1;
-    // Get facility id
-    const frows =
-      await sql`SELECT fid FROM facilities WHERE name = ${facility}`;
-
+    const fid = parseInt(facility);
     const startDateTime = year + "-" + month + "-" + day + " " + startTime;
     const endDateTime = year + "-" + month + "-" + day + " " + endTime;
 
     const storageResponse =
-      await sql`INSERT INTO reservations (rid, uid, fid, starttime, endtime, location, description)
-                                            VALUES (${rid}, ${userId}, )`;
+      await sql`INSERT INTO reservations (rid, uid, fid, starttime, endtime, message)
+        VALUES (${rid}, ${userId}, ${fid}, ${startDateTime}, ${endDateTime}, ${message})`;
 
     return NextResponse.json(
       {
-        message: "Reserved Facility Successfully",
+        message: "Your reservation has been successfully placed.",
       },
       {
         status: 200,
