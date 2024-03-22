@@ -112,7 +112,7 @@ const VerticalNavContent = ({ handleLinkClick }: Props) => {
         )}
         {userAccountType === "CONDO_OWNER" && (
           <>
-            <li className="mainNavItem">
+            <li className="mainNavItemVertical">
               <a href="">My Properties</a>
             </li>
             <li className="mainNavItemVertical">
