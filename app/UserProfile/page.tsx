@@ -1,35 +1,50 @@
-"use server";
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "/styles/global.css";
 import { sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import { EditButton } from "@/components/EditButton/EditButton.js";
 import { redirect } from "next/navigation";
 import AddPictureButton from "./AddPictureButton";
 
-export default async function ProfilePage() {
-  // -> Retrieving User Data from Postgres
-  const session = await getServerSession();
+interface User {
+  fname: string;
+  lname: string;
+  username: string;
+  dob: string;
+  address: string;
+  phone: string;
+  email: string;
+  regkey: string;
+  pictureblob: string;
+  accounttype: string;
+  companyid: number;
+}
 
+export default function ProfilePage() {
+  // -> Retrieving User Data from Postgres
+  const { data: session } = useSession();
+  const [user, setUser] = useState<User>();
   // If not logged in, redirect to signin
   if (!session?.user?.email) {
     redirect("/SignIn");
   }
 
-  var email = "";
-  if (session?.user?.email) email = session.user.email;
-  const user = await fetch(`/api/getuserprofile?email=${email}`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => data.user);
+  useEffect(() => {
+    var email = "";
+    if (session?.user?.email) email = session.user.email;
+    fetch(`/api/getuserprofile?email=${email}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data.user);
+      });
+  }, []);
 
-  const userProfilePictureUrl = user.pictureblob;
-  console.log(user.username);
-  console.log(user.pictureblob);
-  console.log("User accountType: " + user.accounttype);
-  session.accounttype = user.accounttype;
+  const userProfilePictureUrl = user?.pictureblob;
 
   return (
     <section id="profileContainerMasterCtn" className="mt-12">
@@ -64,29 +79,29 @@ export default async function ProfilePage() {
               <div id="userLegalName" className="mb-5">
                 <p className="fullNameText">
                   <b>
-                    {user.fname} {user.lname}
+                    {user?.fname} {user?.lname}
                   </b>
                 </p>
               </div>
               <div id="userDataCtn" className="flex flex-col gap-2">
                 <div>
                   <p>
-                    <b>Account Type</b>: <span>{user.accounttype}</span>
+                    <b>Account Type</b>: <span>{user?.accounttype}</span>
                   </p>
                 </div>
                 <div>
                   <p>
-                    <b>Username</b>: <span>{user.username}</span>
+                    <b>Username</b>: <span>{user?.username}</span>
                   </p>
                 </div>
                 <div>
                   <p>
-                    <b>Contact e-mail</b>: <span>{user.email}</span>
+                    <b>Contact e-mail</b>: <span>{user?.email}</span>
                   </p>
                 </div>
                 <div>
                   <p>
-                    <b>Phone Number</b>: <span>{user.phone}</span>
+                    <b>Phone Number</b>: <span>{user?.phone}</span>
                   </p>
                 </div>
                 <div className="mt-4">
