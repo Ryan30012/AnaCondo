@@ -11,6 +11,20 @@ import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancial
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
 
+interface User {
+  fname: string;
+  lname: string;
+  username: string;
+  dob: string;
+  address: string;
+  phone: string;
+  email: string;
+  regkey: string;
+  pictureblob: string;
+  accounttype: string;
+  companyid: number;
+}
+
 var type = "Condo Owner";
 
 function submitRequests() {
@@ -26,10 +40,12 @@ function submitRequests() {
 
 export default function CondoOwnerDashboard() {
   const { data: session, status } = useSession();
+  const [user, setUser] = useState<User>();
+
   var accountType = "";
   var counter = 0;
+
   useEffect(() => {
-    console.log("counter: ", counter++);
     if (session) {
       console.log("Session from dashboard: ", session);
       console.log("Session acc type: " + session.user?.name);
@@ -45,7 +61,16 @@ export default function CondoOwnerDashboard() {
           type = "Error";
           break;
       }
-      console.log("Account Type: ", accountType);
+
+      var email = "";
+      if (session?.user?.email) email = session.user.email;
+      fetch(`/api/getuserprofile?email=${email}`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setUser(data.user);
+        });
     }
   }, []);
   /**
@@ -75,10 +100,12 @@ export default function CondoOwnerDashboard() {
           <div className="flex justify-center items-center">
             <Image src={img} className="rounded-lg  w-40 " alt="img" />
           </div>
-          <h1 className="font-semibold text-center">Name</h1>
-          <h2 className="text-center">@user</h2>
+          <h1 className="font-semibold text-center">
+            {user?.fname} {user?.lname}
+          </h1>
+          <h2 className="text-center">@{user?.username}</h2>
           <h2 className="text-center">{session?.user?.email}</h2>
-          <h2 className="text-center">(514) 999-9999</h2>
+          <h2 className="text-center">{user?.phone}</h2>
         </div>
         <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
         <div>
