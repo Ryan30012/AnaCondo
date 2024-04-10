@@ -21,12 +21,12 @@ export default async function CompanyCoupons() {
   const companyIDQuery =
     await sql`SELECT companyid FROM users WHERE email = ${email};`;
   console.log("this is conosle log:" + companyIDQuery);
-  const companyID = companyIDQuery.rows[0].companyid;
+  const companyID = 99; //companyIDQuery.rows[0].companyid;
   const coupons =
     await sql`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`;
-  console.log(coupons.rows[0].nid);
-  console.log(JSON.stringify(coupons.rows[1].expirydate));
-  console.log(coupons);
+  //console.log(coupons.rows[0].nid);
+  //console.log(JSON.stringify(coupons.rows[1].expirydate));
+  //console.log(coupons);
 
   // let result = [];
   // for (var i in coupons.rows) {
@@ -94,11 +94,14 @@ export default async function CompanyCoupons() {
             <h1 className="text-l font-bold text-npcVeryDarkBlueMain">
               Coupons
             </h1>
-            <div className="rounded-full bg-lime-300 px-3 py-0.5 font-bold text-white">
+            <div
+              data-testid="coupon-count"
+              className="rounded-full bg-lime-300 px-3 py-0.5 font-bold text-white"
+            >
               {coupons.rowCount}
             </div>
 
-            <div className="ml-auto">
+            <div data-testid="add-coupon-btn" className="ml-auto">
               <button
                 className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 type="submit"
@@ -114,9 +117,15 @@ export default async function CompanyCoupons() {
           </div>
           {/* Coupons */}
 
-          <div className="relative overflow-x-auto shadow sm:rounded-lg">
+          <div
+            ata-testid="coupon-table"
+            className="relative overflow-x-auto shadow sm:rounded-lg"
+          >
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <thead
+                data-testid="coupon-table-head"
+                className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Coupon ID
@@ -132,7 +141,7 @@ export default async function CompanyCoupons() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-testid="coupon-table-body">
                 {coupons.rows.map((coupon) => {
                   return (
                     <tr
