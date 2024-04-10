@@ -27,6 +27,8 @@ function submitRequests() {
 
 export default function CondoOwnerDashboard(props: any) {
   //console.log(props.userInfo.uid);
+  console.log(props.userUnits.rows);
+  const userUnits = props.userUnits.rows;
   const { data: session, status } = useSession();
   /**
    * 'TYPE' SHOULD BE CHANGED TO PULL DATA FROM THE USER SESSION AND DETERMINE IF THE USER IS A OWNER
@@ -96,7 +98,13 @@ export default function CondoOwnerDashboard(props: any) {
 
         <div className="grid md:grid-cols-2 gap-3 my-12">
           <div>
+
             <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
+            {/* {userUnits.map((unit: any) =>{
+              return (<RentalPropertyCard />);
+
+
+            })} */}
             <RentalPropertyCard />
           </div>
           <div className="ml-6 ">
