@@ -22,9 +22,20 @@ export default async function CondoDashbaord() {
   if (userType != "CONDO_OWNER") {
     redirect("/SignIn");
   }
-  
+
   // Retrieve Condo Owner's units
   // this will be passed as props to the Client Component (CondoOwnerDashboard)
   const userUnits = await sql`SELECT * FROM condounits WHERE owner = ${userInfo.rows[0].uid}`;
+  console.log(userUnits.rowCount);
+
+  // Retrieve condo units' building IDs
+  // this is important for other information such as condo address, name, etc.
+  for (let i = 0; i < userUnits.rowCount; i++) {
+    var buildingUnit = await sql`SELECT * FROM buildings WHERE bid = ${userUnits.rows[i].bid}`;
+    userUnits.rows[i].buildingInfo = buildingUnit.rows[0];
+  }
+  // console.log(userUnits.rows);
+
+  // const buildingInfo = await sql`SELECT * FROM buildings WHERE bid IN = ${userUnits.rows[0].building_id}`;
   return <CondoOwnerDashbaord userUnits={userUnits} userInfo={userInfo.rows[0]} />;
 }
