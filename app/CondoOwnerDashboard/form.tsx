@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
+
 import RentalPropertyCard from "@/components/renter-dashboard/RentalPropertyCard";
 import RentalSubmittedRequests from "@/components/renter-dashboard/RentalSubmittedRequests";
 import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancialStatus";
+import AddPictureButton from "../UserProfile/AddPictureButton";
+
 import img from "@/assets/profile-pic.png";
-import { cookies } from "next/headers";
 
 interface User {
   fname: string;
@@ -41,6 +43,7 @@ function submitRequests() {
 export default function CondoOwnerDashboard() {
   const { data: session, status } = useSession();
   const [user, setUser] = useState<User>();
+  const [userProfilePictureUrl, setUserProfilePictureUrl] = useState(null);
 
   var accountType = "";
   var counter = 0;
@@ -70,6 +73,8 @@ export default function CondoOwnerDashboard() {
         .then((res) => res.json())
         .then((data) => {
           setUser(data.user);
+          setUserProfilePictureUrl(data.user.pictureblob);
+          console.log("User Profile pic url: " + userProfilePictureUrl);
         });
     }
   }, []);
@@ -98,7 +103,18 @@ export default function CondoOwnerDashboard() {
         </div>
         <div>
           <div className="flex justify-center items-center">
-            <Image src={img} className="rounded-lg  w-40 " alt="img" />
+            {/* <Image src={img} className="rounded-lg w-40 " alt="img" /> */}
+            {userProfilePictureUrl == null ? (
+              <AddPictureButton />
+            ) : (
+              <div className="flex justify-start align-middle profilePictureCtn">
+                <img
+                  id="profilePicture"
+                  src={userProfilePictureUrl}
+                  alt="Profile Picture will be here"
+                />
+              </div>
+            )}
           </div>
           <h1 className="font-semibold text-center">
             {user?.fname} {user?.lname}
