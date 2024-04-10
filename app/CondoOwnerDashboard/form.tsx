@@ -61,7 +61,7 @@ export default function CondoOwnerDashboard() {
         <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
         <div>
           <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
-          <div className="dashboard-shortcuts grid md:grid-cols-4 gap-4 my-6">
+          <div className="dashboard-shortcuts grid md:grid-cols-5 gap-4 my-6">
             <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
               {submitRequests()}
             </div>
@@ -86,7 +86,15 @@ export default function CondoOwnerDashboard() {
               className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
             >
               <button id="submitForms" className="font-semibold">
-                Message Baord
+                Message Board
+              </button>
+            </Link>
+            <Link
+              href="/"
+              className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
+            >
+              <button id="submitForms" className="font-semibold">
+                Registration Keys
               </button>
             </Link>
           </div>
