@@ -11,7 +11,6 @@ export default function Form() {
   const { data: session, update } = useSession();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Triggered handleSubmit...");
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("Email"));
     const email = formData.get("Email");
@@ -29,8 +28,8 @@ export default function Form() {
           email,
         },
       });
-      router.push("/");
-      router.refresh();
+
+      console.log("On SignIn account type: ", session?.accounttype);
     }
   };
 
