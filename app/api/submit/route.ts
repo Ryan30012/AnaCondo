@@ -24,8 +24,10 @@ export async function POST(request: Request) {
   const isValidRegKey =
     (await sql`SELECT regKey FROM RegKeys WHERE regKey=${regKey}`).rowCount > 0;
   if (isValidRegKey) {
-    const makeCondoOwner =
+    if (regKey === 12345)
       await sql`UPDATE users SET accounttype=${"CONDO_OWNER"} WHERE uid=${userID}`;
+    else if (regKey === 12112)
+      await sql`UPDATE users SET accounttype=${"RENTAL_USER"} WHERE uid=${userID}`;
     const afterOperation = await sql`SELECT * FROM users WHERE uid=${userID}`;
   } else {
     return NextResponse.json(

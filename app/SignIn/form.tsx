@@ -30,7 +30,7 @@ export default function Form() {
       });
 
       console.log("On SignIn account type: ", session?.accounttype);
-
+      router.push("/");
       router.refresh();
     }
   };

@@ -12,6 +12,7 @@ import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancial
 import AddPictureButton from "../UserProfile/AddPictureButton";
 
 import img from "@/assets/profile-pic.png";
+import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
 
 interface User {
   fname: string;
@@ -27,7 +28,7 @@ interface User {
   companyid: number;
 }
 
-var type = "Condo Owner";
+var type = "";
 
 function submitRequests() {
   if (type == "Condo Owner")
@@ -61,6 +62,9 @@ export default function CondoOwnerDashboard() {
         case "RENTAL_USER":
           type = "Renter";
           break;
+        case "PUBLIC_USER":
+          type = "Public User";
+          break;
         default:
           type = "Error";
           break;
@@ -85,6 +89,13 @@ export default function CondoOwnerDashboard() {
    * OR RENTER, THEN DISPLAY THE CORRECT USER INFORMATION AND CHANGE THE DISPLAY TO "CONDO OWNER PAGE", ETC.
    */
 
+  const handleRegKeyBtnClick = () => {
+    const overlay = document.getElementById("regKeyOverlay");
+    if (overlay) {
+      overlay.style.display = "flex";
+    }
+  };
+
   if (status === "loading" || (loadingUserProfile && session))
     return <p>DASHBOARD: Loading...</p>;
   else if (!session)
@@ -100,91 +111,117 @@ export default function CondoOwnerDashboard() {
     );
   else if (session) {
     return (
-      <div className="flex flex-col my-20 mx-20">
-        <div className="my-12 mx-10">
-          <h1 className="font-bold text-3xl text-center">{type} Dashboard</h1>
+      <>
+        <div id="regKeyOverlay" style={{ display: "none" }}>
+          <div id="regKeyPopup">
+            <RegKeyInput />
+          </div>
         </div>
-        <div>
-          <div className="flex justify-center items-center">
-            {/* <Image src={img} className="rounded-lg w-40 " alt="img" /> */}
-            {userProfilePictureUrl == null ? (
-              <AddPictureButton />
+        <div className="flex flex-col my-20 mx-20">
+          <div className="my-12 mx-10">
+            <h1 className="font-bold text-3xl text-center">{type} Dashboard</h1>
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              {/* <Image src={img} className="rounded-lg w-40 " alt="img" /> */}
+              {userProfilePictureUrl == null ? (
+                <AddPictureButton />
+              ) : (
+                <div className="flex justify-start align-middle profilePictureCtn">
+                  <img
+                    id="profilePicture"
+                    src={userProfilePictureUrl}
+                    alt="Profile Picture will be here"
+                  />
+                </div>
+              )}
+            </div>
+            <h1 className="font-semibold text-center">
+              {user?.fname} {user?.lname}
+            </h1>
+            <h2 className="text-center">@{user?.username}</h2>
+            <h2 className="text-center">{session?.user?.email}</h2>
+            <h2 className="text-center">{user?.phone}</h2>
+          </div>
+          <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
+          <div>
+            <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
+            {!(type == "Public User") ? (
+              <div
+                className={`dashboard-shortcuts grid md:grid-cols-${
+                  type == "CONDO_OWNER" ? "4" : "3"
+                } gap-4 my-6`}
+              >
+                {type === "CONDO_OWNER" && (
+                  <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
+                    {submitRequests()}
+                  </div>
+                )}
+                <Link
+                  href="/"
+                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
+                >
+                  <button id="submitForms" className="font-semibold">
+                    Reservation
+                  </button>
+                </Link>
+                <Link
+                  href="/"
+                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
+                >
+                  <button id="submitForms" className="font-semibold">
+                    Notifications
+                  </button>
+                </Link>
+                <Link
+                  href="/"
+                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
+                >
+                  <button id="submitForms" className="font-semibold">
+                    Message Board
+                  </button>
+                </Link>
+              </div>
             ) : (
-              <div className="flex justify-start align-middle profilePictureCtn">
-                <img
-                  id="profilePicture"
-                  src={userProfilePictureUrl}
-                  alt="Profile Picture will be here"
-                />
+              <div className="dashboard-shortcuts grid md:grid-cols-1 gap-4 my-6">
+                <div className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100">
+                  <button
+                    id="regKeyBtn"
+                    className="font-semibold"
+                    onClick={handleRegKeyBtnClick}
+                  >
+                    Manage Registration Keys
+                  </button>
+                </div>
               </div>
             )}
           </div>
-          <h1 className="font-semibold text-center">
-            {user?.fname} {user?.lname}
-          </h1>
-          <h2 className="text-center">@{user?.username}</h2>
-          <h2 className="text-center">{session?.user?.email}</h2>
-          <h2 className="text-center">{user?.phone}</h2>
+          {!(type == "Public User") && (
+            <>
+              <div className="grid md:grid-cols-2 gap-3 my-12">
+                <div>
+                  <h1 className="font-bold text-xl pb-6">
+                    Your Rental Properties
+                  </h1>
+                  <RentalPropertyCard />
+                </div>
+                <div className="ml-6 ">
+                  <h1 className="font-bold text-xl pb-6">
+                    Your Financial Status
+                  </h1>
+                  <RentalFinancialStatus />
+                </div>
+              </div>
+              <div>
+                <h1 className="font-bold text-xl pr-10 pb-6">
+                  Your Submitted Requests
+                </h1>
+                <RentalSubmittedRequests />
+              </div>
+            </>
+          )}
         </div>
-        <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
-        <div>
-          <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
-          <div className="dashboard-shortcuts grid md:grid-cols-5 gap-4 my-6">
-            <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
-              {submitRequests()}
-            </div>
-            <Link
-              href="/"
-              className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-            >
-              <button id="submitForms" className="font-semibold">
-                Reservation
-              </button>
-            </Link>
-            <Link
-              href="/"
-              className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-            >
-              <button id="submitForms" className="font-semibold">
-                Notifications
-              </button>
-            </Link>
-            <Link
-              href="/"
-              className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-            >
-              <button id="submitForms" className="font-semibold">
-                Message Board
-              </button>
-            </Link>
-            <Link
-              href="/"
-              className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-            >
-              <button id="submitForms" className="font-semibold">
-                Registration Keys
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-3 my-12">
-          <div>
-            <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
-            <RentalPropertyCard />
-          </div>
-          <div className="ml-6 ">
-            <h1 className="font-bold text-xl pb-6">Your Financial Status</h1>
-            <RentalFinancialStatus />
-          </div>
-        </div>
-        <div>
-          <h1 className="font-bold text-xl pr-10 pb-6">
-            Your Submitted Requests
-          </h1>
-          <RentalSubmittedRequests />
-        </div>
-      </div>
+      </>
     );
   } else {
     return (

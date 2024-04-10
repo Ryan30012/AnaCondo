@@ -475,3 +475,16 @@
   background-color: var(--green-hover);
   border-bottom: 1px solid white;
 }
+
+#regKeyOverlay {
+  position: fixed; /* Use fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Cover the full width of the viewport */
+  height: 100vh; /* Cover the full height of the viewport */
+  background-color: rgba(0, 0, 0, 0.5); /* Use RGBA for black color with opacity */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

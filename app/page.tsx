@@ -15,6 +15,10 @@ const Homepage: React.FC = () => {
     console.log("homepage acc type: " + accountType);
     if (accountType === "CONDO_MANAGEMENT_COMPANY") {
       router.push("/UserProfile");
+    } else if (accountType === "PUBLIC_USER") {
+      router.push("/CondoOwnerDashboard");
+    } else if (accountType === "CONDO_OWNER") {
+      router.push("/CondoOwnerDashboard");
     }
   }, []);
 
