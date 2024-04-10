@@ -149,10 +149,10 @@ export default function CondoOwnerDashboard() {
             {!(type == "Public User") ? (
               <div
                 className={`dashboard-shortcuts grid md:grid-cols-${
-                  type == "CONDO_OWNER" ? "4" : "3"
+                  type == "Condo Owner" ? "4" : "3"
                 } gap-4 my-6`}
               >
-                {type === "CONDO_OWNER" && (
+                {type === "Condo Owner" && (
                   <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
                     {submitRequests()}
                   </div>
