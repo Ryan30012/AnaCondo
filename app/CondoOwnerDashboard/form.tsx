@@ -10,6 +10,7 @@ import RentalSubmittedRequests from "@/components/renter-dashboard/RentalSubmitt
 import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancialStatus";
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
+import PropertyList from "../CondoCompany/Properties/page";
 
 let type = "Condo Owner";
 
@@ -24,7 +25,8 @@ function submitRequests() {
     );
 }
 
-export default function CondoOwnerDashboard() {
+export default function CondoOwnerDashboard(props: any) {
+  //console.log(props.userInfo.uid);
   const { data: session, status } = useSession();
   /**
    * 'TYPE' SHOULD BE CHANGED TO PULL DATA FROM THE USER SESSION AND DETERMINE IF THE USER IS A OWNER
@@ -53,10 +55,10 @@ export default function CondoOwnerDashboard() {
           <div className="flex justify-center items-center">
             <Image src={img} className="rounded-lg  w-40 " alt="img" />
           </div>
-          <h1 className="font-semibold text-center">Name</h1>
-          <h2 className="text-center">@user</h2>
-          <h2 className="text-center">{session?.user?.email}</h2>
-          <h2 className="text-center">(514) 999-9999</h2>
+          <h1 className="font-semibold text-center">{props.userInfo.fname} {props.userInfo.lname}</h1>
+          <h2 className="text-center">@{props.userInfo.username}</h2>
+          <h2 className="text-center">{props.userInfo.email}</h2>
+          <h2 className="text-center">({props.userInfo.phone.substring(0,3)}) {props.userInfo.phone.substring(3,6)}-{props.userInfo.phone.substring(6,10)}</h2>
         </div>
         <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
         <div>
