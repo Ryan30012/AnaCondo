@@ -19,10 +19,12 @@ export default async function ProfilePage() {
 
   var email = "";
   if (session?.user?.email) email = session.user.email;
-  console.log("Session Email: " + email);
-  console.log("Fetching user data...");
-  const res = await sql`SELECT * FROM users WHERE Email = ${email}`;
-  const user = res.rows[0];
+  const user = await fetch(`/api/getuserprofile?email=${email}`, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => data.user);
+
   const userProfilePictureUrl = user.pictureblob;
   console.log(user.username);
   console.log(user.pictureblob);
