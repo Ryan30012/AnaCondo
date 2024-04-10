@@ -201,7 +201,7 @@ export default function CondoOwnerDashboard() {
               <div className="grid md:grid-cols-2 gap-3 my-12">
                 <div>
                   <h1 className="font-bold text-xl pb-6">
-                    Your Rental Properties
+                    Your {type == "Rental User" && "Rental"} Properties
                   </h1>
                   <RentalPropertyCard />
                 </div>
