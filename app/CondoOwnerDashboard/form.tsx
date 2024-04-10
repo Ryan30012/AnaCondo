@@ -44,6 +44,7 @@ export default function CondoOwnerDashboard() {
   const { data: session, status } = useSession();
   const [user, setUser] = useState<User>();
   const [userProfilePictureUrl, setUserProfilePictureUrl] = useState(null);
+  const [loadingUserProfile, setLoadingUserProfile] = useState(true);
 
   var accountType = "";
   var counter = 0;
@@ -74,6 +75,7 @@ export default function CondoOwnerDashboard() {
         .then((data) => {
           setUser(data.user);
           setUserProfilePictureUrl(data.user.pictureblob);
+          setLoadingUserProfile(false);
           console.log("User Profile pic url: " + userProfilePictureUrl);
         });
     }
@@ -83,8 +85,9 @@ export default function CondoOwnerDashboard() {
    * OR RENTER, THEN DISPLAY THE CORRECT USER INFORMATION AND CHANGE THE DISPLAY TO "CONDO OWNER PAGE", ETC.
    */
 
-  if (status === "loading") return <p>DASHBOARD: Loading...</p>;
-  if (!session)
+  if (status === "loading" || (loadingUserProfile && session))
+    return <p>DASHBOARD: Loading...</p>;
+  else if (!session)
     return (
       <div className="grid place-items-center h-screen">
         <div className="my-12 mx-10">
@@ -95,7 +98,7 @@ export default function CondoOwnerDashboard() {
         </div>
       </div>
     );
-  if (session) {
+  else if (session) {
     return (
       <div className="flex flex-col my-20 mx-20">
         <div className="my-12 mx-10">
