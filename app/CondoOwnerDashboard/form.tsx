@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import RentalPropertyCard from "@/components/renter-dashboard/RentalPropertyCard";
 import RentalSubmittedRequests from "@/components/renter-dashboard/RentalSubmittedRequests";
@@ -11,7 +11,7 @@ import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancial
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
 
-let type = "Condo Owner";
+var type = "Condo Owner";
 
 function submitRequests() {
   if (type == "Condo Owner")
@@ -26,6 +26,28 @@ function submitRequests() {
 
 export default function CondoOwnerDashboard() {
   const { data: session, status } = useSession();
+  var accountType = "";
+  var counter = 0;
+  useEffect(() => {
+    console.log("counter: ", counter++);
+    if (session) {
+      console.log("Session from dashboard: ", session);
+      console.log("Session acc type: " + session.user?.name);
+      accountType = session.user?.name || "";
+      switch (accountType) {
+        case "CONDO_OWNER":
+          type = "Condo Owner";
+          break;
+        case "RENTAL_USER":
+          type = "Renter";
+          break;
+        default:
+          type = "Error";
+          break;
+      }
+      console.log("Account Type: ", accountType);
+    }
+  }, []);
   /**
    * 'TYPE' SHOULD BE CHANGED TO PULL DATA FROM THE USER SESSION AND DETERMINE IF THE USER IS A OWNER
    * OR RENTER, THEN DISPLAY THE CORRECT USER INFORMATION AND CHANGE THE DISPLAY TO "CONDO OWNER PAGE", ETC.
