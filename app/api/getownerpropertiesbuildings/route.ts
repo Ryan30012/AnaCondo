@@ -13,7 +13,8 @@ export async function GET(request: Request) {
     console.log("Building Ids: ", buildingIds);
     const buildingIdsString = buildingIds.join(",");
     console.log("Building Ids String: ", buildingIdsString);
-    const buildingIdsPrimitive = buildingIds as any as number[];
+    // const buildingIdsPrimitive = buildingIds as any as number[];
+    const buildingIdsPrimitive = buildingIds as any;
     const buildingRows =
       await sql`SELECT * FROM buildings WHERE bid = ANY (${buildingIdsPrimitive})`;
     const buildings = buildingRows.rows.map((row) => row);
