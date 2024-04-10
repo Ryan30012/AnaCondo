@@ -26,5 +26,5 @@ export default async function CondoDashbaord() {
   // Retrieve Condo Owner's units
   // this will be passed as props to the Client Component (CondoOwnerDashboard)
   const userUnits = await sql`SELECT * FROM condounits WHERE owner = ${userInfo.rows[0].uid}`;
-  return <CondoOwnerDashbaord userUnits={userUnits} />;
+  return <CondoOwnerDashbaord userUnits={userUnits} userInfo={userInfo.rows[0]} />;
 }
