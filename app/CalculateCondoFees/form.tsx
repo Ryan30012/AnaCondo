@@ -1,4 +1,5 @@
 import CondoFees from "@/components/calculate-condoFees/CondoFees";
+import React, { useState } from "react";
 
 export default function calculateCondoFees() {
   return (
@@ -8,9 +9,6 @@ export default function calculateCondoFees() {
           Approximate Condo Fee Calculator
         </h1>
         <div className="calculate-condoFees mb-6">
-          <h1 className="font-bold text-xl py-6 text-lime-700">
-            Enter the Square Footage and the City of your Condo!
-          </h1>
           <CondoFees />
           <hr></hr>
         </div>
