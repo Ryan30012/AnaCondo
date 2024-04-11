@@ -22,7 +22,7 @@ export default function Form(props: any) {
   }
  
   return (
-    <form onSubmit={onSubmit} action={"/UserProfile"}>
+    <form onSubmit={onSubmit} action={"/UserProfile"} data-testid='userForm'>
     <div>
       <p>
         <b>Username</b>: 
