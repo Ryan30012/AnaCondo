@@ -28,6 +28,15 @@ describe('Registration Form', () => {
       // Fill in the form
       await user.type(screen.getByPlaceholderText('First Name'), 'John');
       await user.type(screen.getByPlaceholderText('Last Name'), 'Doe');
+      await user.type(screen.getByPlaceholderText('Username'), 'testys123');
+      await user.type(screen.getByPlaceholderText('DD/MM/YYYY'), '5 ave testy');
+      await user.type(screen.getByPlaceholderText('###-###-####'), '333-666-9999');
+      await user.type(screen.getByPlaceholderText('Email'), 'testy@gmaily.po');
+      await user.type(screen.getByPlaceholderText('Password'), 'miltesty');
+      await user.type(screen.getByPlaceholderText('Confirm Password'), 'miltesty');
+      await user.type(screen.getByPlaceholderText('Password'), 'miltesty');
+      const select = screen.getByRole('combobox');
+      await user.selectOptions(select, 'PUBLIC_USER');
       // Continue for other fields...
   
       // Mock successful response
@@ -41,7 +50,7 @@ describe('Registration Form', () => {
         "/api/auth/register",
         expect.objectContaining({
           method: "POST",
-          body: expect.any(String), // You could make this more specific
+          body: expect.any(Array), // You could make this more specific
         })
       ));
   
