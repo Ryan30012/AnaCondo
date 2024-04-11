@@ -1,7 +1,38 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+
 export default function Violation() {
+  let errorMessage = "";
+  const router = useRouter();
+  // console.log(props);
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/submitrequest/violation", {
+      method: "POST",
+      body: formData,
+    });
+
+    // redirect upon successful registration key submission
+    if (response.status == 200) {
+      errorMessage = "";
+      router.push("/SubmitRequest");
+    }
+    // Show error message for invalid discount value or property id
+    else if (response.status == 500 || response.status == 501) {
+      errorMessage = "Invalid request details or user email";
+      router.refresh();
+    }
+    // Handle response if necessary
+    //const data = await response.json();
+    // ...
+  }
   return (
-    <form>
-      <div className="max-w-sm mb-4">
+    <form onSubmit={onSubmit} action={"/UserProfile"}>
+      <div data-testid="violation" className="max-w-sm mb-4">
         <div className="mb-5">
           <label
             htmlFor="email"
@@ -10,9 +41,10 @@ export default function Violation() {
             Your email
           </label>
           <input
+            name="email"
             type="email"
             id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
             placeholder="name@email.com"
             required
           />
@@ -21,9 +53,10 @@ export default function Violation() {
           htmlFor="common-room"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Select a common room
+          Select a common violation
         </label>
         <select
+          name="violation"
           id="common-room"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
         >
@@ -47,7 +80,7 @@ export default function Violation() {
           <input
             type="new-violation"
             id="new-violation"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
             placeholder="New violation"
           />
         </div>

@@ -1,7 +1,38 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+
 export default function Question() {
+  let errorMessage = "";
+  const router = useRouter();
+  // console.log(props);
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/submitrequest/question", {
+      method: "POST",
+      body: formData,
+    });
+
+    // redirect upon successful registration key submission
+    if (response.status == 200) {
+      errorMessage = "";
+      router.push("/SubmitRequest");
+    }
+    // Show error message for invalid discount value or property id
+    else if (response.status == 500 || response.status == 501) {
+      errorMessage = "Invalid request details or user email";
+      router.refresh();
+    }
+    // Handle response if necessary
+    //const data = await response.json();
+    // ...
+  }
   return (
-    <div className="ask-question mb-6">
-      <form>
+    <div data-testid="question" className="ask-question mb-6">
+      <form onSubmit={onSubmit} action={"/UserProfile"}>
         <label htmlFor="question" className="sr-only">
           Your question
         </label>
@@ -14,6 +45,7 @@ export default function Question() {
               Your email
             </label>
             <input
+              name="email"
               type="email"
               id="email"
               className="bg-gray-50 border border-gray-300 bg-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -76,6 +108,7 @@ export default function Question() {
               <span className="sr-only">Add emoji</span>
             </button>
             <textarea
+              name="question"
               id="question"
               rows={1}
               className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
