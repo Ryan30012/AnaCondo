@@ -54,6 +54,7 @@ const PublicUserTaskList: React.FC = () => {
         <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ right: '-40px'}}>
           <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
         </div>
+
         <div className="w-full max-w-4xl mx-auto z-10 bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-6">Task List</h1>
           <div className="overflow-x-auto relative">
@@ -61,20 +62,20 @@ const PublicUserTaskList: React.FC = () => {
             <div className="sticky top-0 z-10">
               <table className="min-w-full leading-normal">
                 <thead>
-                  <tr>
-                    <th className="w-1/4 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Task Name
-                    </th>
-                    <th className="w-1/6 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Start Date
-                    </th>
-                    <th className="w-1/6 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      End Date
-                    </th>
-                    <th className="w-2/5 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Description
-                    </th>
-                  </tr>
+                <tr>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Task Name
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Start Date
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  End Date
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Description
+                </th>
+              </tr>
                 </thead>
               </table>
             </div>
@@ -85,19 +86,19 @@ const PublicUserTaskList: React.FC = () => {
                 <tbody>
                   {tasks.map((task, index) => (
                     <tr key={index}>
-                      <td className="w-1/4 px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {task.taskName}
-                      </td>
-                      <td className="w-1/6 px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {task.startDate}
-                      </td>
-                      <td className="w-1/6 px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {task.endDate}
-                      </td>
-                      <td className="w-2/5 px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {task.description}
-                      </td>
-                    </tr>
+                  <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+                    {task.taskName}
+                  </td>
+                  <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+                    {task.startDate}
+                  </td>
+                  <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+                    {task.endDate}
+                  </td>
+                  <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+                    {task.description}
+                  </td>
+                </tr>
                   ))}
                 </tbody>
               </table>
