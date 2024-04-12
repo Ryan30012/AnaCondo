@@ -34,7 +34,6 @@ describe('Registration Form', () => {
       await user.type(screen.getByPlaceholderText('Email'), 'testy@gmaily.po');
       await user.type(screen.getByPlaceholderText('Password'), 'miltesty');
       await user.type(screen.getByPlaceholderText('Confirm Password'), 'miltesty');
-      await user.type(screen.getByPlaceholderText('Password'), 'miltesty');
       const select = screen.getByRole('combobox');
       await user.selectOptions(select, 'PUBLIC_USER');
       // Continue for other fields...
