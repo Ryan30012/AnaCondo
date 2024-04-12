@@ -4,9 +4,12 @@ import { useSession } from "next-auth/react";
 import "./NavbarMainContent.css";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const NavbarMainContent = () => {
+  const router = useRouter();
   const session = useSession();
+
   var userAccountType = session.data?.accounttype;
   console.log(userAccountType);
 
@@ -19,6 +22,9 @@ const NavbarMainContent = () => {
       setlastPath(path[path.length - 1].toLowerCase());
     }
     userAccountType = session.data?.accounttype;
+
+    if (userAccountType == "CONDO_OWNER") router.push("/CondoOwnerDashboard");
+    router.refresh();
   }, []);
 
   const [activeItem, setactiveItem] = useState(lastPath);

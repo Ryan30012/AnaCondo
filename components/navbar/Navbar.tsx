@@ -44,7 +44,7 @@ const Navbar = () => {
           </div>
           <div className="navBarAccount flex align-middle">
             <Link
-              href="/UserProfile"
+              href="/CondoOwnerDashboard"
               onClick={() => {
                 setBurgerOpen(false);
               }}

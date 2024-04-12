@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   console.log(expirydate);
 
   // Send error response if propertyid or discountvalue are not numbers
-  if (isNaN(propertyid) || isNaN(discountvalue))
+  if (isNaN(Number(propertyid)) || isNaN(Number(discountvalue)))
     return NextResponse.json(
       { error: "Invalid Post Request" },
       { status: 500 }
@@ -30,10 +30,13 @@ export async function POST(request: Request) {
 
   // Handle coupon validation
   const isValidRPropertyID =
-    (await sql`SELECT id FROM properties WHERE id=${propertyid}`).rowCount > 0;
+    (await sql`SELECT id FROM properties WHERE id=${String(propertyid)}`)
+      .rowCount > 0;
   if (isValidRPropertyID) {
     const addcoupon =
-      await sql`INSERT INTO companyCoupons (companyid, propertyid, discountvalue, expirydate) VALUES (${companyid}, ${propertyid},${discountvalue},${expirydate})`;
+      await sql`INSERT INTO companyCoupons (companyid, propertyid, discountvalue, expirydate) VALUES (${companyid}, ${String(
+        propertyid
+      )},${String(discountvalue)},${String(expirydate)})`;
     const afterOperation =
       await sql`SELECT * FROM companyCoupons WHERE companyid=${companyid}`;
     console.log(afterOperation);
