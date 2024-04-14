@@ -216,7 +216,9 @@ export default function CondoOwnerDashboard() {
                 <h1 className="font-bold text-xl pr-10 pb-6">
                   Your Submitted Requests
                 </h1>
-                <RentalSubmittedRequests />
+                <RentalSubmittedRequests
+                    email={session?.user?.email as string}
+                  />
               </div>
             </>
           )}
