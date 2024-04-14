@@ -1,15 +1,35 @@
-const requestInfo = [
-  { title: "Pool", sent: "8:00 am", updated: "1 day ago", status: "Completed" },
-  { title: "Gym", sent: "8:00 am", updated: "1 day ago", status: "Pending" },
-  { title: "Test", sent: "8:00 am", updated: "1 day ago", status: "Pending" },
-];
+"use server";
+import { sql } from "@vercel/postgres";
+import { Children } from "react";
 
-export default function RentalSubmittedRequests() {
+interface RequestInfo {
+  request_id: number;
+  title: string;
+  status: string;
+}
+
+export default async function RentalSubmittedRequests({
+  email,
+}: {
+  email: string;
+}) {
+  /**Pull data from "submittedrequests" table */
+  const submittedrequests =
+    await sql`select * from submittedrequests where user_email=${email};`;
+  const count = (
+    await sql`select count(*) from submittedrequests where user_email=${email};`
+  ).rows[0].count;
+  const requestInfo = submittedrequests.rows.map((row) => ({
+    request_id: row.request_id,
+    title: row.request_type,
+    status: row.request_status,
+  }));
+
   return (
-    <div className="px-4 py-4">
+    <div data-testid="rental-user-submitted-requests" className="px-4 py-4">
       <div className="grid md:grid-cols-4 gap-4">
+        <h3 className="font-bold text-lime-700">Identification</h3>
         <h3 className="font-bold text-lime-700">Title</h3>
-        <h3 className="font-bold text-lime-700">Sent</h3>
         <h3 className="font-bold text-lime-700">Updated</h3>
         <h3 className="font-bold text-lime-700">Status</h3>
       </div>
@@ -17,10 +37,18 @@ export default function RentalSubmittedRequests() {
       {requestInfo.map((requestInfo, index) => (
         <>
           <div className="rental-dashboard-request grid md:grid-cols-4 gap-4 py-3">
-            <h3 className="text-slate-500">{requestInfo.title}</h3>
-            <h3 className="text-slate-500">{requestInfo.sent}</h3>
-            <h3 className="text-slate-500">{requestInfo.updated}</h3>
-            <h3 className="text-slate-500">{requestInfo.status}</h3>
+            <h3 key={requestInfo.request_id} className="text-slate-500">
+              {requestInfo.request_id}
+            </h3>
+            <h3 key={requestInfo.request_id} className="text-slate-500">
+              {requestInfo.title}
+            </h3>
+            <h3 key={requestInfo.request_id} className="text-slate-500">
+              8:00 am
+            </h3>
+            <h3 key={requestInfo.request_id} className="text-slate-500">
+              {requestInfo.status}
+            </h3>
           </div>
           <hr></hr>
         </>
