@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Link from "@/node_modules/next/link";
+import Image from 'next/image';
 
 interface Property {
   bid: number;
@@ -43,13 +44,12 @@ const PropertyList: React.FC = () => {
                   borderRadius: "0.25rem",
                 }}
               >
-                <img
-                  className="propertyImage"
+                <Image
                   src={property.propertyimage}
                   alt={`Property ${property.bid}`}
-                  onLoad={() => {
-                    console.log(property.propertyimage);
-                  }}
+                  layout="fill"  // This can be changed to 'responsive' or specific dimensions if required.
+                  objectFit="cover"  // Adjusts the fitting of the image within the container.
+                  onLoadingComplete={() => console.log(property.propertyimage)}
                 />
                 <div className="text-left flex flex-col gap-2">
                   <p className="font-semibold">{property.name}</p>
