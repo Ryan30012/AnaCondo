@@ -30,6 +30,10 @@ interface User {
 
 var type = "";
 
+ const breadcrumbItems = [
+    { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
+  ];
+
 function submitRequests() {
   if (type == "Condo Owner")
     return (
@@ -112,6 +116,7 @@ export default function CondoOwnerDashboard() {
   else if (session) {
     return (
       <>
+        <Breadcrumb items={breadcrumbItems} />
         <div id="regKeyOverlay" style={{ display: "none" }}>
           <div id="regKeyPopup">
             <RegKeyInput />
