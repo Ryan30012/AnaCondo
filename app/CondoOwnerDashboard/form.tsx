@@ -13,6 +13,7 @@ import AddPictureButton from "../UserProfile/AddPictureButton";
 
 import img from "@/assets/profile-pic.png";
 import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 
 interface User {
   fname: string;
@@ -30,9 +31,9 @@ interface User {
 
 var type = "";
 
- const breadcrumbItems = [
-    { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
-  ];
+const breadcrumbItems = [
+  { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
+];
 
 function submitRequests() {
   if (type == "Condo Owner")
@@ -222,8 +223,8 @@ export default function CondoOwnerDashboard() {
                   Your Submitted Requests
                 </h1>
                 <RentalSubmittedRequests
-                    email={session?.user?.email as string}
-                  />
+                  email={session?.user?.email as string}
+                />
               </div>
             </>
           )}
