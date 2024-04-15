@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 
 const Homepage: React.FC = () => {
-  const {session, status} = useSession();
+  const {data:session, status} = useSession();
   const accountType = session.data?.accounttype;
   const router = useRouter();
 
