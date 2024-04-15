@@ -1,15 +1,17 @@
 import Image from "next/image";
 import img from "@/assets/condopic.jpg";
 
-export default function RentalPropertyCard() {
+export default function RentalPropertyCard(props: any) {
+  const unit = props.unit;
+  const buildingInfo = props.buildingInfo;
   const cardinfo = [
     {
-      name: "Condominium Place",
-      unitNb: "5B",
-      address: "3000 Condo Street, QC",
-      parkingSpotID: "99",
-      lockerCount: "8",
-      rent: "500$",
+      name: buildingInfo.name,
+      unitNb: unit.unitnumber,
+      address: buildingInfo.address,
+      parkingSpotID: buildingInfo.parkingcount,
+      lockerCount: buildingInfo.lockercount,
+      rent: unit.fee/10,
       registrationKey: "8979706",
     },
   ];

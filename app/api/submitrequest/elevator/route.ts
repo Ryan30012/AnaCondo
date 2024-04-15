@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     /**Fetch SubmittedRequests pk */
     const current_request_id = (await sql`SELECT count(*) FROM "submittedrequests"`).rows[0].count; //find the count of the pk
     console.log(current_request_id);
-    var pk = parseInt(current_request_id) + 1;
+    var pk = current_request_id + 1;
 
     /**Get formdata*/
     const user_email = data.get("email") as string;  

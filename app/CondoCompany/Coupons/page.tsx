@@ -4,8 +4,15 @@ import React from "react";
 import { Pool } from "pg";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 
 export default async function CompanyCoupons() {
+  /*BREADCRUMB ITEMS*/
+  const breadcrumbItems = [
+    { text: "Condo Company", url: "/CondoCompany" },
+    { text: "Create Condo Discounts", url: "/CondoCompany/Coupons" },
+  ];
+
   // Retrieve user email to use for fetching company id and coupons
   const session = await getServerSession();
   var email = "";
@@ -13,6 +20,7 @@ export default async function CompanyCoupons() {
 
   const companyIDQuery =
     await sql`SELECT companyid FROM users WHERE email = ${email};`;
+  console.log("this is conosle log:" + companyIDQuery);
   const companyID = companyIDQuery.rows[0].companyid;
   const coupons =
     await sql`SELECT * FROM companyCoupons WHERE companyID = ${companyID}`;
@@ -69,77 +77,95 @@ export default async function CompanyCoupons() {
   // console.log(coupons);
 
   return (
-    <main className="flex min-h-dvh w-full items-center justify-center bg-npVeryLightGrayishBlue text-[calc(16rem/16)] text-npDarkGrayishBlue">
-      {/* Container */}
-      <div className="flex w-full max-w-[730px] flex-col gap-6 bg-white p-4 md:rounded-2xl md:p-8">
-        {/* Top Bar */}
-        <div className="flex-between flex items-baseline gap-2">
-          <h1 className="text-xl font-bold text-npcVeryDarkBlueMain">
-            Coupons
+    <main className="m-1">
+      <div>
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
+      <div className="flex flex-col min-h-dvh w-full items-center justify-center bg-npVeryLightGrayishBlue text-[calc(16rem/16)] text-npDarkGrayishBlue">
+        <div>
+          <h1 className="font-bold text-xl m-6 text-center">
+            All Open Coupons
           </h1>
-          <div className="rounded-lg bg-blue-500 px-3 py-0.5 font-bold text-white">
-            {coupons.rowCount}
+        </div>
+        {/* Container */}
+        <div className="flex w-full max-w-[730px] flex-col gap-6 bg-white p-4 md:rounded-2xl md:p-8">
+          {/* Top Bar */}
+          <div className="flex-between flex items-baseline gap-2">
+            <h1 className="text-l font-bold text-npcVeryDarkBlueMain">
+              Coupons
+            </h1>
+            <div className="rounded-full bg-lime-300 px-3 py-0.5 font-bold text-white">
+              {coupons.rowCount}
+            </div>
+
+            <div className="ml-auto">
+              <button
+                className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
+                type="submit"
+              >
+                <Link
+                  href="./Coupons/Add"
+                  className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                >
+                  Add Coupon
+                </Link>
+              </button>
+            </div>
           </div>
-          <Link
-            href="./Coupons/Add"
-            className="rounded-lg ml-auto text-gray-500 hover:text-blue-500 px-3 py-0.5 hover:cursor-pointer"
-          >
-            Add Coupon
-          </Link>
-        </div>
-        {/* Coupons */}
+          {/* Coupons */}
 
-        <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Coupon ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Property ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Discount
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Expiry Date
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {coupons.rows.map((coupon) => {
-                return (
-                  <tr
-                    key={coupon.id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          <div className="relative overflow-x-auto shadow sm:rounded-lg">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Coupon ID
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Property ID
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Discount
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Expiry Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {coupons.rows.map((coupon) => {
+                  return (
+                    <tr
+                      key={coupon.id}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
-                      {coupon.id}
-                    </th>
-                    <td className="px-6 py-4">{coupon.propertyid}</td>
-                    <td className="px-6 py-4">
-                      {`${coupon.discountvalue * 100}%`}
-                    </td>
-                    <td className="px-6 py-4">
-                      {`${JSON.stringify(coupon.expirydate)}`}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {coupon.id}
+                      </th>
+                      <td className="px-6 py-4">{coupon.propertyid}</td>
+                      <td className="px-6 py-4">
+                        {`${coupon.discountvalue * 100}%`}
+                      </td>
+                      <td className="px-6 py-4">
+                        {`${JSON.stringify(coupon.expirydate)}`}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
 
-        {/* <div className="flex flex-col gap-3">
+          {/* <div className="flex flex-col gap-3">
         {coupons.rows.map(item => {
           return <div>{item.nid} and {item.description}</div>
 
         })}
       </div> */}
+        </div>
       </div>
     </main>
   );

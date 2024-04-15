@@ -1,13 +1,10 @@
 "use client";
 import "/styles/global.css";
-import "/styles/home.css";
-import React from "react";
-import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
 
 const Homepage: React.FC = () => {
-  const session = useSession();
+  const {session, status} = useSession();
   const accountType = session.data?.accounttype;
   const router = useRouter();
 
@@ -22,40 +19,50 @@ const Homepage: React.FC = () => {
     }
   }, []);
 
+  if (status === "loading") return <p>Status is loading...</p>;
+  //if (!session) return <p>Not signed in</p>;
   return (
     <>
-      {accountType === undefined ||
-        accountType === "" ||
-        (accountType === null && (
-          <div
-            id="homeMainContent"
-            className="text-center flex align-middle flex-col p-12"
-          >
-            <h1 className="text-4xl font-bold text-gray-800 mb-8">
-              Welcome to AnaCondo
-            </h1>
-            <div className="text-center">
-              <p className="text-lg mb-4">Everything Condo with AnaCondo T-T</p>
-              <div className="flex justify-center flex-wrap">
-                <img
-                  src="https://bestkeptmontreal.com/wp-content/uploads/2022/07/solstice-persp-ext-vue-ouest-1-1024x429.jpg"
-                  alt="Condo Image 1"
-                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
+      <section className="bg-center bg-no-repeat bg-gradient-to-r from-teal-500 to-lime-500 bg-blend-multiply">
+        <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+            Get access to all your condo management needs in one system
+          </h1>
+          <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+            All in one tool for condo owners, renters, condominium employees and
+            condomium management companies for managing their property.
+          </p>
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+            <a
+              href="/SignUp"
+              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-900 hover:bg-slate-700 focus:ring-4 focus:ring-slate-300 dark:focus:ring-slate-900"
+            >
+              Get started
+              <svg
+                className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"
                 />
-                <img
-                  src="https://maplr.co/wp-content/uploads/2022/08/13-griffintown-se-loger-montreal-francais-expatries.jpg"
-                  alt="Condo Image 2"
-                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
-                />
-                <img
-                  src="https://immo.vrtx.co/picFull/10260972.jpg"
-                  alt="Condo Image 3"
-                  className="w-1/2 md:w-1/3 lg:w-1/4 mx-2 my-2 rounded-lg shadow-lg"
-                />
-              </div>
-            </div>
+              </svg>
+            </a>
+            <a
+              href="SignIn"
+              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+            >
+              Learn more
+            </a>
           </div>
-        ))}
+        </div>
+      </section>
     </>
   );
 };
