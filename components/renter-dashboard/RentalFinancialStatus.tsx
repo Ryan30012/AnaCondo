@@ -3,11 +3,14 @@ import img1 from "@/assets/user-salary.png";
 import img2 from "@/assets/send-money.png";
 import img3 from "@/assets/house-chimney-heart.png";
 
-const finances = [
-  { currentBalance: "120", duePerMonth: "500", condoFee: "90" },
-];
 
-export default function RentalFinancialStatus() {
+export default function RentalFinancialStatus(props: any) {
+  const unit = props.unit;
+  const buildingInfo = props.buildingInfo;
+
+  const finances = [
+    { currentBalance: "120", duePerMonth: "500", condoFee: unit.fee },
+  ];
   return (
     <>
       {finances.map((finances, index) => (
