@@ -100,16 +100,29 @@ export default function CondoOwnerDashboard(props: any) {
           <div>
 
             <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
-            {/* {userUnits.map((unit: any) =>{
-              return (<RentalPropertyCard />);
-
-
-            })} */}
-            <RentalPropertyCard />
+            {userUnits?.map((unit: any) => {
+              return (
+                <RentalPropertyCard
+                  key={unit.cuid}
+                  unit={unit}
+                  buildingInfo={unit.buildingInfo}
+                />
+              );
+            })}
+            {/* <RentalPropertyCard /> */}
           </div>
           <div className="ml-6 ">
             <h1 className="font-bold text-xl pb-6">Your Financial Status</h1>
-            <RentalFinancialStatus />
+            {userUnits?.map((unit: any) => {
+              return (
+                <RentalFinancialStatus
+                  key={unit.cuid}
+                  unit={unit}
+                  buildingInfo={unit.buildingInfo}
+                />
+              );
+            })}
+            {/* <RentalFinancialStatus /> */}
           </div>
         </div>
         <div>
