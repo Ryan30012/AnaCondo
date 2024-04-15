@@ -1,11 +1,10 @@
-"use server";
+"use server"
 
 import GuestNavbar from "@/components/guestnavbar/GuestNavbar";
 import "/styles/global.css";
 import Navbar from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
-import Footer from "@/components/footer/Footer";
 
 export default async function RootLayout({
   children,
@@ -36,7 +35,6 @@ export default async function RootLayout({
           {session && <Navbar />}
           {!session && <GuestNavbar />}
           {children}
-          {<Footer />}
         </SessionProvider>
       </body>
     </html>

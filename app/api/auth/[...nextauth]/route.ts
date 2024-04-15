@@ -4,12 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 declare module "next-auth" {
   interface User {
-    uid: number;
     username: string;
     accounttype: string;
   }
   interface Session {
-    uid: number;
     username: string;
     accounttype: string;
   }
@@ -42,7 +40,6 @@ const handler = NextAuth({
             email: user.email,
             username: user.username,
             accounttype: user.accounttype,
-            uid: user.uid,
           };
         }
         return null;
@@ -55,7 +52,6 @@ const handler = NextAuth({
         console.log(user);
         token.username = user.username;
         token.accounttype = user.accounttype;
-        token.uid = user.uid;
       }
       return token;
     },
@@ -65,14 +61,12 @@ const handler = NextAuth({
       console.log(token);
       session.accounttype = token.accounttype as string;
       session.username = token.username as string;
-      session.uid = token.uid as number;
       return {
         ...session,
         user: {
           ...session.user,
           username: token.username,
           accounttype: token.accounttype,
-          uid: token.uid,
         },
       };
     },

@@ -34,7 +34,7 @@ export default function AddPictureButton() {
       const storageResponse = await fetch(
         `/api/imagefilestorage?bloburl=${blobUrl}`,
         {
-          method: "PUT",
+          method: "POST",
         }
       );
       if (storageResponse.ok) {
@@ -55,7 +55,7 @@ export default function AddPictureButton() {
         type="button"
         onClick={selectProfilePicture}
       >
-        <div id="imageIconCtn" className="flex">
+        <div id="imageIconCtn">
           <div className="imageIcon">
             <svg
               xmlns="http://www.w3.org/2000/svg"

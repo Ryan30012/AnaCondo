@@ -36,7 +36,7 @@ export default function Form() {
   return (
     <div
       className="bg-stone-50 flex flex-col items-center justify-center gap-8"
-      style={{ height: "calc(100vh - 90px)" }}
+      style={{ height: "calc(100vh - 82px)" }}
     >
       <div id="welcomeSignUp">
         <p style={{ fontSize: "1.75rem" }}>Welcome to Anacondo</p>
