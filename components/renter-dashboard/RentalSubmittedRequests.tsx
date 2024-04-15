@@ -14,6 +14,27 @@ export default async function RentalSubmittedRequests({
   email: string;
 }) {
   /**Pull data from "submittedrequests" table */
+   /**Check that table exists */
+    try {
+        await sql`CREATE TABLE IF NOT EXISTS "submittedrequests" (
+            request_id int primary key,
+            request_type varchar(50),
+            user_email varchar(100),
+            request_status varchar(30),
+            question varchar(500),
+            day varchar(2),
+            month varchar(20),
+            year varchar(4),
+            unit_nb varchar(30),
+            access_method varchar(10),
+            common_room varchar(100),
+            violation varchar(100),
+            deficiency varchar(300)
+        );`;
+        console.log("Successfully initialized the SubmittedRequests table");
+    } catch (error) {
+        throw new Error(`RAN INTO ERROR WITH SUBMITTED_REQUESTS TABLE: ${error}`);
+    };
   const submittedrequests =
     await sql`select * from submittedrequests where user_email=${email};`;
   const count = (
