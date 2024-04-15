@@ -1,6 +1,6 @@
 import React from "react";
 
-const Breadcrumb = ({ items }) => {
+const Breadcrumb = ({ items }: { items: any }) => {
   return (
     <nav className="flex m-5" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -21,7 +21,7 @@ const Breadcrumb = ({ items }) => {
             Home
           </a>
         </li>
-        {items.map((item, index) => (
+        {items.map((item: any, index: any) => (
           <li key={index} className="inline-flex items-center">
             <div className="flex items-center">
               <svg

@@ -2,8 +2,22 @@
 import "/styles/global.css";
 import { useSession } from "next-auth/react";
 
-const Homepage = () => {
-  const { data: session, status } = useSession();
+
+const Homepage: React.FC = () => {
+  const {session, status} = useSession();
+  const accountType = session.data?.accounttype;
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("homepage acc type: " + accountType);
+    if (accountType === "CONDO_MANAGEMENT_COMPANY") {
+      router.push("/UserProfile");
+    } else if (accountType === "PUBLIC_USER") {
+      router.push("/CondoOwnerDashboard");
+    } else if (accountType === "CONDO_OWNER") {
+      router.push("/CondoOwnerDashboard");
+    }
+  }, []);
 
   if (status === "loading") return <p>Status is loading...</p>;
   //if (!session) return <p>Not signed in</p>;
