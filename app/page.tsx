@@ -1,10 +1,12 @@
 "use client";
 import "/styles/global.css";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
+import { useEffect } from "react";
 
 
 const Homepage: React.FC = () => {
-  const {data:session, status} = useSession();
+  const session = useSession();
   const accountType = session.data?.accounttype;
   const router = useRouter();
 
@@ -19,7 +21,7 @@ const Homepage: React.FC = () => {
     }
   }, []);
 
-  if (status === "loading") return <p>Status is loading...</p>;
+  //if (status === "loading") return <p>Status is loading...</p>;
   //if (!session) return <p>Not signed in</p>;
   return (
     <>
