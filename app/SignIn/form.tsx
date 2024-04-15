@@ -11,7 +11,6 @@ export default function Form() {
   const { data: session, update } = useSession();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Triggered handleSubmit...");
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("Email"));
     const email = formData.get("Email");
@@ -29,6 +28,8 @@ export default function Form() {
           email,
         },
       });
+
+      console.log("On SignIn account type: ", session?.accounttype);
       router.push("/");
       router.refresh();
     }
@@ -39,7 +40,7 @@ export default function Form() {
   return (
     <div
       className="bg-stone-50 loginSignupCtn flex flex-col items-center justify-center"
-      style={{ height: "calc(100vh - 82px)" }}
+      style={{ height: "calc(100vh - 90px)" }}
     >
       <div className="loginSignupLogo flex flex-col justify-center align-middle">
         <p className="text-center logoTitle">AnaCondo</p>
