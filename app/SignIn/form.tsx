@@ -3,12 +3,14 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
+import { set } from "zod";
 
 export default function Form() {
   const router = useRouter();
   const { data: session, update } = useSession();
+  const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -20,6 +22,14 @@ export default function Form() {
       password: formData.get("Password"),
       redirect: false,
     });
+
+    // If the response is not succesful (i.e. the credentials are inalid), set the appropriate error message
+    if(response?.status != 200) {
+      setErrorMessage("Invalid email or password");
+      return;
+    }
+
+
     if (!response?.error) {
       update({
         ...session,
@@ -35,7 +45,6 @@ export default function Form() {
     }
   };
 
-  let notExists = " ";
 
   return (
     <div
@@ -67,7 +76,7 @@ export default function Form() {
             style={{ width: "100%" }}
           />
         </div>
-        <div className="text-red-500 text-center">{notExists}</div>
+        {errorMessage && <div className="text-red-500 text-center">{errorMessage}</div>}
         <div className="flex items-center mb-4">
           <input type="checkbox" id="remember" className="mr-2" />
           <label htmlFor="remember" className="text-gray-600">
