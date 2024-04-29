@@ -14,6 +14,8 @@ import AddPictureButton from "../UserProfile/AddPictureButton";
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
 import PropertyList from "../CondoCompany/Properties/page";
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
+import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
 
 var type = "";
 
