@@ -17,6 +17,17 @@ import PropertyList from "../CondoCompany/Properties/page";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
 
+interface User {
+  uid: number;
+  username: string;
+  dob: Date;
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  pictureblob: string;
+}
+
 var type = "";
 
 const breadcrumbItems = [
