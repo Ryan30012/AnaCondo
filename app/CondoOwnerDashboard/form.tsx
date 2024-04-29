@@ -17,9 +17,9 @@ import PropertyList from "../CondoCompany/Properties/page";
 
 var type = "";
 
- const breadcrumbItems = [
-    { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
-  ];
+const breadcrumbItems = [
+  { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
+];
 
 function submitRequests() {
   if (type == "Condo Owner")
@@ -111,10 +111,16 @@ export default function CondoOwnerDashboard(props: any) {
           <div id="regKeyPopup">
             <RegKeyInput />
           </div>
-          <h1 className="font-semibold text-center">{props.userInfo.fname} {props.userInfo.lname}</h1>
+          <h1 className="font-semibold text-center">
+            {props.userInfo.fname} {props.userInfo.lname}
+          </h1>
           <h2 className="text-center">@{props.userInfo.username}</h2>
           <h2 className="text-center">{props.userInfo.email}</h2>
-          <h2 className="text-center">({props.userInfo.phone.substring(0,3)}) {props.userInfo.phone.substring(3,6)}-{props.userInfo.phone.substring(6,10)}</h2>
+          <h2 className="text-center">
+            ({props.userInfo.phone.substring(0, 3)}){" "}
+            {props.userInfo.phone.substring(3, 6)}-
+            {props.userInfo.phone.substring(6, 10)}
+          </h2>
         </div>
         <div className="flex flex-col my-20 mx-20">
           <div className="my-12 mx-10">
@@ -167,8 +173,8 @@ export default function CondoOwnerDashboard(props: any) {
                   Your Submitted Requests
                 </h1>
                 <RentalSubmittedRequests
-                    email={session?.user?.email as string}
-                  />
+                  email={session?.user?.email as string}
+                />
               </div>
             </>
           )}
