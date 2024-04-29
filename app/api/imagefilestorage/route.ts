@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-export async function POST(request: Request): Promise<NextResponse> {
+export async function PUT(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const blobUrl = searchParams.get("bloburl") || "";
   const session = await getServerSession();

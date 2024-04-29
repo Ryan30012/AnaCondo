@@ -13,19 +13,21 @@ export async function POST(request: Request) {
   const data = await request.formData();
 
   // Send error response if regKey is empty
-  if (isNaN(parseInt(data.get("regKey"))))
+  if (isNaN(parseInt(data.get("regKey")?.toString() ?? "")))
     return NextResponse.json(
       { error: "Invalid Post Request" },
       { status: 500 }
     );
 
   // Handle registration key validaton
-  const regKey = parseInt(data.get("regKey")?.toString());
+  const regKey = parseInt(data.get("regKey")?.toString() ?? "");
   const isValidRegKey =
     (await sql`SELECT regKey FROM RegKeys WHERE regKey=${regKey}`).rowCount > 0;
   if (isValidRegKey) {
-    const makeCondoOwner =
+    if (regKey === 12345)
       await sql`UPDATE users SET accounttype=${"CONDO_OWNER"} WHERE uid=${userID}`;
+    else if (regKey === 12112)
+      await sql`UPDATE users SET accounttype=${"RENTAL_USER"} WHERE uid=${userID}`;
     const afterOperation = await sql`SELECT * FROM users WHERE uid=${userID}`;
   } else {
     return NextResponse.json(

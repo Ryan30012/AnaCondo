@@ -61,7 +61,10 @@ export default function ReserveFacility() {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 mt-8">
+    <div className="flex flex-col items-center justify-center p-4 mt-8 gap-4">
+      <p style={{ fontSize: "1.75rem" }}>
+        <b>Select a Property to reserve a Facility</b>
+      </p>
       {buildings.length !== 0 && !buildingSelected ? (
         <div className="flex selectProperties gap-4">
           {buildings.map((property) => (

@@ -8,7 +8,7 @@ import Violation from "@/components/submit-request/Violation";
 export default function SubmitRequestPage() {
   return (
     <>
-      <div className="flex flex-col my-20 mx-20">
+      <div className="flex flex-col m-4 my-10 justify-center">
         <h1 className="font-bold text-3xl text-center">Submit Requests</h1>
         <div className="ask-question">
           <h1 className="font-bold text-xl py-6 text-lime-700">

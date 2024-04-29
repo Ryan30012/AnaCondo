@@ -1,6 +1,11 @@
+"use client";
+
 import React, { useState } from 'react';
 
 const PublicUserTaskList: React.FC = () => {
+
+  const [isMobile, setIsMobile] = useState(false);
+
     const tasks = [
       {
         taskName: 'Check requests',
@@ -54,47 +59,54 @@ const PublicUserTaskList: React.FC = () => {
         <div className="fixed right-0 top-0 bottom-0 w-1/3 flex items-center justify-center -z-10" style={{ right: '-40px'}}>
           <img src="/imgbin_drawing-building-architecture-png.png" alt="Condo" className="h-auto w-full max-h-80vh" />
         </div>
+    
         <div className="w-full max-w-4xl mx-auto z-10 bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-6">Task List</h1>
           <div className="overflow-x-auto relative">
-            {/* Table header */}
-            <div className="sticky top-0 z-10">
+            {/* Grid layout for small screens */}
+            <div className={`${isMobile ? '' : 'hidden'} grid grid-cols-1 gap-6 sm:grid-cols-2`}>
+              {tasks.map((task, index) => (
+                <div key={index} className="bg-white shadow-md rounded-md p-6">
+                  <p><span className="font-semibold">Task Name:</span> {task.taskName}</p>
+                  <p><span className="font-semibold">Start Date:</span> {task.startDate}</p>
+                  <p><span className="font-semibold">End Date:</span> {task.endDate}</p>
+                  <p><span className="font-semibold">Description:</span> {task.description}</p>
+                </div>
+              ))}
+            </div>
+    
+            {/* Table layout for larger screens */}
+            <div className={`${isMobile ? 'hidden' : ''} overflow-x-auto relative`}>
               <table className="min-w-full leading-normal">
                 <thead>
                   <tr>
-                    <th className="w-1/4 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Task Name
                     </th>
-                    <th className="w-1/6 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Start Date
                     </th>
-                    <th className="w-1/6 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       End Date
                     </th>
-                    <th className="w-2/5 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Description
                     </th>
                   </tr>
                 </thead>
-              </table>
-            </div>
-            
-            {/* Table body */}
-            <div className="max-h-96 overflow-y-auto">
-              <table className="min-w-full leading-normal">
                 <tbody>
                   {tasks.map((task, index) => (
                     <tr key={index}>
-                      <td className="w-1/4 px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                         {task.taskName}
                       </td>
-                      <td className="w-1/6 px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                         {task.startDate}
                       </td>
-                      <td className="w-1/6 px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                         {task.endDate}
                       </td>
-                      <td className="w-2/5 px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                         {task.description}
                       </td>
                     </tr>
