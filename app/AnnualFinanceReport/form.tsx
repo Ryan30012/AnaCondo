@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 
 interface PropertyFee {
   property: string;
-  condoFee: number;
-  parkingFee: number | null;
+  condoFee: string;
+  parkingFee: string | null;
 }
 
 export const AnnualFinanceReport: React.FC = () => {
@@ -21,7 +21,16 @@ export const AnnualFinanceReport: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           console.log("Successfully fetched condo unit costs:", data); // Log the fetched data
-          setFeesData(data);
+          if (data && data.body) {
+            const condoFees = {
+              property: `Unit ${data.body.unitnumber}`,
+              condoFee: data.body.fee,
+              parkingFee: data.body.pid !== null ? data.body.pid : null,
+            };
+            setFeesData([condoFees]);
+          } else {
+            console.error("No condo unit costs found in response:", data);
+          }
           setLoading(false);
         } else {
           console.error("Failed to fetch condo unit costs:", response.statusText);
@@ -63,7 +72,8 @@ export const AnnualFinanceReport: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {loading ? (
+
+              { loading ? (
                 <tr>
                   <td colSpan={3} className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Loading...</td>
                 </tr>
@@ -72,11 +82,13 @@ export const AnnualFinanceReport: React.FC = () => {
                   <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{property.property}</td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">${property.condoFee}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">${property.parkingFee || '-'}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">${property.parkingFee !== null ? property.parkingFee : '0'}</td>
                   </tr>
                 ))
               )}
             </tbody>
+
+
           </table>
         </div>
       </div>
@@ -85,4 +97,3 @@ export const AnnualFinanceReport: React.FC = () => {
 };
 
 export default AnnualFinanceReport;
-

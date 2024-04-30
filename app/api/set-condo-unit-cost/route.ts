@@ -73,6 +73,30 @@ export async function POST(request: Request) {
   }
 }
 
+export async function GET(request: Request){
+  try {
+    // Fetch condo fee
+    const condoResult = await sql`SELECT * FROM condounits`;
+    const result = condoResult.rows[0];
+
+    return NextResponse.json(
+      {
+        message: "Successfully retrieved condo unit costs.",
+        body: result,
+
+      },
+      { status: 200 }
+    );
+  } catch (e) {
+    console.log({ e });
+    return NextResponse.json(
+      { message: "Something went wrong when fetching condo unit costs." },
+      { status: 500 }
+    );
+  }
+}
+
+/** 
 export async function GET(request: Request) {
 
   const { bid, cuid } = await request.json();
@@ -86,7 +110,7 @@ export async function GET(request: Request) {
 
   try {
     // Fetch condo fee
-    const condoResult = await sql`SELECT fee FROM condounits WHERE bid = ${bid} AND cuid = ${cuid}`;
+    const condoResult = await sql`SELECT * FROM condounits WHERE bid = ${bid} AND cuid = ${cuid}`;
     
     if (condoResult.rowCount === 0) {
       return NextResponse.json(
@@ -103,7 +127,7 @@ export async function GET(request: Request) {
 
     // If pid is provided and not -1, fetch parking fee
     if (pid && pid !== "-1") {
-      const parkingResult = await sql`SELECT fee FROM parking WHERE bid = ${bid} AND pid = ${pid}`;
+      const parkingResult = await sql`SELECT * FROM parking WHERE bid = ${bid} AND pid = ${pid}`;
       parkingFee = parkingResult.rowCount > 0 ? parkingResult.rows[0].fee : null;
     }
 
@@ -122,4 +146,6 @@ export async function GET(request: Request) {
       { status: 500 }
     );
   }
+  
 }
+*/
