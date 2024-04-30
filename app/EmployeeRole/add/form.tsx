@@ -52,6 +52,10 @@ const AddEmployeeForm: React.FC = () => {
       </div>
   
       <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 rounded shadow-lg relative z-10">
+        <div className="flex justify-between mb-4">
+          <a href="http://localhost:3000/EmployeeRole/fetch" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
+          <h1 className="text-xl font-bold">Add Employee</h1>
+        </div>
         <div className="mb-4">
           <label htmlFor="uname" className="block text-gray-700 text-sm font-bold mb-2">User Name</label>
           <input
