@@ -1,13 +1,48 @@
-"use client";
-
 import { FormEvent } from "react";
 import Form from './form';
 import EditCostsForm from "./editCosts";
-
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { sql } from "@vercel/postgres";
 import React, { useState } from 'react';
+import OperationCosts from "./form";
+
+
+export default async function OperationsTable(props: any) {
+    const session = await getServerSession();
+
+    // ENSURING CORRECT USER IS LOGGED IN
+    // If not logged in, redirect to signin
+    if (!session?.user?.email) redirect("/SignIn");
+
+    // Retreive User type
+    var email = "";
+    if (session?.user?.email) email = session.user.email;
+    const userInfo = await sql`SELECT * FROM users WHERE Email = ${email}`;
+    const userType = userInfo.rows[0].accounttype;
+
+    // Redirect if not condo owner
+    if (userType != "CONDO_MANAGEMENT_COMPANY") redirect("/SignIn");
+
+    // RETRIEVING DATA FROM DATABASE
+    // Retrieve condo owner's user id for future retrieval
+    const userQuery = await sql`SELECT * FROM users WHERE email = ${session.user.email}`;
+    const ownerID = userQuery.rows[0].uid;
+
+    // Retrieve condo units
+    const condoUnitsQuery = await sql`SELECT * FROM condounits WHERE owner = ${ownerID}`;
+    const condoUnits = condoUnitsQuery.rows;
+
+    // Retrieve operations associated to condo units
+    const operationsQuery = await sql`SELECT * FROM operations WHERE ownerid = ${ownerID}`;
+    const operations = operationsQuery.rows;
+
+    return <OperationCosts ownerid={ownerID} condounits={condoUnits} operations={operations} />;
+}
 
 
 
+/*
 const ViewOperationCosts: React.FC = () => {
     var arrProperties, property, budget, cost, oid;
 
@@ -37,6 +72,15 @@ const ViewOperationCosts: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
+                    {userUnits?.map((unit: any) => {
+                        return (
+                            <RentalPropertyCard
+                            key={unit.cuid}
+                            unit={unit}
+                            buildingInfo={unit.buildingInfo}
+                            />
+                        );
+                    })}
                         <tr>
                             <td className="border-b border-slate-100 p-4 pl-8">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
                             <td className="border-b border-slate-100 p-4 pl-8">Malcolm Lockyer</td>
@@ -69,3 +113,4 @@ const ViewOperationCosts: React.FC = () => {
 };
 
 export default ViewOperationCosts;
+*/
