@@ -125,42 +125,64 @@ const CondoCostsForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="buildingId"
-        value={inputs.buildingId}
-        onChange={handleChange}
-        placeholder="Building ID"
-      />
-      <input
-        type="text"
-        name="condoUnitId"
-        value={inputs.condoUnitId}
-        onChange={handleChange}
-        placeholder="Condo Unit ID"
-      />
-      <input
-        type="text"
-        name="costPerSquareFoot"
-        value={inputs.costPerSquareFoot}
-        onChange={handleChange}
-        placeholder="Cost per Square Foot"
-      />
-      <input
-        type="text"
-        name="parkingId"
-        value={inputs.parkingId}
-        onChange={handleChange}
-        placeholder="Parking ID"
-      />
-      <input
-        type="text"
-        name="feePerParkingSpot"
-        value={inputs.feePerParkingSpot}
-        onChange={handleChange}
-        placeholder="Fee per Parking Spot"
-      />
-      <button type="submit">Submit</button>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buildingID">Building ID</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            name="buildingId"
+            value={inputs.buildingId}
+            onChange={handleChange}
+            placeholder="Building ID"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="condoUnitID">Condo Unit ID</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            name="condoUnitId"
+            value={inputs.condoUnitId}
+            onChange={handleChange}
+            placeholder="Condo Unit ID"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="costPerSquareFoot">Cost per Square Foot</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            name="costPerSquareFoot"
+            value={inputs.costPerSquareFoot}
+            onChange={handleChange}
+            placeholder="Cost per Square Foot"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="parkingId">Parking ID</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            name="parkingId"
+            value={inputs.parkingId}
+            onChange={handleChange}
+            placeholder="Parking ID"
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="feePerParkingSpot">Fee per Parking Spot</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            name="feePerParkingSpot"
+            value={inputs.feePerParkingSpot}
+            onChange={handleChange}
+            placeholder="Fee per Parking Spot"
+          />
+        </div>
+        <div className="flex items-center justify-center">
+        <button className="bg-lime-600 hover:bg-black hover:font-semibold text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+
+        </div>  
+
+
+
+
     </form>
   );
 };
