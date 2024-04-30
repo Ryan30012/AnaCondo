@@ -46,8 +46,7 @@ export async function POST(request: Request) {
     if (typeof user_email !== "string") {
         throw new Error("Invalid or missing email address");
     }
-    const validEmail = (await sql`SELECT email FROM users WHERE email=${user_email};`).rows[0].email;
-    console.log(validEmail + user_email)
+    const validEmail = (await sql`SELECT email FROM users WHERE email=${user_email}`).rows[0].email;
     if (validEmail === null || validEmail === undefined) {
         console.log("invalid email, could not be found in 'users' table")
         return NextResponse.json(

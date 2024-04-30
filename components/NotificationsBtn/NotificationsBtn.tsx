@@ -1,7 +1,7 @@
 
 import { Result } from 'postcss';
 import React, { useState, useEffect } from 'react';
-import { IoMdNotificationsOutline } from 'react-icons/io';
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 // Define a type for notifications
 type AppNotification = {
@@ -48,7 +48,7 @@ const NotificationsBtn: React.FC = () => {
           setNewNotif(false);
         }}
       >
-        <IoMdNotificationsOutline /> {/* Icon for notifications */}
+        <IoIosNotificationsOutline /> {/* Icon for notifications */}
       </button>
       {showNotifications && (
         <div className="absolute top-full right-0 bg-white border border-gray-300 rounded p-2 shadow">

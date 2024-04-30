@@ -12,21 +12,21 @@ import RentalFinancialStatus from "@/components/renter-dashboard/RentalFinancial
 import AddPictureButton from "../UserProfile/AddPictureButton";
 
 import img from "@/assets/profile-pic.png";
+import { cookies } from "next/headers";
+import PropertyList from "../CondoCompany/Properties/page";
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 
 interface User {
+  uid: number;
+  username: string;
+  dob: Date;
   fname: string;
   lname: string;
-  username: string;
-  dob: string;
-  address: string;
-  phone: string;
   email: string;
-  regkey: string;
+  phone: string;
   pictureblob: string;
-  accounttype: string;
-  companyid: number;
 }
 
 var type = "";
@@ -46,7 +46,10 @@ function submitRequests() {
     );
 }
 
-export default function CondoOwnerDashboard() {
+export default function CondoOwnerDashboard(props: any) {
+  //console.log(props.userInfo.uid);
+  console.log(props.userUnits.rows);
+  const userUnits = props.userUnits.rows;
   const { data: session, status } = useSession();
   const [user, setUser] = useState<User>();
   const [userProfilePictureUrl, setUserProfilePictureUrl] = useState(null);
@@ -122,85 +125,46 @@ export default function CondoOwnerDashboard() {
           <div id="regKeyPopup">
             <RegKeyInput />
           </div>
+          <h1 className="font-semibold text-center">
+            {props.userInfo.fname} {props.userInfo.lname}
+          </h1>
+          <h2 className="text-center">@{props.userInfo.username}</h2>
+          <h2 className="text-center">{props.userInfo.email}</h2>
+          <h2 className="text-center">
+            ({props.userInfo.phone.substring(0, 3)}){" "}
+            {props.userInfo.phone.substring(3, 6)}-
+            {props.userInfo.phone.substring(6, 10)}
+          </h2>
         </div>
         <div className="flex flex-col my-20 mx-20">
           <div className="my-12 mx-10">
             <h1 className="font-bold text-3xl text-center">{type} Dashboard</h1>
           </div>
           <div>
-            <div className="flex justify-center items-center">
-              {/* <Image src={img} className="rounded-lg w-40 " alt="img" /> */}
-              {userProfilePictureUrl == null ? (
-                <AddPictureButton />
-              ) : (
-                <div className="flex justify-start align-middle profilePictureCtn">
-                  <img
-                    id="profilePicture"
-                    src={userProfilePictureUrl}
-                    alt="Profile Picture will be here"
-                  />
-                </div>
-              )}
-            </div>
-            <h1 className="font-semibold text-center">
-              {user?.fname} {user?.lname}
-            </h1>
-            <h2 className="text-center">@{user?.username}</h2>
-            <h2 className="text-center">{session?.user?.email}</h2>
-            <h2 className="text-center">{user?.phone}</h2>
+            <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
+            {userUnits?.map((unit: any) => {
+              return (
+                <RentalPropertyCard
+                  key={unit.cuid}
+                  unit={unit}
+                  buildingInfo={unit.buildingInfo}
+                />
+              );
+            })}
+            {/* <RentalPropertyCard /> */}
           </div>
-          <hr className="w-48 h-1 mx-auto mt-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
-          <div>
-            <h1 className="font-bold text-xl pb-2">Shortcuts</h1>
-            {!(type == "Public User") ? (
-              <div
-                className={`dashboard-shortcuts grid md:grid-cols-${
-                  type == "Condo Owner" ? "4" : "3"
-                } gap-4 my-6`}
-              >
-                {type === "Condo Owner" && (
-                  <div className="border p-3  text-center rounded-lg border-slate-950 hover:bg-slate-100">
-                    {submitRequests()}
-                  </div>
-                )}
-                <Link
-                  href="/"
-                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-                >
-                  <button id="submitForms" className="font-semibold">
-                    Reservation
-                  </button>
-                </Link>
-                <Link
-                  href="/"
-                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-                >
-                  <button id="submitForms" className="font-semibold">
-                    Notifications
-                  </button>
-                </Link>
-                <Link
-                  href="/"
-                  className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100"
-                >
-                  <button id="submitForms" className="font-semibold">
-                    Message Board
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <div className="dashboard-shortcuts grid md:grid-cols-1 gap-4 my-6">
-                <div className="border p-3 text-center rounded-lg border-slate-950 hover:bg-slate-100">
-                  <button
-                    id="regKeyBtn"
-                    className="font-semibold"
-                    onClick={handleRegKeyBtnClick}
-                  >
-                    Manage Registration Keys
-                  </button>
-                </div>
-              </div>
-            )}
+          <div className="ml-6 ">
+            <h1 className="font-bold text-xl pb-6">Your Financial Status</h1>
+            {userUnits?.map((unit: any) => {
+              return (
+                <RentalFinancialStatus
+                  key={unit.cuid}
+                  unit={unit}
+                  buildingInfo={unit.buildingInfo}
+                />
+              );
+            })}
+            {/* <RentalFinancialStatus /> */}
           </div>
           {!(type == "Public User") && (
             <>

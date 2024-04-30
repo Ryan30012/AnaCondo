@@ -72,3 +72,26 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function GET(request: Request){
+  try {
+    // Fetch condo fee
+    const condoResult = await sql`SELECT * FROM condounits`;
+    const result = condoResult.rows[0];
+
+    return NextResponse.json(
+      {
+        message: "Successfully retrieved condo unit costs.",
+        body: result,
+
+      },
+      { status: 200 }
+    );
+  } catch (e) {
+    console.log({ e });
+    return NextResponse.json(
+      { message: "Something went wrong when fetching condo unit costs." },
+      { status: 500 }
+    );
+  }
+}
