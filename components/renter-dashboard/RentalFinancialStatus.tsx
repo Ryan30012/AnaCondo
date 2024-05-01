@@ -9,8 +9,11 @@ export default function RentalFinancialStatus(props: any) {
   const buildingInfo = props.buildingInfo;
 
   const finances = [
-    { currentBalance: "120", duePerMonth: "500", condoFee: unit.fee },
+    { currentBalance: "120", duePerMonth: Math.ceil(unit.fee/12) , condoFee: unit.fee },
   ];
+  // const finances = [
+  //   { currentBalance: "120", duePerMonth: "500", condoFee: 50 },
+  // ];
   return (
     <>
       {finances.map((finances, index) => (
