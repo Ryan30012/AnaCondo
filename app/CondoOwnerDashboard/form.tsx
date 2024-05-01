@@ -16,7 +16,6 @@ import { cookies } from "next/headers";
 import PropertyList from "../CondoCompany/Properties/page";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
-import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 
 interface User {
   uid: number;
