@@ -15,6 +15,17 @@ export default function RentalPropertyCard(props: any) {
       registrationKey: "8979706",
     },
   ];
+  // const cardinfo = [
+  //   {
+  //     name: 1,
+  //     unitNb: 2,
+  //     address:3,
+  //     parkingSpotID: 4,
+  //     lockerCount: 5,
+  //     rent: 10,
+  //     registrationKey: "8979706",
+  //   },
+  // ];
 
   return (
     <div className="rental-property items-center justify-center my-3">
@@ -31,7 +42,7 @@ export default function RentalPropertyCard(props: any) {
               <h2>Parking Id: {cardInfo.parkingSpotID}</h2>
               <h2>Locker: {cardInfo.lockerCount}</h2>
               <h2>Registration key: {cardInfo.registrationKey}</h2>
-              <h2 className="align-bottom">{cardInfo.rent}/month</h2>
+              <h2 className="align-bottom">Rent: $ {cardInfo.rent}/month</h2>
             </>
           ))}
         </div>

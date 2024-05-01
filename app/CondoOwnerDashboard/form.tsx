@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Link from "next/link";
@@ -14,12 +15,25 @@ import AddPictureButton from "../UserProfile/AddPictureButton";
 import img from "@/assets/profile-pic.png";
 import { cookies } from "next/headers";
 import PropertyList from "../CondoCompany/Properties/page";
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
+import RegKeyInput from "@/components/RegKeyInput/RegKeyInput";
+
+interface User {
+  uid: number;
+  username: string;
+  dob: Date;
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  pictureblob: string;
+}
 
 var type = "";
 
- const breadcrumbItems = [
-    { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
-  ];
+const breadcrumbItems = [
+  { text: "Public User Dashboard", url: "/CondoOwnerDashboard" },
+];
 
 function submitRequests() {
   if (type == "Condo Owner")
@@ -34,12 +48,14 @@ function submitRequests() {
 
 export default function CondoOwnerDashboard(props: any) {
   //console.log(props.userInfo.uid);
+  console.log("inside form")
   console.log(props.userUnits.rows);
   const userUnits = props.userUnits.rows;
   const { data: session, status } = useSession();
   const [user, setUser] = useState<User>();
   const [userProfilePictureUrl, setUserProfilePictureUrl] = useState(null);
   const [loadingUserProfile, setLoadingUserProfile] = useState(true);
+  const requestInfo = props.requestInfo;
 
   var accountType = "";
   var counter = 0;
@@ -105,75 +121,75 @@ export default function CondoOwnerDashboard(props: any) {
     );
   else if (session) {
     return (
-      <>
+    <>
         <Breadcrumb items={breadcrumbItems} />
         <div id="regKeyOverlay" style={{ display: "none" }}>
           <div id="regKeyPopup">
             <RegKeyInput />
           </div>
-          <h1 className="font-semibold text-center">{props.userInfo.fname} {props.userInfo.lname}</h1>
-          <h2 className="text-center">@{props.userInfo.username}</h2>
-          <h2 className="text-center">{props.userInfo.email}</h2>
-          <h2 className="text-center">({props.userInfo.phone.substring(0,3)}) {props.userInfo.phone.substring(3,6)}-{props.userInfo.phone.substring(6,10)}</h2>
         </div>
         <div className="flex flex-col my-20 mx-20">
           <div className="my-12 mx-10">
             <h1 className="font-bold text-3xl text-center">{type} Dashboard</h1>
-          </div>
-          <div>
-            <h1 className="font-bold text-xl pb-6">Your Rental Properties</h1>
-            {userUnits?.map((unit: any) => {
-              return (
-                <RentalPropertyCard
-                  key={unit.cuid}
-                  unit={unit}
-                  buildingInfo={unit.buildingInfo}
+            <div className="flex justify-center align-middle p-5">
+                <img
+                  id="profilePicture"
+                  src={userProfilePictureUrl}
+                  alt="Profile Picture will be here"
                 />
-              );
-            })}
-            {/* <RentalPropertyCard /> */}
+              </div>
+
+            <h1 className="font-semibold text-center">
+            {props.userInfo.fname} {props.userInfo.lname}
+          </h1>
+          <h2 className="text-center">@{props.userInfo.username}</h2>
+          <h2 className="text-center">{props.userInfo.email}</h2>
+          <h2 className="text-center">
+            ({props.userInfo.phone.substring(0, 3)}){" "}
+            {props.userInfo.phone.substring(3, 6)}-
+            {props.userInfo.phone.substring(6, 10)}
+          </h2>
           </div>
-          <div className="ml-6 ">
-            <h1 className="font-bold text-xl pb-6">Your Financial Status</h1>
-            {userUnits?.map((unit: any) => {
-              return (
-                <RentalFinancialStatus
-                  key={unit.cuid}
-                  unit={unit}
-                  buildingInfo={unit.buildingInfo}
-                />
-              );
-            })}
-            {/* <RentalFinancialStatus /> */}
-          </div>
+          
           {!(type == "Public User") && (
             <>
+            <div className={`grid-rows-${userUnits.rowCount}`}>
               <div className="grid md:grid-cols-2 gap-3 my-12">
-                <div>
-                  <h1 className="font-bold text-xl pb-6">
-                    Your {type == "Rental User" && "Rental"} Properties
-                  </h1>
-                  <RentalPropertyCard />
+                <h1 className="font-bold text-xl pb-6"> Your {type == "Rental User" && "Rental"} Properties</h1>
+                <h1 className="font-bold text-xl pb-6">Your Financial Status </h1>
+              </div>             
+              {userUnits?.map((unit: any) => {
+                return (
+                  <>
+                  <div className="grid md:grid-cols-2 gap-3 my-12">
+                  <RentalPropertyCard
+                    key={unit.cuid}
+                    unit={unit}
+                    buildingInfo={unit.buildingInfo}
+                  />
+                  <RentalFinancialStatus
+                  key={unit.cuid}
+                  unit={unit}
+                  buildingInfo={unit.buildingInfo}
+                />
                 </div>
-                <div className="ml-6 ">
-                  <h1 className="font-bold text-xl pb-6">
-                    Your Financial Status
-                  </h1>
-                  <RentalFinancialStatus />
-                </div>
-              </div>
-              <div>
+                </>
+                );
+              })}
+            </div>
+            <div>
                 <h1 className="font-bold text-xl pr-10 pb-6">
                   Your Submitted Requests
                 </h1>
                 <RentalSubmittedRequests
-                    email={session?.user?.email as string}
-                  />
-              </div>
+                  email={session?.user?.email}
+                  requestInfo={requestInfo}
+                />
+            </div>
             </>
           )}
         </div>
-      </>
+    </>
     );
   } else {
     return (
