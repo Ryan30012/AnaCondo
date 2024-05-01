@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Anacondo</string>
+    <string name="title_activity_main">Anacondo</string>
+    <string name="package_name">com.anacondo.app</string>
+    <string name="custom_url_scheme">com.anacondo.app</string>
+</resources>
