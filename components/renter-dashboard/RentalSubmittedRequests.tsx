@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import { sql } from "@vercel/postgres";
 import { Children } from "react";
 
@@ -8,44 +8,43 @@ interface RequestInfo {
   status: string;
 }
 
-export default async function RentalSubmittedRequests({
-  email,
-}: {
-  email: string;
-}) {
+export default function RentalSubmittedRequests(props: any) {
   /**Pull data from "submittedrequests" table */
    /**Check that table exists */
-    try {
-        await sql`CREATE TABLE IF NOT EXISTS "submittedrequests" (
-            request_id int primary key,
-            request_type varchar(50),
-            user_email varchar(100),
-            request_status varchar(30),
-            question varchar(500),
-            day varchar(2),
-            month varchar(20),
-            year varchar(4),
-            unit_nb varchar(30),
-            access_method varchar(10),
-            common_room varchar(100),
-            violation varchar(100),
-            deficiency varchar(300)
-        );`;
-        console.log("Successfully initialized the SubmittedRequests table");
-    } catch (error) {
-        throw new Error(`RAN INTO ERROR WITH SUBMITTED_REQUESTS TABLE: ${error}`);
-    };
-  const submittedrequests =
-    await sql`select * from submittedrequests where user_email=${email};`;
-  const count = (
-    await sql`select count(*) from submittedrequests where user_email=${email};`
-  ).rows[0].count;
-  const requestInfo = submittedrequests.rows.map((row) => ({
-    request_id: row.request_id,
-    title: row.request_type,
-    status: row.request_status,
-  }));
+    // try {
+    //     await sql`CREATE TABLE IF NOT EXISTS "submittedrequests" (
+    //         request_id int primary key,
+    //         request_type varchar(50),
+    //         user_email varchar(100),
+    //         request_status varchar(30),
+    //         question varchar(500),
+    //         day varchar(2),
+    //         month varchar(20),
+    //         year varchar(4),
+    //         unit_nb varchar(30),
+    //         access_method varchar(10),
+    //         common_room varchar(100),
+    //         violation varchar(100),
+    //         deficiency varchar(300)
+    //     );`;
+    //     console.log("Successfully initialized the SubmittedRequests table");
+    // } catch (error) {
+    //     throw new Error(`RAN INTO ERROR WITH SUBMITTED_REQUESTS TABLE: ${error}`);
+    // };
+  //   const email = props.email;
+  // const submittedrequests =
+  //   await sql`select * from submittedrequests where user_email=${email};`;
+  // // const count = (
+  // //   await sql`select count(*) from submittedrequests where user_email=${email};`
+  // // ).rows[0].count;
+  // const requestInfo = submittedrequests.rows.map((row) => ({
+  //   request_id: row.request_id,
+  //   title: row.request_type,
+  //   status: row.request_status,
+  // }));
+  const requestInfo = props.requestInfo;
 
+  
   return (
     <div data-testid="rental-user-submitted-requests" className="px-4 py-4">
       <div className="grid md:grid-cols-4 gap-4">
@@ -55,7 +54,7 @@ export default async function RentalSubmittedRequests({
         <h3 className="font-bold text-lime-700">Status</h3>
       </div>
       <hr></hr>
-      {requestInfo.map((requestInfo, index) => (
+      {requestInfo.map((requestInfo: any, index: any) => (
         <>
           <div className="rental-dashboard-request grid md:grid-cols-4 gap-4 py-3">
             <h3 key={requestInfo.request_id} className="text-slate-500">

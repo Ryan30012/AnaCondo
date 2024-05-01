@@ -27,7 +27,7 @@ export default async function CondoDashbaord() {
   // this will be passed as props to the Client Component (CondoOwnerDashboard)
   const userUnits =
     await sql`SELECT * FROM condounits WHERE owner = ${userInfo.rows[0].uid}`;
-  console.log(userUnits.rowCount);
+  //console.log(userUnits.rowCount);
 
   // Retrieve condo units' building IDs
   // this is important for other information such as condo address, name, etc.
@@ -37,9 +37,19 @@ export default async function CondoDashbaord() {
     userUnits.rows[i].buildingInfo = buildingUnit.rows[0];
   }
   // console.log(userUnits.rows);
+  const submittedrequests =
+    await sql`select * from submittedrequests where user_email=${email};`;
+  // const count = (
+  //   await sql`select count(*) from submittedrequests where user_email=${email};`
+  // ).rows[0].count;
+  const requestInfo = submittedrequests.rows.map((row) => ({
+    request_id: row.request_id,
+    title: row.request_type,
+    status: row.request_status,
+  }));
 
   // const buildingInfo = await sql`SELECT * FROM buildings WHERE bid IN = ${userUnits.rows[0].building_id}`;
   return (
-    <CondoOwnerDashbaord userUnits={userUnits} userInfo={userInfo.rows[0]} />
+    <CondoOwnerDashbaord userUnits={userUnits} userInfo={userInfo.rows[0]}  requestInfo={requestInfo} />
   );
 }
