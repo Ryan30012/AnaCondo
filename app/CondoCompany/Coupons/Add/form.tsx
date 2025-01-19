@@ -47,6 +47,7 @@ export default function Form() {
       </div>
       <div className="flex justify-center items-center m-2">
         <form
+          data-testid="form"
           className=" rounded-xl border-2 border-lim-200 p-6"
           onSubmit={onSubmit}
           action={"/UserProfile"}
@@ -65,7 +66,7 @@ export default function Form() {
             >
               Property ID
             </label>
-            <div className="flex">
+            <div data-testid="propertyid" className="flex">
               <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                 <svg
                   className="w-4 h-4  text-gray-500 dark:text-gray-400"
@@ -89,7 +90,7 @@ export default function Form() {
             </div>
           </div>
 
-          <div className="my-2">
+          <div data-testid="discount-percentage" className="my-2">
             <label
               htmlFor="website-admin"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -118,7 +119,7 @@ export default function Form() {
             </div>
           </div>
 
-          <div className="my-2">
+          <div data-testid="expiry-date" className="my-2">
             <label
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

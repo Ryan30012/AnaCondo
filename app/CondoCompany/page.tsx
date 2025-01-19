@@ -17,7 +17,7 @@ const Homepage = () => {
             </h1>
           </div>
           <div className="grid grid-rows-4 gap-3 w-full max-w-4xl items-center justify-center content-center">
-            <div className="mt-4 ">
+            <div data-testid="property-information-btn" className="mt-4 ">
               <button
                 className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 type="submit"
@@ -31,7 +31,7 @@ const Homepage = () => {
               </button>
             </div>
 
-            <div className="mt-4">
+            <div data-testid="upload-file-btn" className="mt-4">
               <button
                 className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 type="submit"
@@ -42,7 +42,7 @@ const Homepage = () => {
               </button>
             </div>
 
-            <div className="mt-4">
+            <div data-testid="send-regkey-btn" className="mt-4">
               <button
                 className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 type="submit"
@@ -53,7 +53,7 @@ const Homepage = () => {
               </button>
             </div>
 
-            <div className="mt-4">
+            <div data-testid="create-discounts-btn" className="mt-4">
               <button
                 className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 type="submit"
