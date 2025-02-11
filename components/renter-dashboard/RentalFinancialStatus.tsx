@@ -2,12 +2,20 @@ import Image from "next/image";
 import img1 from "@/assets/user-salary.png";
 import img2 from "@/assets/send-money.png";
 import img3 from "@/assets/house-chimney-heart.png";
+import { redirect } from "next/navigation";
 
-const finances = [
-  { currentBalance: "120", duePerMonth: "500", condoFee: "90" },
-];
 
-export default function RentalFinancialStatus() {
+
+export default function RentalFinancialStatus(props: any) {
+  const unit = props.unit;
+  const buildingInfo = props.buildingInfo;
+
+  const finances = [
+    { currentBalance: "120", duePerMonth: Math.ceil(unit.fee/12) , condoFee: unit.fee },
+  ];
+  // const finances = [
+  //   { currentBalance: "120", duePerMonth: "500", condoFee: 50 },
+  // ];
   return (
     <>
       {finances.map((finances, index) => (
@@ -38,6 +46,13 @@ export default function RentalFinancialStatus() {
               <h2 className="font-semibold">Condo fee</h2>
               <h2>{finances.condoFee}$</h2>
             </div>
+          </div>
+          <div className="border-2 row-span-2 rounded-lg p-3 flex">
+            <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onPress={redirect("/Operations")}
+              type="button"
+              title="Edit Condo Fees"
+              />
           </div>
         </div>
       ))}

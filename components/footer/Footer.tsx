@@ -1,7 +1,10 @@
 export const Footer = () => {
   return (
     <footer className="bg-white rounded-lg m-4 dark:bg-gray-900">
-      <div className="w-screen mx-auto max-w-screen-xl p-4 md:py-8">
+      <div
+        className="w-screen mx-auto max-w-screen-xl p-4 md:py-8"
+        style={{ maxWidth: "100%" }}
+      >
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
             href=""
